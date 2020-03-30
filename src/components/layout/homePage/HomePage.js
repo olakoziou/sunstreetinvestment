@@ -7,13 +7,10 @@ import ActualProperties from '../propertiesForSale/ActualProperties';
 function HomePage() {
   return (
     <>
-      <div>HomePage:</div>
-      <>
-        <Slider />
-        <ActualProperties />
-        <About />
-        <Team />
-      </>
+      <Slider />
+      <ActualProperties />
+      <About />
+      <Team />
     </>
   );
 }
