@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import SingleTeamMember from './SingleTeamMember';
 import styled from 'styled-components';
 import { mediaQueries } from '../../../../mixins';
+import { useFirestoreConnect } from 'react-redux-firebase';
 
 const TeamDiv = styled.div`
   margin: 5rem 0;
@@ -15,15 +16,12 @@ const TeamDiv = styled.div`
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-
-    @media ${mediaQueries('tab-port')} {
-      flex-wrap: nowrap;
-    }
   }
 
   & .team-bottom > div {
     @media ${mediaQueries('tab-port')} {
       height: 25rem;
+      /* min-width: 30rem; */
     }
 
     @media ${mediaQueries('tab-land')} {
@@ -33,9 +31,42 @@ const TeamDiv = styled.div`
 `;
 
 function Team() {
-  const team = useSelector(state => state.team.team);
-  const team1 = team.slice(0, 2);
-  const team2 = team.slice(2);
+  useFirestoreConnect('users');
+  const team = useSelector((state) => state.team.team);
+  const teamArr = useSelector((state) => state.firestore.ordered.users);
+  const confirmedUsers =
+    teamArr && teamArr.filter((user) => user.status === 'Confirmed');
+
+  const team1 = [];
+
+  teamArr &&
+    confirmedUsers.forEach((user) => {
+      if (
+        (user.fullName.indexOf('Krzysztof') !== -1 &&
+          user.fullName.indexOf('Kozioł') !== -1) ||
+        (user.fullName.indexOf('Wojciech') !== -1 &&
+          user.fullName.indexOf('Urbańczyk') !== -1)
+      ) {
+        team1.push(user);
+      }
+    });
+
+  const team2 = [];
+
+  teamArr &&
+    confirmedUsers.forEach((user) => {
+      if (
+        user.fullName.indexOf('Krzysztof') === -1 &&
+        user.fullName.indexOf('Kozioł') === -1 &&
+        user.fullName.indexOf('Wojciech') === -1 &&
+        user.fullName.indexOf('Urbańczyk') === -1
+      ) {
+        team2.push(user);
+      }
+    });
+
+  // const team1 = team.slice(0, 2);
+  // const team2 = team.slice(2);
   return (
     <section id="team">
       <TeamDiv className="team ">
@@ -44,10 +75,10 @@ function Team() {
           {team1.map((member, i) => (
             <SingleTeamMember
               key={i}
-              name={member.name}
+              name={member.firstName}
               lastName={member.lastName}
               description={member.description}
-              img={member.img}
+              img={member.userImg}
             />
           ))}
         </div>
@@ -55,10 +86,10 @@ function Team() {
           {team2.map((member, i) => (
             <SingleTeamMember
               key={i}
-              name={member.name}
+              name={member.firstName}
               lastName={member.lastName}
               description={member.description}
-              img={member.img}
+              img={member.userImg}
             />
           ))}
         </div>

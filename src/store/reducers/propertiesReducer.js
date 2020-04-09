@@ -3,6 +3,7 @@ import second from '../../img/properties/LEH_6914.jpg';
 import third from '../../img/properties/LEH_6940.jpg';
 
 const initialState = {
+  error: null,
   properties: [
     {
       propertyId: 1,
@@ -27,7 +28,7 @@ const initialState = {
       garage: 'Garaż',
       year: 2010,
       technology: 'Pustak ceramiczny',
-      extra: ['Pod inwestycje', 'Tylko u nas', 'Obniżona cena', 'Pilne']
+      extra: ['Pod inwestycje', 'Tylko u nas', 'Obniżona cena', 'Pilne'],
     },
     {
       propertyId: 2,
@@ -52,7 +53,7 @@ const initialState = {
       garage: 'Garaż',
       year: 2010,
       technology: 'Pustak ceramiczny',
-      extra: ['Pod inwestycje', 'Tylko u nas', 'Obniżona cena', 'Pilne']
+      extra: ['Pod inwestycje', 'Tylko u nas', 'Obniżona cena', 'Pilne'],
     },
     {
       propertyId: 3,
@@ -77,7 +78,7 @@ const initialState = {
       garage: 'Garaż',
       year: 2010,
       technology: 'Pustak ceramiczny',
-      extra: ['Pod inwestycje', 'Tylko u nas', 'Obniżona cena', 'Pilne']
+      extra: ['Pod inwestycje', 'Tylko u nas', 'Obniżona cena', 'Pilne'],
     },
     {
       propertyId: 4,
@@ -102,13 +103,82 @@ const initialState = {
       garage: 'Garaż',
       year: 2010,
       technology: 'Pustak ceramiczny',
-      extra: ['Pod inwestycje', 'Tylko u nas', 'Obniżona cena', 'Pilne']
-    }
-  ]
+      extra: ['Pod inwestycje', 'Tylko u nas', 'Obniżona cena', 'Pilne'],
+    },
+  ],
 };
 
 const propertiesReducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case 'ADD_NEW_PROPERTY_SUCCESS':
+      console.log(action);
+      console.log('ADD_NEW_PROPERTY_SUCCESS');
+      return {
+        ...state,
+        error: null,
+      };
+    case 'ADD_NEW_PROPERTY_ERROR':
+      console.log('ADD_NEW_PROPERTY_ERROR');
+      console.log(action.err);
+      return {
+        ...state,
+        error: action.err,
+      };
+    case 'ADDONWEB_SUCCESS':
+      console.log('ADDONWEB_SUCCESS');
+      return {
+        ...state,
+        error: null,
+      };
+    case 'ADDONWEB_ERROR':
+      console.log('ADDONWEB_ERROR');
+      console.log(action.err);
+      return {
+        ...state,
+        error: action.err,
+      };
+    case 'DELETE_SUCCESS':
+      console.log('DELETE_SUCCESS');
+      return {
+        ...state,
+        error: null,
+      };
+    case 'DELETE_ERROR':
+      console.log('DELETE_ERROR');
+      console.log(action.err);
+      return {
+        ...state,
+        error: action.err,
+      };
+    case 'SETBACK_SUCCESS':
+      console.log('SETBACK_SUCCESS');
+      return {
+        ...state,
+        error: null,
+      };
+    case 'SETBACK_ERROR':
+      console.log('SETBACK_ERROR');
+      console.log(action.err);
+      return {
+        ...state,
+        error: action.err,
+      };
+    case 'EDIT_SUCCESS':
+      console.log('EDIT_SUCCESS');
+      return {
+        ...state,
+        error: null,
+      };
+    case 'EDIT_ERROR':
+      console.log('EDIT_ERROR');
+      console.log(action.err);
+      return {
+        ...state,
+        error: action.err,
+      };
+    default:
+      return state;
+  }
 };
 
 export default propertiesReducer;

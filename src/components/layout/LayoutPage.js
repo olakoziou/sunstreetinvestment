@@ -1,7 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Navbar from '../layout/Navbar';
-import Footer from '../layout/Footer';
 import HomePage from './homePage/HomePage';
 import Conatct from './contact/Contact';
 import SinglePropertyCard from './propertiesForSale/singlePropertyCard/SinglePropertyCard';

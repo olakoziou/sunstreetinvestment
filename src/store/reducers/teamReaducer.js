@@ -12,7 +12,7 @@ const initialState = {
       lastName: 'Kozioł',
       description:
         'Negocjuję warunki kupna i sprzedaży nieruchomości. Dbam, aby każda inwestycja generowała jak największe zyski. Moim nowym zainteresowaniem stała się jazda na quadach.',
-      img: img1
+      img: img1,
     },
     {
       id: 2,
@@ -20,7 +20,7 @@ const initialState = {
       lastName: 'Urbańczyk',
       description:
         'Odpowiadam za prawidłowy przebieg obecnych inwestycji oraz planowanie nowych transakcji. Prywatnie interesuję się historią regionu, z którego pochodzę oraz sportami siłowymi.',
-      img: img2
+      img: img2,
     },
     {
       id: 3,
@@ -28,7 +28,7 @@ const initialState = {
       lastName: 'Kubiela',
       description:
         'Moje działania skupiają się na koordynacji pracy biura. Jestem wsparciem zespołu w zakresie księgowo – administracyjnym. Odpoczywam od pracy przy książkach z pogranicza fantasy i kryminału.',
-      img: img5
+      img: img5,
     },
     {
       id: 4,
@@ -36,7 +36,7 @@ const initialState = {
       lastName: 'Sojka-Jakubik',
       description:
         'W swojej pracy odpowiadam zarówno za działania administracyjne, jak i pozyskiwanie nowych nieruchomości inwestycyjnych. Prywatnie interesuję się podróżowaniem oraz kosmetologią.',
-      img: img6
+      img: img6,
     },
     {
       id: 5,
@@ -44,9 +44,17 @@ const initialState = {
       lastName: 'Muzyk',
       description:
         'W firmie zajmuję się analizą opłacalności zakupu nieruchomości na kredyt mieszkaniowy oraz pośrednictwem kredytów hipotecznych. W wolnej chwili lubię jazdę na rowerze oraz bieganie z psem po lesie.',
-      img: img4
-    }
-  ]
+      img: img4,
+    },
+    {
+      id: 5,
+      name: 'Damian',
+      lastName: 'Muzyk',
+      description:
+        'W firmie zajmuję się analizą opłacalności zakupu nieruchomości na kredyt mieszkaniowy oraz pośrednictwem kredytów hipotecznych. W wolnej chwili lubię jazdę na rowerze oraz bieganie z psem po lesie.',
+      img: img4,
+    },
+  ],
 };
 
 const teamReducer = (state = initialState, action) => {

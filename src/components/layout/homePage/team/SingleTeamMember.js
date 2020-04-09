@@ -31,7 +31,7 @@ const DivMember = styled.div`
     transform: translateY(-6rem);
   }
 
-  & .single-team-member__image > div {
+  & .single-team-member__image > .img {
     background-position: center;
     background-size: cover;
     height: 10rem;
@@ -40,6 +40,14 @@ const DivMember = styled.div`
     border-radius: 50%;
     border: 5px solid rgba(${colors.primary5});
     ${boxShadows('small')};
+  }
+  & .single-team-member__image > .initials {
+    height: 10rem;
+    width: 10rem;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 5px solid rgba(${colors.primary5});
+    background-color: rgba(${colors.primary3});
   }
 
   & .single-team-member__content {
@@ -70,7 +78,16 @@ function SingleTeamMember(props) {
   return (
     <DivMember className="single-team-member">
       <div className="single-team-member__image">
-        <div className="img" style={{ backgroundImage: `url(${img})` }}></div>
+        {img ? (
+          <div className="img" style={{ backgroundImage: `url(${img})` }}></div>
+        ) : (
+          <div className="initials">
+            <span>
+              {name[0]}
+              {lastName[0]}
+            </span>
+          </div>
+        )}
       </div>
       <div className="single-team-member__content">
         <h5>
