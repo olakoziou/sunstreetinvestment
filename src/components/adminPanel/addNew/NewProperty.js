@@ -3,6 +3,7 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useFirestoreConnect, useFirebase } from 'react-redux-firebase';
+import imageCompression from 'browser-image-compression';
 
 function NewProperty(props) {
   const { data } = props;
@@ -29,6 +30,30 @@ function NewProperty(props) {
     const files = [];
     const upload = Array.from(e.target.files);
     upload.map((img) => files.push(img));
+    var options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+    };
+
+    files.map((file) => {
+      console.log(file);
+      imageCompression(file, options)
+        .then(function (compressedFile) {
+          console.log(
+            'compressedFile instanceof Blob',
+            compressedFile instanceof Blob
+          ); // true
+          console.log(
+            `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+          ); // smaller than maxSizeMB
+
+          // return uploadToServer(compressedFile); // write your own logic
+        })
+        .catch(function (error) {
+          console.log(error.message);
+        });
+    });
+
     props.setImgState({ ...props.imgState, [e.target.id]: files });
   };
 
@@ -48,7 +73,7 @@ function NewProperty(props) {
           <select
             onChange={props.handleSelected}
             id="purpose"
-            defaultValue={data ? data.purpose : 'Default'}
+            defaultValue={data && data.purpose ? data.purpose : 'Default'}
           >
             <option value="Default" disabled>
               Cel
@@ -64,7 +89,7 @@ function NewProperty(props) {
           <select
             onChange={props.handleSelected}
             id="market"
-            defaultValue={data ? data.market : 'Default'}
+            defaultValue={data && data.market ? data.market : 'Default'}
           >
             <option value="Default" disabled>
               Rynek
@@ -80,7 +105,7 @@ function NewProperty(props) {
           <select
             onChange={props.handleSelected}
             id="type"
-            defaultValue={data ? data.type : 'Default'}
+            defaultValue={data && data.type ? data.type : 'Default'}
           >
             <option value="Default" disabled>
               Typ nieruchomości
@@ -236,7 +261,7 @@ function NewProperty(props) {
               className="filled-in"
               id="elevator"
               onChange={props.handleChecked}
-              defaultChecked={data ? true : false}
+              defaultChecked={data && data.elevator ? true : false}
             />
             <span>Winda</span>
           </label>
@@ -247,7 +272,7 @@ function NewProperty(props) {
           <select
             onChange={props.handleSelected}
             id="kitchen"
-            defaultValue={data ? data.kitchen : 'Default'}
+            defaultValue={data && data.kitchen ? data.kitchen : 'Default'}
           >
             <option value="Default" disabled>
               Kuchnia
@@ -276,7 +301,7 @@ function NewProperty(props) {
           <select
             onChange={props.handleSelected}
             id="standard"
-            defaultValue={data ? data.standard : 'Default'}
+            defaultValue={data && data.standard ? data.standard : 'Default'}
           >
             <option value="Default" disabled>
               Standard
@@ -358,7 +383,7 @@ function NewProperty(props) {
           <select
             onChange={props.handleSelected}
             id="technology"
-            defaultValue={data ? data.technology : 'Default'}
+            defaultValue={data && data.technology ? data.technology : 'Default'}
           >
             <option value="Default" disabled>
               Brak
@@ -392,12 +417,30 @@ function NewProperty(props) {
             <option value="Pod inwestycję">Pod inwestycję</option>
             <option value="Pilna sprzedaż">Pilna sprzedaż</option>
             <option value="Tylko u nas">Tylko u nas</option>
-            <option value="Loggia">Loggia</option>
             <option value="Obniżona cena">Obniżona cena</option>
           </select>
           <label>Dodatkowe informacje</label>
         </div>
       </div>
+      {data && (
+        <div className="row">
+          <div className="input-field col s12">
+            <select
+              onChange={props.handleSelected}
+              id="stan"
+              defaultValue={data && data.stan ? data.stan : 'Default'}
+            >
+              <option value="Default" disabled>
+                Stan
+              </option>
+              <option value="Umowa przedwstępna">Umowa przedwstępna</option>
+              <option value="Rezerwacja">Rezerwacja</option>
+              <option value="Sprzedane">Sprzedane</option>
+            </select>
+            <label>Wybierz</label>
+          </div>
+        </div>
+      )}
       <div className="row checkbox realEstateBroker">
         {names &&
           names.map((name, i) => (

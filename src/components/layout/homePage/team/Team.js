@@ -18,14 +18,18 @@ const TeamDiv = styled.div`
     flex-wrap: wrap;
   }
 
-  & .team-bottom > div {
-    @media ${mediaQueries('tab-port')} {
-      height: 25rem;
-      /* min-width: 30rem; */
-    }
+  & .team-bottom {
+    max-width: 95%;
+    margin: 0 auto;
+    & > div {
+      @media ${mediaQueries('tab-port')} {
+        height: 25rem;
+        /* min-width: 30rem; */
+      }
 
-    @media ${mediaQueries('tab-land')} {
-      height: 22rem;
+      @media ${mediaQueries('tab-land')} {
+        height: 22rem;
+      }
     }
   }
 `;

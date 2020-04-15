@@ -2,7 +2,6 @@ export const addNewProperty = (property) => {
   return (dispatch, getState, { getFirestore }) => {
     const user = getState().firebase.profile;
     const firestore = getFirestore();
-    const id = getState().firebase.auth.uid;
 
     firestore
       .collection('properties')
@@ -78,7 +77,6 @@ export const setBackProperty = (property) => {
 };
 
 export const editProperty = (property) => {
-  console.log(property);
   return (dispatch, getState, { getFirestore }) => {
     const firestore = getFirestore();
 

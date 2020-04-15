@@ -2,22 +2,27 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { LogIn } from '../../../store/actions/authActions';
+import { Link } from 'react-router-dom';
 
 const LoginDiv = styled.div``;
 
-function Login() {
-  const authError = useSelector(state => state.auth.authError);
-  const auth = useSelector(state => state.firebase.auth);
+function Login({ resetPassword, displayResetPassword }) {
+  const authError = useSelector((state) => state.auth.authError);
+  const auth = useSelector((state) => state.firebase.auth);
   const dispatch = useDispatch();
   const [state, setState] = useState({});
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setState({ ...state, [e.target.id]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(LogIn(state));
+  };
+
+  const handleReset = (e) => {
+    displayResetPassword({ display: true });
   };
   return (
     <LoginDiv className="login">
@@ -49,6 +54,11 @@ function Login() {
 
           <div className="submit">
             <button className="btn send">Wyślij</button>
+          </div>
+          <div className="forgot-password">
+            <span>
+              Zapomniałeś hasła? <span onClick={handleReset}>Odzyskaj</span>
+            </span>
           </div>
           <div className="red-text center">
             {authError ? <span>{authError}</span> : null}

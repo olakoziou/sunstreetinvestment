@@ -95,6 +95,9 @@ function Signup({
                 maxLength={9}
               />
               <label htmlFor="signup-phone">Numer służbowy</label>
+              <span className="helper-text">
+                Widoczny na stronie nieruchomości w kategorii Opiekun oferty
+              </span>
             </div>
           </div>
           <div className="row">

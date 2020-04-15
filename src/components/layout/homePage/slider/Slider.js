@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { mediaQueries, boxShadows } from '../../../../mixins';
 import { colors } from '../../../../colors';
+import { useFirestoreConnect } from 'react-redux-firebase';
 
 const SpanDiv = styled.div`
   @media only screen and (min-width: 600px) {
@@ -37,40 +38,52 @@ const properties = {
   infinite: true,
   arrows: true,
   pauseOnHover: true,
-  indicators: true
+  indicators: true,
 };
 
 function Slider() {
-  const propertiesArr = useSelector(state =>
-    state.properties.properties.map(property => property)
+  useFirestoreConnect([
+    {
+      collection: 'properties',
+      orderBy: ['addedDate', 'desc'],
+    },
+  ]);
+  const propertiesArr = useSelector(
+    (state) => state.firestore.ordered.properties
   );
-  return (
-    <SlideContainer className="slide-container">
-      <Slide {...properties}>
-        {propertiesArr.map((property, i) => (
-          <div
-            className="each-slide"
-            key={i}
-            style={{ position: 'relative', overflow: 'hidden' }}
-          >
-            <div
-              style={{
-                backgroundImage: `url(${property.mainImgUrl})`,
-                height: 600,
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat'
-              }}
-            >
-              <SpanDiv>
-                <span>{property.propertyName}</span>
-              </SpanDiv>
-            </div>
-          </div>
-        ))}
-      </Slide>
-    </SlideContainer>
-  );
+  // const propertiesArr = useSelector((state) =>
+  //   state.properties.properties.map((property) => property)
+  // );
+  return propertiesArr ? (
+    <>
+      <SlideContainer className="slide-container">
+        <Slide {...properties}>
+          {propertiesArr &&
+            propertiesArr.slice(0, 4).map((property, i) => (
+              <div
+                className="each-slide"
+                key={i}
+                style={{ position: 'relative', overflow: 'hidden' }}
+              >
+                <div
+                  style={{
+                    backgroundImage: `url(${property.mainImgUrl})`,
+                    height: 600,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
+                  }}
+                >
+                  <SpanDiv>
+                    <span>{property.propertyName}</span>
+                  </SpanDiv>
+                </div>
+              </div>
+            ))}
+        </Slide>
+      </SlideContainer>
+    </>
+  ) : null;
 }
 
 export default Slider;

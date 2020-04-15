@@ -16,6 +16,8 @@ import { useSelector } from 'react-redux';
 import Archives from './added/Archives';
 import EditProperty from './edit/EditProperty';
 import EditUser from './account/EditUser';
+import ForgotPassword from './logging/ForgotPassword';
+import { useFirebase, useFirebaseConnect } from 'react-redux-firebase';
 
 const AdminAppDiv = styled.div`
   min-height: 100vh;
@@ -36,15 +38,22 @@ const AdminAppDiv = styled.div`
       min-height: 10rem;
       background-color: rgba(${colors.secondary5});
 
+      padding: 5rem 0;
       & > div {
         width: 90%;
         margin: 0 auto;
-        padding: 5rem 0;
 
         & h5 {
           text-align: center;
           margin-bottom: 5rem;
         }
+      }
+
+      & .confirmation {
+        padding: 10rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }
@@ -52,62 +61,90 @@ const AdminAppDiv = styled.div`
 
 function AdminApp() {
   const globalState = useSelector((state) => state);
-  // console.log(globalState);
+  useFirebaseConnect();
+  const userConfirmed = useSelector((state) => state.firebase.profile.status);
+  // console.log(userConfirmed);
   return (
     <AdminAppDiv className="admin-panel">
       <div className="wrapper">
         <BrowserRouter>
           <Route
             path="/"
-            render={(props) =>
-              // props.location.pathname !== '/admin-panel' ? <Navbar /> : null
-              props.location.pathname.indexOf('/admin-panel/log-in') === -1 ? (
-                <Navbar />
-              ) : null
-            }
+            render={(props) => {
+              if (
+                props.location.pathname.indexOf('/admin-panel/log-in') === -1 &&
+                props.location.pathname.indexOf(
+                  '/admin-panel/forgot-password'
+                ) === -1
+              ) {
+                return <Navbar />;
+              } else {
+                return null;
+              }
+            }}
           />
           <Switch>
             <Route exact path="/admin-panel/log-in" component={LogInPanel} />
+            <Route
+              exact
+              path="/admin-panel/forgot-password"
+              component={ForgotPassword}
+            />
             <Container>
               <div className="dashboard">
-                <Route exact path="/admin-panel" component={AdminPanel} />
                 <Route
                   exact
-                  path="/admin-panel/account"
-                  component={UserAccount}
-                />
-                <Route
-                  exact
-                  path="/admin-panel/added-properties"
-                  component={AddedProperties}
-                />
-                <Route
-                  exact
-                  path="/admin-panel/add-new-property"
-                  component={AddNewProperty}
-                />
-                <Route
-                  exact
-                  path="/admin-panel/deleted-properties"
-                  component={DeletedProperties}
-                />
-                <Route
-                  exact
-                  path="/admin-panel/archives"
-                  component={Archives}
+                  path="/admin-panel"
+                  render={() => <AdminPanel userConfirmed={userConfirmed} />}
                 />
 
-                <Route
-                  exact
-                  path="/admin-panel/edit-property"
-                  component={EditProperty}
-                />
-                <Route
-                  exact
-                  path="/admin-panel/edit-user"
-                  component={EditUser}
-                />
-                <Route exact path="/admin-panel/users" component={Users} />
+                <>
+                  {userConfirmed === 'Confirmed' && (
+                    <>
+                      <Route
+                        exact
+                        path="/admin-panel/account"
+                        component={UserAccount}
+                      />
+                      <Route
+                        exact
+                        path="/admin-panel/added-properties"
+                        component={AddedProperties}
+                      />
+                      <Route
+                        exact
+                        path="/admin-panel/add-new-property"
+                        component={AddNewProperty}
+                      />
+                      <Route
+                        exact
+                        path="/admin-panel/deleted-properties"
+                        component={DeletedProperties}
+                      />
+                      <Route
+                        exact
+                        path="/admin-panel/archives"
+                        component={Archives}
+                      />
+
+                      <Route
+                        exact
+                        path="/admin-panel/edit-property"
+                        component={EditProperty}
+                      />
+                      <Route
+                        exact
+                        path="/admin-panel/edit-user"
+                        component={EditUser}
+                      />
+                      <Route
+                        exact
+                        path="/admin-panel/users"
+                        component={Users}
+                      />
+                    </>
+                  )}
+                </>
               </div>
             </Container>
           </Switch>

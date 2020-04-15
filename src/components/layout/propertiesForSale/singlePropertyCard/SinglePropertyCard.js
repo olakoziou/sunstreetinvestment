@@ -16,13 +16,14 @@ const PropertyCardSection = styled.section`
       height: 40rem;
       position: relative;
 
-      span {
+      & .title,
+      .stan {
         @media ${mediaQueries('phone')} {
           text-align: left;
           right: 0;
           width: max-content;
         }
-        background-color: rgba(255, 255, 255, 0.5);
+
         border-top: 1px solid rgba(255, 255, 255, 0.75);
         border-left: 1px solid rgba(255, 255, 255, 0.75);
         border-bottom: 1px solid rgba(255, 255, 255, 0.75);
@@ -31,8 +32,35 @@ const PropertyCardSection = styled.section`
         font-size: 2rem;
         text-align: center;
         position: absolute;
-        bottom: 15%;
+        z-index: 1000;
+
         ${boxShadows('xsmall')}
+      }
+
+      & .title {
+        bottom: 15%;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+
+      & .stan {
+        position: absolute;
+        bottom: 40%;
+        left: 0;
+        right: 0;
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        background-color: rgba(${colors.extra});
+        border-right: 1px solid rgba(255, 255, 255, 0.75);
+      }
+
+      & .stan__active {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(${colors.primary}, 0.25);
       }
     }
 
@@ -50,7 +78,7 @@ const PropertyCardSection = styled.section`
 `;
 
 function SinglePropertyCard(props) {
-  const { title, img } = props.location.state;
+  const { title, img, stan } = props.location.state;
 
   return (
     <PropertyCardSection className="property">
@@ -59,10 +87,18 @@ function SinglePropertyCard(props) {
           className="property-card__banner"
           style={{ backgroundImage: `url(${img})` }}
         >
-          <span>{title}</span>
+          {!stan && <span className="title">{title}</span>}
+
+          {stan && (
+            <div className="stan__active">
+              <span className="stan">
+                {title} - {stan}
+              </span>
+            </div>
+          )}
         </div>
         <div className="property-card__content">
-          <Description data={props.location.state} />
+          <Description data={props.location.state} displayImgs={true} />
           <Details data={props.location.state} />
         </div>
       </div>

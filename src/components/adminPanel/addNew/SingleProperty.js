@@ -67,7 +67,6 @@ const Item = styled.li`
 
 function SingleProperty(props) {
   const { data } = props;
-  console.log(data);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -136,6 +135,7 @@ function SingleProperty(props) {
                     Dodatkowe informacje: {data.extra.map((el) => el + ' ')}
                   </li>
                 )}
+                {data.stan && <li>Stan: {data.stan}</li>}
                 {data.status && <li>Status: {data.status}</li>}
               </ul>
               <div className="create-infos">
@@ -145,8 +145,7 @@ function SingleProperty(props) {
                 )}
                 {data.addedDate && (
                   <span>
-                    Data dodania:{' '}
-                    {moment(data.addedDate.toDate()).format('LLLL')}
+                    Data dodania: {moment(data.addedDate).format('LLLL')}
                   </span>
                 )}
               </div>

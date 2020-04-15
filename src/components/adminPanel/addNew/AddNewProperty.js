@@ -6,7 +6,7 @@ import NewProperty from './NewProperty';
 import OldProperty from './OldProperty';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { useEffect } from 'react';
-import { useFirebase } from 'react-redux-firebase';
+import { useFirebase, useFirebaseConnect } from 'react-redux-firebase';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   addNewProperty,

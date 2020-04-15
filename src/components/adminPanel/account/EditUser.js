@@ -1,16 +1,39 @@
 import React from 'react';
-import Signup from '../logging/Signup';
 import { useState } from 'react';
-import UserAccount from './UserAccount';
 import { useDispatch } from 'react-redux';
 import { editUser } from '../../../store/actions/userActions';
 import { useHistory } from 'react-router';
+import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
+import { useEffect } from 'react';
+import { useFirebase } from 'react-redux-firebase';
+
+const EditUserDiv = styled.div`
+  & .img {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 15rem;
+    height: 8rem;
+    position: relative;
+
+    & .close {
+      position: absolute;
+      top: 5%;
+      right: 5%;
+      cursor: pointer;
+    }
+  }
+`;
 
 function EditUser(props) {
   const [state, setState] = useState(props.location.state);
+  const [imgState, setImgState] = useState({});
   const emailForAuthEdit = props.location.state.email;
   const dispatch = useDispatch();
   const history = useHistory();
+  const firebase = useFirebase();
+  const storageRef = firebase.storage().ref();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,11 +43,43 @@ function EditUser(props) {
   const handleChange = (e) => {
     setState({ ...state, [e.target.id]: e.target.value });
   };
-  const handleImgChange = (e) => {};
+  const handleImgChange = (e) => {
+    const files = [];
+    const upload = Array.from(e.target.files);
+    upload.map((img) => files.push(img));
+    setImgState({
+      ...imgState,
+      [e.target.id]: files,
+    });
+  };
+
+  // Add main image
+  useEffect(() => {
+    if (state.firstName && state.lastName && imgState.userImg) {
+      imgState.userImg.map((image) => {
+        storageRef
+          .child(`team/${state.firstName}${state.lastName}-${uuidv4()}`)
+          .put(image)
+          .then((url) => {
+            url.ref.getDownloadURL().then((url) => {
+              setState((state) => ({ ...state, userImg: url }));
+            });
+          });
+      });
+    }
+  }, [imgState.userImg]);
+
+  const handleRemoveImg = (e) => {
+    const currentImgUrl = e.target.parentElement.parentElement.style.backgroundImage
+      .slice(4, -1)
+      .replace(/"/g, '');
+
+    setState({ ...state, userImg: null });
+  };
+
   const handleEdit = (e) => {};
   return (
-    <div className="edit-user">
-      <UserAccount />
+    <EditUserDiv className="edit-user">
       <div className="row">
         <form className="col s12" onSubmit={handleSubmit}>
           <div className="row">
@@ -146,6 +201,16 @@ function EditUser(props) {
               />
             </div>
           </div>
+          {state.userImg ? (
+            <div
+              className="img"
+              style={{ backgroundImage: `url(${state.userImg})` }}
+            >
+              <div className="close" onClick={handleRemoveImg}>
+                <i className="material-icons">close</i>
+              </div>
+            </div>
+          ) : null}
           <div className="row">
             <span>*Wymagane</span>
           </div>
@@ -156,7 +221,7 @@ function EditUser(props) {
           </div>
         </form>
       </div>
-    </div>
+    </EditUserDiv>
   );
 }
 

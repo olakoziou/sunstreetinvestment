@@ -93,7 +93,7 @@ const DescriptionDiv = styled.div`
     }
   }
 
-  & .gallery {
+  & .gallery, .property-plan {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -104,31 +104,32 @@ const DescriptionDiv = styled.div`
       height: 15rem;
     }
 
-    @media ${mediaQueries('tab-port')} {
-      height: 20rem;
-    }
+ 
 
     & .img {
-      @media ${mediaQueries('tab-port')} {
-        width: 20%;
-      }
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      width: 25%;
+      width: 30%;
       max-width: 20rem;
       margin: 0.5rem;
       ${boxShadows('small')};
       position: relative;
       cursor: pointer;
+      /* @media ${mediaQueries('tab-port')} {
+        width: 20%;
+      } */
     }
   }
 `;
 
 function Description(props) {
-  const { description, imgUrlArr, extra } = props.data;
+  const { description, imgUrlArr, propertyPlanUrl, extra } = props.data;
+  const { displayImgs } = props;
 
-  const handleImgClick = e => {
+  console.log(props.data);
+
+  const handleImgClick = (e) => {
     const imgUrl = e.target.style.backgroundImage;
     const imageBig = document.querySelector('.image-big');
     const description = document.querySelector('.description');
@@ -137,7 +138,7 @@ function Description(props) {
     description.style.filter = 'blur(3px)';
   };
 
-  const handleImgClose = e => {
+  const handleImgClose = (e) => {
     const imageBig = document.querySelector('.image-big');
     const description = document.querySelector('.description');
     imageBig.style.display = 'none';
@@ -153,20 +154,13 @@ function Description(props) {
       </div>
       <div className="description">
         <h4>Opis oferty</h4>
-        <p>
-          {description} Lorem ipsum dolor sit, amet consectetur adipisicing
-          elit. Animi corrupti esse maxime molestias alias, neque quasi
-          consequuntur ipsam praesentium. Voluptatum sequi, alias dolores
-          debitis quidem saepe quo obcaecati temporibus eos qui voluptas
-          deserunt natus sit itaque dignissimos, commodi blanditiis culpa libero
-          inventore praesentium rem eveniet. Veritatis esse quae debitis
-          doloremque!
-        </p>
+        <p>{description}</p>
       </div>
       <div className="extra-infos">
-        {extra.map((extra, i) => (extra ? <div key={i}>{extra}</div> : null))}
+        {extra &&
+          extra.map((extra, i) => (extra ? <div key={i}>{extra}</div> : null))}
       </div>
-      {imgUrlArr.length > 0 ? (
+      {displayImgs && imgUrlArr ? (
         <div className="gallery">
           {imgUrlArr.map((img, i) => (
             <div
@@ -176,6 +170,15 @@ function Description(props) {
               onClick={handleImgClick}
             ></div>
           ))}
+        </div>
+      ) : null}
+      {displayImgs && propertyPlanUrl ? (
+        <div className="property-plan">
+          <div
+            className="img"
+            style={{ backgroundImage: `url(${propertyPlanUrl})` }}
+            onClick={handleImgClick}
+          ></div>
         </div>
       ) : null}
     </DescriptionDiv>

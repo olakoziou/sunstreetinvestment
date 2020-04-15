@@ -23,7 +23,7 @@ function ActualProperties() {
         <h3>
           Aktualne <span>oferty</span>
         </h3>
-        <PropertySmallCards button={true} />
+        <PropertySmallCards button={true} limit={true} />
       </Div>
     </section>
   );

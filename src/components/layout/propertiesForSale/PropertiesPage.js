@@ -60,8 +60,8 @@ const PropertiesSection = styled.section`
 `;
 
 function PropertiesPage() {
-  const images = useSelector(state =>
-    state.properties.properties.map(img => img.mainImgUrl)
+  const images = useSelector((state) =>
+    state.properties.properties.map((img) => img.mainImgUrl)
   );
 
   return (
@@ -80,7 +80,7 @@ function PropertiesPage() {
           ))}
         </div>
       </div>
-      <PropertySmallCards button={false} />
+      <PropertySmallCards button={false} limit={false} />
     </PropertiesSection>
   );
 }

@@ -9,6 +9,7 @@ import { Redirect } from 'react-router';
 import { useFirebase } from 'react-redux-firebase';
 import { SignUp } from '../../../store/actions/authActions';
 import { useState } from 'react';
+import ForgotPassword from './ForgotPassword';
 
 const LogInPanelSection = styled.section`
   min-height: 100vh;
@@ -28,7 +29,8 @@ const LogInPanelSection = styled.section`
     }
 
     & .login,
-    .signup {
+    .signup,
+    .reset-password {
       border: 1px solid rgba(${colors.secondary6});
       border-radius: 4px;
       width: 90%;
@@ -36,10 +38,11 @@ const LogInPanelSection = styled.section`
       padding: 1rem;
       background-color: rgba(${colors.secondary4}, 0.025);
       ${boxShadows('xsmall')};
+      position: relative;
 
       @media ${mediaQueries('phone')} {
         width: 75%;
-        max-width: 25rem;
+        max-width: 30rem;
       }
 
       /* label focus color */
@@ -93,6 +96,26 @@ const LogInPanelSection = styled.section`
       & .send {
         width: 100%;
       }
+
+      & .forgot-password {
+        padding: 1rem 0.5rem;
+
+        & span {
+          & span {
+            color: rgba(${colors.secondary6});
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    & .reset-password {
+      & .close {
+        position: absolute;
+        top: 5%;
+        right: 5%;
+        cursor: pointer;
+        color: rgba(${colors.secondary5});
+      }
     }
   }
 `;
@@ -102,6 +125,7 @@ function LogInPanel() {
   const firebase = useFirebase();
   const storageRef = firebase.storage().ref();
   const [state, setState] = useState({});
+  const [resetPassword, displayResetPassword] = useState({ display: false });
   const [imgState, setImgState] = useState({});
   const dispatch = useDispatch();
 
@@ -128,10 +152,23 @@ function LogInPanel() {
     dispatch(SignUp(state));
   };
 
+  console.log(auth);
+
   return (
     <LogInPanelSection className="login-panel">
       <div className="login-panel__wrapper">
-        {auth.isLoaded && <Login />}
+        {auth.isLoaded && (
+          <Login
+            resetPassword={resetPassword}
+            displayResetPassword={displayResetPassword}
+          />
+        )}
+        {auth.isLoaded && resetPassword.display && (
+          <ForgotPassword
+            resetPassword={resetPassword}
+            displayResetPassword={displayResetPassword}
+          />
+        )}
         {auth.isLoaded && (
           <Signup
             firebase={firebase}

@@ -47,7 +47,12 @@ const DivMember = styled.div`
     margin: 0 auto;
     border-radius: 50%;
     border: 5px solid rgba(${colors.primary5});
+    color: rgba(${colors.secondary5});
+    font-size: 2rem;
     background-color: rgba(${colors.primary3});
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   & .single-team-member__content {

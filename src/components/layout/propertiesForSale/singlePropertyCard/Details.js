@@ -120,11 +120,14 @@ function Details(props) {
     elevator,
     kitchen,
     standard,
+    stan,
     balcony,
     garage,
     year,
-    technology
+    technology,
   } = props.data;
+
+  console.log(props);
   return (
     <DetailsnDiv className="property-card__content-details">
       <div className="infos">
@@ -206,6 +209,12 @@ function Details(props) {
             <li>
               <span>Standard: </span>
               <span>{standard}</span>
+            </li>
+          ) : null}
+          {stan ? (
+            <li>
+              <span>Stan: </span>
+              <span>{stan}</span>
             </li>
           ) : null}
           {balcony ? (

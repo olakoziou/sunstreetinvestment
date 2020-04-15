@@ -9,6 +9,13 @@ const Card = styled.div`
   margin: 0 auto;
   & .card {
     ${boxShadows('xsmall')};
+
+    & .card-image {
+      height: 25rem;
+      & img {
+        height: 100%;
+      }
+    }
   }
   & .card .card-image span.card-title {
     display: block;
@@ -59,12 +66,15 @@ function PropertySmallSingleCard(props) {
     elevator,
     kitchen,
     standard,
+    stan,
     balcony,
     garage,
     year,
     technology,
-    extra
+    extra,
   } = props;
+
+  console.log(props);
 
   const urlTitle = title
     .split(' ')
@@ -96,12 +106,13 @@ function PropertySmallSingleCard(props) {
               elevator,
               kitchen,
               standard,
+              stan,
               balcony,
               garage,
               year,
               technology,
-              extra
-            }
+              extra,
+            },
           }}
         >
           <Card>
@@ -115,11 +126,13 @@ function PropertySmallSingleCard(props) {
               </div>
               <div className="card-details">
                 <ul>
-                  <li>{purpose}</li>
-                  <li>{market}</li>
-                  <li>{price} zł</li>
-                  <li>{metrage} m2</li>
-                  <li>{(price / metrage).toFixed(2)} zł/m2</li>
+                  {purpose && <li>{purpose}</li>}
+                  {market && <li>{market}</li>}
+                  {price && <li>{price} zł</li>}
+                  {metrage && <li>{metrage} m2</li>}
+                  {price && metrage && (
+                    <li>{(price / metrage).toFixed(2)} zł/m2</li>
+                  )}
                 </ul>
               </div>
             </div>

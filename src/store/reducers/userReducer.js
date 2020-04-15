@@ -69,6 +69,19 @@ const userReducer = (state = initialState, action) => {
         ...state,
         error: action.err,
       };
+    case 'RESET_SUCCESS':
+      console.log('RESET_SUCCESS');
+      return {
+        ...state,
+        error: null,
+      };
+    case 'RESET_ERROR':
+      console.log('RESET_ERROR');
+      console.log(action.err);
+      return {
+        ...state,
+        error: action.err,
+      };
     default:
       return state;
   }

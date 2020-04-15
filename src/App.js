@@ -9,6 +9,7 @@ import HistoryPage from './components/layout/homePage/about/HistoryPage';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import 'materialize-css/dist/css/materialize.min.css';
+import PDFpage from './components/layout/propertiesForSale/singlePropertyCard/PDFpage';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
       <BrowserRouter>
         <Route
           path="/"
-          render={props =>
+          render={(props) =>
             // props.location.pathname !== '/admin-panel' ? <Navbar /> : null
             props.location.pathname.indexOf('/admin-panel') === -1 ? (
               <Navbar />
@@ -33,11 +34,12 @@ function App() {
             path="/nieruchomosc/:name/:id"
             component={SinglePropertyCard}
           />
+          <Route exact path="/pdf" component={PDFpage} />
           <Route exact path="/contact" component={Contact} />
         </Switch>
         <Route
           path="/"
-          render={props =>
+          render={(props) =>
             props.location.pathname.indexOf('/admin-panel') === -1 ? (
               <Footer />
             ) : null

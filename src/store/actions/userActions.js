@@ -36,14 +36,10 @@ export const editUser = (userEdit, emailForAuthEdit) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
-    const auth = firebase.auth();
     const user = firebase.auth().currentUser;
-    console.log(firebase.auth.EmailAuthProvider);
-    console.log(user);
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log(user);
         var cred = firebase.auth.EmailAuthProvider.credential(
           emailForAuthEdit,
           userEdit.password
@@ -73,12 +69,35 @@ export const editUser = (userEdit, emailForAuthEdit) => {
     firestore
       .collection('users')
       .doc(userEdit.id)
-      .update({ ...userEdit })
+      .update({
+        description: userEdit.description,
+        email: userEdit.email,
+        firstName: userEdit.firstName,
+        lastName: userEdit.lastName,
+        userImg: userEdit.userImg ? userEdit.userImg : null,
+      })
       .then(() => {
         dispatch({ type: 'USEREDITED_SUCCES' });
       })
       .catch((err) => {
         dispatch({ type: 'USEREDITED_ERROR', err });
+      });
+  };
+};
+
+export const resetUserPassword = (email) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firebase = getFirebase();
+    const user = firebase.auth().currentUser;
+
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(function () {
+        dispatch({ type: 'RESET_SUCCESS' });
+      })
+      .catch(function (err) {
+        dispatch({ type: 'RESET_ERROR', err });
       });
   };
 };
