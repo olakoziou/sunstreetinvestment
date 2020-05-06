@@ -10,8 +10,6 @@ function NewProperty(props) {
   useFirestoreConnect('users');
   useEffect(() => {
     M.AutoInit();
-    // var elems = document.querySelectorAll('select');
-    // var instances = M.FormSelect.init(elems);
   }, []);
 
   const handleRemoveImg = (e) => {
@@ -26,35 +24,37 @@ function NewProperty(props) {
     props.setState({ ...props.state, imgUrlArr: filteredImageArr });
   };
 
-  const handleImgChange = (e) => {
+  const optionsBigImg = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 1920,
+  };
+
+  const optionsSmallImg = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 800,
+  };
+
+  const handleImgChange = (size) => (e) => {
+    e.persist();
     const files = [];
     const upload = Array.from(e.target.files);
-    upload.map((img) => files.push(img));
-    var options = {
-      maxSizeMB: 1,
-      maxWidthOrHeight: 1920,
-    };
 
-    files.map((file) => {
-      console.log(file);
-      imageCompression(file, options)
+    upload.map((file) => {
+      console.log(file.size);
+      imageCompression(file, size)
         .then(function (compressedFile) {
-          console.log(
-            'compressedFile instanceof Blob',
-            compressedFile instanceof Blob
-          ); // true
-          console.log(
-            `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
-          ); // smaller than maxSizeMB
-
-          // return uploadToServer(compressedFile); // write your own logic
+          console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
+          files.push(compressedFile);
+        })
+        .then(() => {
+          files.map((file) => {
+            props.setImgState({ ...props.imgState, [e.target.id]: [file] });
+          });
         })
         .catch(function (error) {
           console.log(error.message);
         });
     });
-
-    props.setImgState({ ...props.imgState, [e.target.id]: files });
   };
 
   const realEastateBroker = useSelector(
@@ -62,9 +62,9 @@ function NewProperty(props) {
   );
   const names = [];
   realEastateBroker &&
-    realEastateBroker.map((el) =>
-      names.push([el.firstName, el.lastName].join(' '))
-    );
+    realEastateBroker
+      .filter((el) => el.status === 'Confirmed')
+      .map((el) => names.push([el.fullName]));
 
   return (
     <>
@@ -169,7 +169,7 @@ function NewProperty(props) {
             <span>{props.data ? null : '*'}Zdjęcie główne</span>
             <input
               type="file"
-              onChange={handleImgChange}
+              onChange={handleImgChange(optionsBigImg)}
               id="mainImg"
               disabled={!props.state.propertyName ? true : false}
               required={props.data ? false : true}
@@ -190,7 +190,7 @@ function NewProperty(props) {
             <span>Pozostałe zdjęcia</span>
             <input
               type="file"
-              onChange={handleImgChange}
+              onChange={handleImgChange(optionsSmallImg)}
               multiple
               id="images"
               disabled={!props.state.propertyName ? true : false}
@@ -211,7 +211,7 @@ function NewProperty(props) {
             <span>Plan</span>
             <input
               type="file"
-              onChange={handleImgChange}
+              onChange={handleImgChange(optionsSmallImg)}
               id="plan"
               disabled={!props.state.propertyName ? true : false}
             />

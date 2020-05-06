@@ -26,6 +26,7 @@ function Archives(props) {
                 allBtns={true}
                 allData={true}
                 archives={true}
+                image={false}
                 pathname={props.location.pathname}
               />
             </div>

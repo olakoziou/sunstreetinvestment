@@ -1,14 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { SignUp } from '../../../store/actions/authActions';
-import { Redirect } from 'react-router';
-import { useFirebase } from 'react-redux-firebase';
 
 const SignupDiv = styled.div``;
 
 function Signup({
-  firebase,
   storageRef,
   handleChange,
   handleSubmit,
@@ -16,10 +11,8 @@ function Signup({
   state,
   imgState,
   setState,
+  optionsSmallImg,
 }) {
-  const auth = useSelector((state) => state.firebase.auth);
-  const dispatch = useDispatch();
-
   // Add main image
   useEffect(() => {
     if (
@@ -137,7 +130,7 @@ function Signup({
               <span>Zdjęcie</span>
               <input
                 type="file"
-                onChange={handleImgChange}
+                onChange={handleImgChange(optionsSmallImg)}
                 disabled={!state['signup-first_name'] ? true : false}
                 id="userImg"
               />

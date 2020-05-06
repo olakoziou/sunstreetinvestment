@@ -4,6 +4,7 @@ import SingleTeamMember from './SingleTeamMember';
 import styled from 'styled-components';
 import { mediaQueries } from '../../../../mixins';
 import { useFirestoreConnect } from 'react-redux-firebase';
+import { colors } from '../../../../colors';
 
 const TeamDiv = styled.div`
   margin: 5rem 0;
@@ -11,6 +12,11 @@ const TeamDiv = styled.div`
   & h3 {
     text-align: center;
     margin: 5rem 0;
+
+    & span {
+      color: rgba(${colors.extra}, 1);
+      text-shadow: 0 1px 2.5px rgba(0, 0, 0, 0.2);
+    }
   }
   & > div {
     display: flex;
@@ -19,16 +25,12 @@ const TeamDiv = styled.div`
   }
 
   & .team-bottom {
-    max-width: 95%;
+    max-width: 90%;
     margin: 0 auto;
     & > div {
       @media ${mediaQueries('tab-port')} {
         height: 25rem;
         /* min-width: 30rem; */
-      }
-
-      @media ${mediaQueries('tab-land')} {
-        height: 22rem;
       }
     }
   }
@@ -74,7 +76,9 @@ function Team() {
   return (
     <section id="team">
       <TeamDiv className="team ">
-        <h3>Nasz Zespół</h3>
+        <h3>
+          Nasz <span>Zespół</span>{' '}
+        </h3>
         <div className="team-top ">
           {team1.map((member, i) => (
             <SingleTeamMember

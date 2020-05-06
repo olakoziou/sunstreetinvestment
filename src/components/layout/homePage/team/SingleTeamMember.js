@@ -1,17 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../../../colors';
-import { boxShadows } from '../../../../mixins';
+import { boxShadows, mediaQueries } from '../../../../mixins';
 
 const DivMember = styled.div`
   min-width: 15rem;
-  width: 25rem;
-  min-height: 20rem;
-  height: 22rem;
+  width: 20rem;
   margin: 5rem 2rem;
   background-color: rgba(${colors.secondary5});
   ${boxShadows('small')};
   position: relative;
+
+  @media ${mediaQueries('phone')} {
+    height: 25rem;
+  }
+
+  @media ${mediaQueries('tab-port')} {
+    width: 25rem;
+  }
 
   &:after {
     content: '';
@@ -22,8 +28,13 @@ const DivMember = styled.div`
     bottom: 0;
     left: 0;
     background-color: rgba(${colors.primary5});
+    transition: all 0.2s;
     transform: skew(-3deg);
     z-index: -100;
+  }
+
+  &:hover:after {
+    transform: skew(-1deg);
   }
 
   & .single-team-member__image {
@@ -59,7 +70,7 @@ const DivMember = styled.div`
     position: relative;
     transform: translateY(-6rem);
     text-align: center;
-    padding: 1.5rem;
+    padding: 1rem;
 
     & h5 {
       margin: 1rem;

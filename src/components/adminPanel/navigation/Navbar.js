@@ -6,6 +6,7 @@ import { LogOut } from '../../../store/actions/authActions';
 import { Redirect, useHistory } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { useFirestoreConnect, useFirebaseConnect } from 'react-redux-firebase';
+import { mediaQueries } from '../../../mixins';
 
 const SideNavbarDiv = styled.div`
   background-color: rgba(${colors.secondary});
@@ -35,9 +36,22 @@ const SideNavbarDiv = styled.div`
   }
 
   & .nav-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media ${mediaQueries('tab-port')} {
+      flex-direction: column;
+    }
+
     & li {
       border-bottom: 1px solid rgba(${colors.secondary3});
       background-color: rgba(${colors.secondary});
+      margin: 0.5rem 1rem;
+
+      @media ${mediaQueries('tab-port')} {
+        margin: 0;
+      }
 
       &:hover {
         background-color: rgba(${colors.secondary2});
@@ -47,7 +61,11 @@ const SideNavbarDiv = styled.div`
         display: block;
         text-align: center;
         color: rgba(${colors.secondary5});
-        padding: 1rem 0;
+        padding: 1rem;
+
+        @media ${mediaQueries('tab-port')} {
+          padding: 1rem 0;
+        }
       }
 
       & a.active {
@@ -100,12 +118,12 @@ function Navbar() {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/admin-panel/archives">Archiwum</NavLink>
+        </li>
+        <li>
           <NavLink to="/admin-panel/deleted-properties">
             Usunięte nieruchomości
           </NavLink>
-        </li>
-        <li>
-          <NavLink to="/admin-panel/archives">Archiwum</NavLink>
         </li>
         <li>
           <NavLink to="/admin-panel/users">Użytkownicy</NavLink>

@@ -16,11 +16,12 @@ const JobDiv = styled.div`
   }
 
   & h4 {
-    color: rgba(${colors.secondary4}, 1);
+    color: rgba(${colors.secondary5}, 1);
   }
 
   & .our-job__work {
-    color: rgba(${colors.secondary4}, 1);
+    color: rgba(${colors.secondary5}, 1);
+    padding: 0 0.5rem;
 
     & > div {
       font-size: 1.2rem;
@@ -31,8 +32,12 @@ const JobDiv = styled.div`
         rgba(208, 208, 208, 0.025) 50%,
         rgba(240, 240, 240, 0) 100%
       );
-      margin: 1rem;
+      margin: 1rem 0.5rem;
       width: 100%;
+
+      & i {
+        margin-right: 0.5rem;
+      }
     }
   }
 `;
@@ -42,18 +47,18 @@ function OurJob() {
     <JobDiv className="our-job">
       <h4>Czym się zajmujemy</h4>
       <div className="our-job__work">
-        <div className="wotk-item-1">
+        <div className="work-item-1">
           <i className="material-icons">check</i>
           <span>Pozyskiwanie nieruchomości na sprzedaż</span>
         </div>
-        <div className="wotk-item-2">
+        <div className="work-item-2">
           <i className="material-icons">check</i>Negocjowanie cen w imieniu
           Klienta
         </div>
-        <div className="wotk-item-3">
+        <div className="work-item-3">
           <i className="material-icons">check</i>Budowa osiedli domów
         </div>
-        <div className="wotk-item-4">
+        <div className="work-item-4">
           <i className="material-icons">check</i>Zarządzanie kapitałem Klienta
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { boxShadows } from '../../../mixins';
+import { boxShadows, mediaQueries } from '../../../mixins';
 import { colors } from '../../../colors';
 
 const Card = styled.div`
@@ -9,11 +9,25 @@ const Card = styled.div`
   margin: 0 auto;
   & .card {
     ${boxShadows('xsmall')};
+    transition: all 0.2s;
+
+    &:hover {
+      ${boxShadows('small')};
+      transform: scale(1.01);
+    }
 
     & .card-image {
-      height: 25rem;
+      height: 18rem;
       & img {
         height: 100%;
+      }
+
+      @media ${mediaQueries('tab-port')} {
+        min-height: 20rem;
+      }
+
+      @media ${mediaQueries('tab-land')} {
+        min-height: 25rem;
       }
     }
   }
@@ -37,12 +51,19 @@ const Card = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 1rem 0;
 
     & li {
-      padding: 0.5rem;
+      padding: 0.75rem;
       margin: 0.5rem;
       ${boxShadows('xsmall')};
       color: rgba(${colors.primary3}, 1);
+      font-size: 1.1rem;
+    }
+
+    & li.stan {
+      background-color: rgba(${colors.extra}, 1);
+      color: rgba(${colors.secondary6}, 1);
     }
   }
 `;
@@ -72,9 +93,8 @@ function PropertySmallSingleCard(props) {
     year,
     technology,
     extra,
+    realEstateBroker,
   } = props;
-
-  console.log(props);
 
   const urlTitle = title
     .split(' ')
@@ -112,6 +132,7 @@ function PropertySmallSingleCard(props) {
               year,
               technology,
               extra,
+              realEstateBroker,
             },
           }}
         >
@@ -125,15 +146,18 @@ function PropertySmallSingleCard(props) {
                 <p>{description.slice(0, 100)}...</p>
               </div>
               <div className="card-details">
-                <ul>
-                  {purpose && <li>{purpose}</li>}
-                  {market && <li>{market}</li>}
-                  {price && <li>{price} zł</li>}
-                  {metrage && <li>{metrage} m2</li>}
-                  {price && metrage && (
-                    <li>{(price / metrage).toFixed(2)} zł/m2</li>
-                  )}
-                </ul>
+                {!stan ? (
+                  <ul>
+                    {market && <li>{market}</li>}
+                    {price && <li>{price} zł</li>}
+                    {metrage && <li>{metrage} m2</li>}
+                    {price && metrage && (
+                      <li>{(price / metrage).toFixed(2)} zł/m2</li>
+                    )}
+                  </ul>
+                ) : (
+                  <ul>{stan && <li className="stan">{stan}</li>}</ul>
+                )}
               </div>
             </div>
           </Card>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Login from './Login';
 import Signup from './Signup';
 import styled from 'styled-components';
@@ -10,6 +10,7 @@ import { useFirebase } from 'react-redux-firebase';
 import { SignUp } from '../../../store/actions/authActions';
 import { useState } from 'react';
 import ForgotPassword from './ForgotPassword';
+import imageCompression from 'browser-image-compression';
 
 const LogInPanelSection = styled.section`
   min-height: 100vh;
@@ -137,13 +138,33 @@ function LogInPanel() {
     setState({ ...state, [e.target.id]: e.target.value });
   };
 
-  const handleImgChange = (e) => {
+  const optionsSmallImg = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 300,
+  };
+
+  const handleImgChange = (size) => (e) => {
+    e.persist();
     const files = [];
     const upload = Array.from(e.target.files);
-    upload.map((img) => files.push(img));
-    setImgState({
-      ...imgState,
-      [e.target.id]: files,
+
+    upload.forEach((file) => {
+      imageCompression(file, size)
+        .then(function (compressedFile) {
+          console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
+          files.push(compressedFile);
+        })
+        .then(() => {
+          files.forEach((file) => {
+            setImgState({
+              ...imgState,
+              [e.target.id]: [file],
+            });
+          });
+        })
+        .catch(function (error) {
+          console.log(error.message);
+        });
     });
   };
 
@@ -151,8 +172,6 @@ function LogInPanel() {
     e.preventDefault();
     dispatch(SignUp(state));
   };
-
-  console.log(auth);
 
   return (
     <LogInPanelSection className="login-panel">
@@ -179,6 +198,7 @@ function LogInPanel() {
             state={state}
             imgState={imgState}
             setState={setState}
+            optionsSmallImg={optionsSmallImg}
           />
         )}
       </div>

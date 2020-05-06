@@ -5,15 +5,19 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { colors } from '../../../colors';
 import { useFirestoreConnect } from 'react-redux-firebase';
+import { mediaQueries } from '../../../mixins';
+import Spinner from '../../adminPanel/spinner/Spinner';
 
 const Div = styled.div`
   display: flex;
   flex-wrap: wrap;
 
   & > div {
-    max-width: 100%;
+    width: 100%;
+    max-width: 35rem;
+    margin: 0 auto;
 
-    @media only screen and (min-width: 600px) {
+    @media ${mediaQueries('tab-port')} {
       max-width: 50%;
     }
 
@@ -26,6 +30,7 @@ const Div = styled.div`
 const Button = styled.div`
   display: flex;
   justify-content: center;
+  margin: 2rem 0;
 
   & a div {
     background-color: rgba(${colors.primary5}, 1);
@@ -45,15 +50,16 @@ function PropertySmallCards(props) {
     },
   ]);
   const properties = useSelector((state) => state.firestore.ordered.properties);
-
-  console.log(properties);
+  const propertiesFiltered =
+    properties && properties.filter((el) => el.status === 'added');
 
   return (
     <div className="property-small-cards container">
       <Div>
-        {props.limit
-          ? properties &&
-            properties
+        {properties ? (
+          props.limit ? (
+            properties &&
+            propertiesFiltered
               .slice(0, 4)
               .map((property, i) => (
                 <PropertySmallSingleCard
@@ -81,10 +87,12 @@ function PropertySmallCards(props) {
                   year={property.year}
                   technology={property.technology}
                   extra={property.extra}
+                  realEstateBroker={property.realEstateBroker}
                 />
               ))
-          : properties &&
-            properties.map((property, i) => (
+          ) : (
+            properties &&
+            propertiesFiltered.map((property, i) => (
               <PropertySmallSingleCard
                 key={i}
                 title={property.propertyName}
@@ -110,8 +118,13 @@ function PropertySmallCards(props) {
                 year={property.year}
                 technology={property.technology}
                 extra={property.extra}
+                realEstateBroker={property.realEstateBroker}
               />
-            ))}
+            ))
+          )
+        ) : (
+          <Spinner />
+        )}
       </Div>
       <Button>
         <Link to="/nieruchomosci">

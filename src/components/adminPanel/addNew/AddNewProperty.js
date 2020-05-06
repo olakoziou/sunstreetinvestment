@@ -159,7 +159,6 @@ function AddNewProperty(props) {
   useEffect(() => {
     if (state.propertyName && imgState.images) {
       imgState.images.map((image, i) => {
-        console.log(image);
         storageRef
           .child(`images/${state.propertyName}/${image.name}`)
           .put(image)
@@ -267,10 +266,9 @@ function AddNewProperty(props) {
               defaultValue={
                 state.propertyDescription ? state.propertyDescription : ''
               }
-              required
             />
             <label className="active" htmlFor="propertyDescription">
-              *Opis
+              Opis
             </label>
           </div>
         </div>

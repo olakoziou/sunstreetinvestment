@@ -4,10 +4,16 @@ import { colors } from '../../../colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { confirmUser, deleteUser } from '../../../store/actions/userActions';
 import { useFirestoreConnect } from 'react-redux-firebase';
+import { mediaQueries } from '../../../mixins';
 
 const SingleUserDiv = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
+
+  @media ${mediaQueries('tab-port')} {
+    flex-direction: row;
+  }
   & .single-user__initials {
     width: 5rem;
     height: 5rem;
@@ -39,13 +45,25 @@ const SingleUserDiv = styled.div`
   & .single-user__details {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex-grow: 0.5;
     width: 70%;
   }
 
   & .single-user-btns {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+
+    & button {
+      margin: 1rem;
+
+      @media ${mediaQueries('tab-port')} {
+        margin: 0 0.5rem;
+      }
+    }
+
+    @media ${mediaQueries('tab-port')} {
+      flex-direction: row;
+    }
   }
 `;
 
@@ -73,7 +91,7 @@ function SingleUser(props) {
     dispatch(deleteUser(user));
   };
   return (
-    <li className="collection-item avatar">
+    <li className="collection-item avatar" style={{ paddingLeft: 0 }}>
       <SingleUserDiv>
         {data.userImg ? (
           <div
@@ -95,12 +113,20 @@ function SingleUser(props) {
           <span>Status: {data && data.status}</span>
         </div>
         <div className="single-user-btns">
-          <div className="btn blue" onClick={handleConfimation}>
+          <button
+            className="btn blue"
+            onClick={handleConfimation}
+            disabled={data.status === 'Confirmed' ? true : false}
+          >
             Zatwierdź
-          </div>
-          <div className="btn red" onClick={handleDelete}>
+          </button>
+          <button
+            className="btn red"
+            onClick={handleDelete}
+            disabled={data.status === 'Deleted' ? true : false}
+          >
             Usuń
-          </div>
+          </button>
         </div>
       </SingleUserDiv>
     </li>

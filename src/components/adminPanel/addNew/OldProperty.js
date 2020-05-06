@@ -19,8 +19,9 @@ function OldProperty(props) {
             className="validate"
             onChange={props.handleChange}
             defaultValue={data ? data.buyPrice : ''}
+            required
           />
-          <label htmlFor="buyPrice">Cena zakupu</label>
+          <label htmlFor="buyPrice">*Cena zakupu</label>
         </div>
       </div>
       <div className="row">
@@ -31,8 +32,9 @@ function OldProperty(props) {
             className="validate"
             onChange={props.handleChange}
             defaultValue={data ? data.sellPrice : ''}
+            required
           />
-          <label htmlFor="sellPrice">Cena sprzedaży</label>
+          <label htmlFor="sellPrice">*Cena sprzedaży</label>
         </div>
       </div>
       <div className="row">

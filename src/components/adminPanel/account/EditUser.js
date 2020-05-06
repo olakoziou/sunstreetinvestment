@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
 import { useFirebase } from 'react-redux-firebase';
+import imageCompression from 'browser-image-compression';
 
 const EditUserDiv = styled.div`
   & .img {
@@ -43,13 +44,34 @@ function EditUser(props) {
   const handleChange = (e) => {
     setState({ ...state, [e.target.id]: e.target.value });
   };
-  const handleImgChange = (e) => {
+
+  const optionsSmallImg = {
+    maxSizeMB: 1,
+    maxWidthOrHeight: 300,
+  };
+  const handleImgChange = (size) => (e) => {
+    e.persist();
     const files = [];
     const upload = Array.from(e.target.files);
-    upload.map((img) => files.push(img));
-    setImgState({
-      ...imgState,
-      [e.target.id]: files,
+
+    upload.map((file) => {
+      console.log(file.size);
+      imageCompression(file, size)
+        .then(function (compressedFile) {
+          console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
+          files.push(compressedFile);
+        })
+        .then(() => {
+          files.map((file) => {
+            setImgState({
+              ...imgState,
+              [e.target.id]: [file],
+            });
+          });
+        })
+        .catch(function (error) {
+          console.log(error.message);
+        });
     });
   };
 
@@ -188,7 +210,7 @@ function EditUser(props) {
               <span>Zdjęcie</span>
               <input
                 type="file"
-                onChange={handleImgChange}
+                onChange={handleImgChange(optionsSmallImg)}
                 // disabled={!state['firstName'] ? true : false}
                 id="userImg"
               />

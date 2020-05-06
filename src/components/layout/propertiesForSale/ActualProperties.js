@@ -11,7 +11,7 @@ const Div = styled.div`
 
     & span {
       color: rgba(${colors.extra}, 1);
-      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
+      text-shadow: 0 1px 2.5px rgba(0, 0, 0, 0.2);
     }
   }
 `;
@@ -21,7 +21,7 @@ function ActualProperties() {
     <section id="actual-properties">
       <Div>
         <h3>
-          Aktualne <span>oferty</span>
+          Nasze <span>inwestycje</span>
         </h3>
         <PropertySmallCards button={true} limit={true} />
       </Div>

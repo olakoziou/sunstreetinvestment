@@ -14,8 +14,16 @@ import {
 import moment from 'moment';
 import 'moment/locale/pl';
 import { useHistory } from 'react-router';
+import { mediaQueries } from '../../../mixins';
 
 const Item = styled.li`
+  display: flex;
+  flex-direction: column;
+
+  @media ${mediaQueries('tab-port')} {
+    flex-direction: row;
+  }
+
   &.collection-item.avatar {
     display: flex;
     align-items: center;
@@ -25,9 +33,14 @@ const Item = styled.li`
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      width: 15%;
-      height: 5rem;
-      margin: 0 0.5rem;
+      width: 50%;
+      height: 10rem;
+      margin: 1rem 0.5rem;
+
+      @media ${mediaQueries('tab-port')} {
+        width: 15%;
+        height: 5rem;
+      }
     }
 
     & .content {
@@ -56,10 +69,14 @@ const Item = styled.li`
 
     & .buttons {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+
+      @media ${mediaQueries('tab-port')} {
+        flex-direction: column;
+      }
 
       & .btn {
-        margin: 0.5rem 0;
+        margin: 0.5rem 1rem;
       }
     }
   }
@@ -101,15 +118,22 @@ function SingleProperty(props) {
   const handleEdit = (e) => {
     history.push({ pathname: '/admin-panel/edit-property', state: data });
   };
+
   return (
     <Item className="collection-item avatar">
-      <div
-        className="img"
-        style={{ backgroundImage: `url(${data.mainImgUrl})` }}
-      ></div>
+      {props.image && (
+        <div
+          className="img"
+          style={{ backgroundImage: `url(${data.mainImgUrl})` }}
+        ></div>
+      )}
       <div className="content">
         <span className="title">{data.propertyName}</span>
-        <p>{data.propertyDescription.slice(0, 100)}...</p>
+        <p>
+          {data.propertyDescription
+            ? `${data.propertyDescription.slice(0, 100)}...`
+            : null}
+        </p>
         {!props.archives ? (
           props.allData ? (
             <>
@@ -145,7 +169,8 @@ function SingleProperty(props) {
                 )}
                 {data.addedDate && (
                   <span>
-                    Data dodania: {moment(data.addedDate).format('LLLL')}
+                    Data dodania:{' '}
+                    {moment(new Date(data.addedDate.toDate())).format('LLLL')}
                   </span>
                 )}
               </div>

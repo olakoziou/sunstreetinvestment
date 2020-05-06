@@ -10,5 +10,5 @@ export const colors = {
   secondary4: '204, 204, 204',
   secondary5: '228, 228, 228',
   secondary6: '241, 242, 243',
-  extra: '190, 124, 107'
+  extra: '190, 124, 107',
 };

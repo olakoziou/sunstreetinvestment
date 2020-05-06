@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import HomePage from './homePage/HomePage';
-import Conatct from './contact/Contact';
 import SinglePropertyCard from './propertiesForSale/singlePropertyCard/SinglePropertyCard';
 import PropertiesPage from './propertiesForSale/PropertiesPage';
 import HistoryPage from './homePage/about/HistoryPage';
+import PDFpage from './propertiesForSale/singlePropertyCard/PDFpage';
 
 function LayoutPage() {
   return (
@@ -19,7 +19,7 @@ function LayoutPage() {
           />
           <Route exact path="/nieruchomosci" component={PropertiesPage} />
           <Route exact path="/archiwum" component={HistoryPage} />
-          <Route exact path="/contact" component={Conatct} />
+          <Route exact path="/oferta-pdf" component={PDFpage} />
         </Switch>
       </BrowserRouter>
     </>

@@ -4,6 +4,7 @@ import { boxShadows, mediaQueries } from '../../../../mixins';
 import { colors } from '../../../../colors';
 import Description from './Description';
 import Details from './Details';
+import { Link } from 'react-router-dom';
 
 const PropertyCardSection = styled.section`
   & .property-card {
@@ -79,6 +80,7 @@ const PropertyCardSection = styled.section`
 
 function SinglePropertyCard(props) {
   const { title, img, stan } = props.location.state;
+  console.log(props);
 
   return (
     <PropertyCardSection className="property">
@@ -102,6 +104,11 @@ function SinglePropertyCard(props) {
           <Details data={props.location.state} />
         </div>
       </div>
+      <button>
+        <Link to={{ pathname: '/oferta-pdf', state: props.location.state }}>
+          Wygeneruj ofertę
+        </Link>
+      </button>
     </PropertyCardSection>
   );
 }

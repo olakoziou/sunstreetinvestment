@@ -1,19 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Switch, Route, Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import { colors } from '../../colors';
-// import { BrowserRouter } from 'react-router-dom';
-// import UserAccount from './account/UserAccount';
-// import AddedProperties from './added/AddedProperties';
-// import AddNewProperty from './addNew/AddNewProperty';
-// import DeletedProperties from './deleted/DeletedProperties';
-// import Users from './users/Users';
-// import Archives from './added/Archives';
-// import SingleProperty from './addNew/SingleProperty';
-// import EditProperty from './edit/EditProperty';
-// import EditUser from './account/EditUser';
-// import { useFirebase } from 'react-redux-firebase';
 
 const DashboardDiv = styled.div`
   width: 100%;
@@ -29,8 +18,6 @@ function AdminPanel({ userConfirmed }) {
   if (!auth.uid) {
     return <Redirect to="/admin-panel/log-in" />;
   }
-  console.log(userConfirmed);
-
   return (
     <DashboardDiv>
       {userConfirmed !== 'Confirmed' ? (

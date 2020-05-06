@@ -38,18 +38,19 @@ const DivAbout = styled.div`
   & > div {
     width: 100%;
     max-width: 45rem;
-    padding: 2rem 1rem;
+    padding: 2rem 0.5rem;
     /* height: 80%; */
     margin: 1rem 0;
     ${boxShadows('medium')};
     border-radius: 2px;
     transition: all 0.2s;
     color: rgba(${colors.secondary}, 1);
-    z-index: 1000;
+
     position: relative;
 
     &:hover {
       transform: scale(1.05);
+      z-index: 1000;
     }
 
     @media ${mediaQueries('phone')} {

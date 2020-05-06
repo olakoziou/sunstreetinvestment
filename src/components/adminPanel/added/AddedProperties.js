@@ -29,6 +29,7 @@ function AddedProperties(props) {
                 allBtns={true}
                 allData={true}
                 archives={false}
+                image={true}
                 pathname={props.location.pathname}
               />
             </div>

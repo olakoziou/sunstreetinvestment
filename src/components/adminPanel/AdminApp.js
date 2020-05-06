@@ -10,18 +10,18 @@ import DeletedProperties from './deleted/DeletedProperties';
 import Users from './users/Users';
 import styled from 'styled-components';
 import { colors } from '../../colors';
-import SingleProperty from './addNew/SingleProperty';
 import Container from './Container';
 import { useSelector } from 'react-redux';
 import Archives from './added/Archives';
 import EditProperty from './edit/EditProperty';
 import EditUser from './account/EditUser';
 import ForgotPassword from './logging/ForgotPassword';
-import { useFirebase, useFirebaseConnect } from 'react-redux-firebase';
+import { useFirebaseConnect } from 'react-redux-firebase';
+import { mediaQueries } from '../../mixins';
 
 const AdminAppDiv = styled.div`
   min-height: 100vh;
-  padding: 10rem 5rem;
+  padding: 1rem;
   background: rgb(32, 64, 81);
   background: linear-gradient(
     113deg,
@@ -30,8 +30,17 @@ const AdminAppDiv = styled.div`
   );
   border-radius: 2px;
 
+  @media ${mediaQueries('tab-port')} {
+    padding: 10rem 5rem;
+  }
+
   & .wrapper {
     display: flex;
+    flex-direction: column;
+
+    @media ${mediaQueries('tab-port')} {
+      flex-direction: row;
+    }
 
     & .dashboard {
       width: 100%;
@@ -60,10 +69,9 @@ const AdminAppDiv = styled.div`
 `;
 
 function AdminApp() {
-  const globalState = useSelector((state) => state);
   useFirebaseConnect();
   const userConfirmed = useSelector((state) => state.firebase.profile.status);
-  // console.log(userConfirmed);
+
   return (
     <AdminAppDiv className="admin-panel">
       <div className="wrapper">

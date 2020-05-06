@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../../../colors';
 import { mediaQueries } from '../../../../mixins';
+import { Link } from 'react-router-dom';
 
 const JobDiv = styled.div`
   background-color: rgba(${colors.extra}, 1);
@@ -25,12 +26,21 @@ const JobDiv = styled.div`
     height: 100%;
     margin-bottom: 1rem;
     & > p {
-      padding: 1rem 2rem;
+      padding: 1rem;
       font-size: 1.2rem;
+
+      & a {
+        display: inline-block;
+        font-weight: bold;
+        color: rgba(${colors.secondary6}, 1);
+      }
     }
-    & > div {
+    & > div.btn {
       max-width: max-content;
       background-color: rgba(${colors.secondary2}, 1);
+      & a {
+        color: rgba(${colors.secondary6});
+      }
 
       &:hover {
         background-color: rgba(${colors.secondary3}, 1);
@@ -45,11 +55,18 @@ function OurHistory() {
       <h4>Nasza historia</h4>
       <div className="our-history__content">
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-          voluptatibus repellendus possimus recusandae cupiditate molestiae eius
-          tempore assumenda numquam? Aut!
+          Firma powstała w 2015 roku. Początkowo zajmowaliśmy się podnajmem i
+          najmem krótkoterminowym, a po kilku miesiącach całkowicie
+          poświęciliśmy się pozyskiwaniu nieruchomości inwestycyjnych oraz
+          sprzedaży. W 2019 roku powstała bliźniacza spółka{' '}
+          <a href="greenvest.pl" target="_blank">
+            Greenvest
+          </a>
+          .
         </p>
-        <div className="btn">Portfolio</div>
+        <div className="btn">
+          <Link to="/archiwum">Portfolio</Link>
+        </div>
       </div>
     </JobDiv>
   );

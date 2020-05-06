@@ -13,7 +13,14 @@ const FooterStyle = styled.footer`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 5rem;
+    padding: 0 2rem;
+    max-width: 90%;
+    margin: 0 auto;
+
+    @media ${mediaQueries('phone')} {
+      padding: 0 5rem;
+      max-width: 80%;
+    }
 
     @media ${mediaQueries('tab-port')} {
       padding: 0;
@@ -70,42 +77,40 @@ const FlexDiv = styled.div`
 function Footer() {
   return (
     <FooterStyle>
-      <div className="container">
-        <div className="footer">
-          <div className="footer__details">
-            <div className="coworking">
-              <h5>Współpraca</h5>
-              <span>
-                Jeśli jesteś pośrednikiem, prowadzisz firmę remontową lub
-                zajmujesz się aranżacją wnętrz, skonktakuj się z nami!
-              </span>
+      <div className="footer">
+        <div className="footer__details">
+          <div className="coworking">
+            <h5>Współpraca</h5>
+            <span>
+              Jeśli jesteś pośrednikiem, prowadzisz firmę remontową lub
+              zajmujesz się aranżacją wnętrz, skonktakuj się z nami!
+            </span>
+          </div>
+          <div className="contact">
+            <h5>Kontakt</h5>
+            <div>
+              <i className="material-icons small">local_phone</i>
+              <span>730173031</span>
             </div>
-            <div className="contact">
-              <h5>Kontakt</h5>
-              <div>
-                <i className="material-icons small">local_phone</i>
-                <span>730173031</span>
-              </div>
-              <div>
-                <i className="material-icons small">mail_outline</i>
-                <span>biuro@sunstreetinvestment.pl</span>
-              </div>
-            </div>
-            <div className="company-info">
-              <h5>Dane spółki</h5>
-              <span>SunStreet Investment Sp. z o.o.</span>
-              <span>Masarska 13/b4, 31-534 Kraków</span>
-              <span>NIP: 6751705313</span>
-              <span>REGON: 383486649</span>
-            </div>
-            <div className="address">
-              <h5>Siedziba firmy</h5>
-              <span>ul. Generała Józefa Sowińskiego, 2/5 31-524 Kraków</span>
+            <div>
+              <i className="material-icons small">mail_outline</i>
+              <span>biuro@sunstreetinvestment.pl</span>
             </div>
           </div>
-          <div className="footer_copyright">
-            <span>&copy; Aleksandra Kozioł</span>
+          <div className="company-info">
+            <h5>Dane spółki</h5>
+            <span>SunStreet Investment Sp. z o.o.</span>
+            <span>Masarska 13/b4, 31-534 Kraków</span>
+            <span>NIP: 6751705313</span>
+            <span>REGON: 383486649</span>
           </div>
+          <div className="address">
+            <h5>Siedziba firmy</h5>
+            <span>ul. Generała Józefa Sowińskiego, 2/5 31-524 Kraków</span>
+          </div>
+        </div>
+        <div className="footer_copyright">
+          <span>&copy; Aleksandra Kozioł</span>
         </div>
       </div>
     </FooterStyle>

@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { LogIn } from '../../../store/actions/authActions';
-import { Link } from 'react-router-dom';
 
 const LoginDiv = styled.div``;
 
-function Login({ resetPassword, displayResetPassword }) {
+function Login({ displayResetPassword }) {
   const authError = useSelector((state) => state.auth.authError);
-  const auth = useSelector((state) => state.firebase.auth);
   const dispatch = useDispatch();
   const [state, setState] = useState({});
 

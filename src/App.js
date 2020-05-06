@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import LayoutPage from './components/layout/LayoutPage';
 import AdminApp from './components/adminPanel/AdminApp';
-import Contact from './components/layout/contact/Contact';
 import SinglePropertyCard from './components/layout/propertiesForSale/singlePropertyCard/SinglePropertyCard';
 import PropertiesPage from './components/layout/propertiesForSale/PropertiesPage';
 import HistoryPage from './components/layout/homePage/about/HistoryPage';
@@ -29,13 +28,13 @@ function App() {
 
           <Route path="/nieruchomosci" exact component={PropertiesPage} />
           <Route path="/archiwum" component={HistoryPage} />
+          <Route path="/archiwum/:name" component={HistoryPage} />
           <Route
             exact
             path="/nieruchomosc/:name/:id"
             component={SinglePropertyCard}
           />
-          <Route exact path="/pdf" component={PDFpage} />
-          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/oferta-pdf" component={PDFpage} />
         </Switch>
         <Route
           path="/"

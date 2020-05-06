@@ -1,16 +1,16 @@
-export const boxShadows = size => {
+export const boxShadows = (size) => {
   if (size === 'xsmall') {
-    return `box-shadow: 0 0.5rem 1.2rem rgba(0, 0, 0, 0.15)`;
+    return `box-shadow: 0 0.25rem .5rem rgba(0, 0, 0, 0.15)`;
   } else if (size === 'small') {
-    return `box-shadow: 0 0.5rem 1.2rem rgba(0, 0, 0, 0.35)`;
+    return `box-shadow: 0 0.45rem .85rem rgba(0, 0, 0, 0.2)`;
   } else if (size === 'medium') {
-    return `box-shadow: 0 0.75rem 1.8rem rgba(0, 0, 0, 0.55)`;
+    return `box-shadow: 0 0.75rem 1.8rem rgba(0, 0, 0, 0.35)`;
   } else if (size === 'big') {
-    return `box-shadow: 0 0.2rem 2.2rem rgba(0, 0, 0, 0.75)`;
+    return `box-shadow: 0 0.2rem 2.2rem rgba(0, 0, 0, 0.55)`;
   }
 };
 
-export const mediaQueries = breakpoint => {
+export const mediaQueries = (breakpoint) => {
   if (breakpoint === 'phone') {
     return `(min-width: 37.5em)`; //600px
   }

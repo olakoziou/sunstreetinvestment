@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../img/ssi-logo.png';
 import { colors } from '../../colors';
@@ -10,18 +10,23 @@ const NavBar = styled.nav`
   top: 0;
   z-index: 1000;
   transition: all 0.2s;
+  z-index: 100000;
 
-  & ul li a {
-    font-size: 1.2rem;
-  }
+  & .nav-wrapper {
+    max-width: 80%;
+    margin: 0 auto;
+    & ul li a {
+      font-size: 1.2rem;
+    }
 
-  & ul li a.active {
-    color: rgba(${colors.extra}, 0.85);
-    border-bottom: 3px solid rgba(${colors.extra}, 0.85);
-  }
+    & ul li a.active {
+      color: rgba(${colors.extra}, 0.9);
+      border-bottom: 3px solid rgba(${colors.extra}, 0.9);
+    }
 
-  & a.sidenav-trigger i {
-    line-height: 4rem;
+    & a.sidenav-trigger i {
+      line-height: 4rem;
+    }
   }
 `;
 
@@ -53,7 +58,7 @@ function Navbar() {
     document.addEventListener('scroll', () => {
       const isTop = window.scrollY < 500;
       if (isTop !== state) {
-        setState(state => ({ ...state, isTop }));
+        setState((state) => ({ ...state, isTop }));
       }
     });
   }, [state.isTop]);
@@ -74,10 +79,10 @@ function Navbar() {
             state.isTop ? '0.85' : '0.95'
           })`,
           height,
-          lineHeight
+          lineHeight,
         }}
       >
-        <div className="nav-wrapper container">
+        <div className="nav-wrapper">
           <a href="/" className="brand-logo">
             <Logo
               src={logo}
@@ -95,9 +100,6 @@ function Navbar() {
             <li>
               <NavLink to="/archiwum">Archiwum</NavLink>
             </li>
-            <li>
-              <NavLink to="/contact">Kontakt</NavLink>
-            </li>
           </ul>
         </div>
       </NavBar>
@@ -107,9 +109,6 @@ function Navbar() {
         </li>
         <li>
           <NavLink to="/archiwum">Archiwum</NavLink>
-        </li>
-        <li>
-          <NavLink to="/contact">Kontakt</NavLink>
         </li>
       </MobileNavbar>
     </>

@@ -66,7 +66,7 @@ export const setBackProperty = (property) => {
     firestore
       .collection('properties')
       .doc(property.id)
-      .update({ status: 'set back' })
+      .update({ status: 'set back', addedDate: new Date() })
       .then(() => {
         dispatch({ type: 'SETBACK_SUCCESS' });
       })

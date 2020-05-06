@@ -44,6 +44,7 @@ function DeletedProperties(props) {
                   allBtns={false}
                   allData={false}
                   archives={false}
+                  image={false}
                   pathname={props.location.pathname}
                 />
               </div>

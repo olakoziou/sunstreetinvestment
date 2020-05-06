@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { colors } from '../../../colors';
 import { mediaQueries } from '../../../mixins';
 import { useSelector } from 'react-redux';
+import { useFirestoreConnect } from 'react-redux-firebase';
 
 const PropertiesSection = styled.section`
   margin-bottom: 5rem;
@@ -60,28 +61,35 @@ const PropertiesSection = styled.section`
 `;
 
 function PropertiesPage() {
-  const images = useSelector((state) =>
-    state.properties.properties.map((img) => img.mainImgUrl)
-  );
+  useFirestoreConnect('properties');
+  const state = useSelector((state) => state.firestore.ordered.properties);
+  const images =
+    state &&
+    state.filter((el) => el.status === 'added').map((img) => img.mainImgUrl);
 
-  return (
+  return state ? (
     <PropertiesSection className="properties-page">
       <div className="banner">
         <div className="banner-title">
-          <h2>Aktualne oferty</h2>
+          <h2>Nasze inwestycje</h2>
         </div>
         <div className="banner-images">
-          {images.slice(0, 4).map((item, i) => (
-            <div
-              key={i}
-              className="banner-img"
-              style={{ backgroundImage: `url(${item})` }}
-            ></div>
-          ))}
+          {images &&
+            images
+              .slice(0, 4)
+              .map((item, i) => (
+                <div
+                  key={i}
+                  className="banner-img"
+                  style={{ backgroundImage: `url(${item})` }}
+                ></div>
+              ))}
         </div>
       </div>
       <PropertySmallCards button={false} limit={false} />
     </PropertiesSection>
+  ) : (
+    <div style={{ minHeight: '100vh' }}></div>
   );
 }
 

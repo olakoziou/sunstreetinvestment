@@ -3,12 +3,14 @@ import imgAuthor from '../../../../img/team/001.jpg';
 import styled from 'styled-components';
 import { mediaQueries } from '../../../../mixins';
 import { colors } from '../../../../colors';
+import RealEstateBroker from './RealEstateBroker';
 
 const DetailsnDiv = styled.div`
   padding: 2rem;
   background-color: rgba(${colors.extra}, 0.75);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   @media ${mediaQueries('tab-port')} {
     flex-direction: row;
@@ -72,7 +74,7 @@ const DetailsnDiv = styled.div`
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
-      max-width: 80%;
+      max-width: 90%;
       margin: 0 auto;
       & .image {
         background-position: center;
@@ -82,6 +84,22 @@ const DetailsnDiv = styled.div`
         height: 8rem;
         border-radius: 50%;
         border: 2px solid rgba(${colors.secondary});
+      }
+
+      & .initials {
+        width: 8rem;
+        height: 8rem;
+        border-radius: 50%;
+        border: 2px solid rgba(${colors.secondary});
+        background-color: rgba(${colors.secondary3});
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & span {
+          color: rgba(${colors.secondary5});
+          font-size: 2rem;
+        }
       }
 
       & .info {
@@ -126,8 +144,8 @@ function Details(props) {
     year,
     technology,
   } = props.data;
+  console.log(props.data);
 
-  console.log(props);
   return (
     <DetailsnDiv className="property-card__content-details">
       <div className="infos">
@@ -237,28 +255,7 @@ function Details(props) {
           ) : null}
         </ul>
       </div>
-      <div className="author">
-        <h5>Opiekun oferty</h5>
-        <div className="author-details">
-          <div
-            className="image"
-            style={{ backgroundImage: `url(${imgAuthor})` }}
-          ></div>
-          <div className="info">
-            <span className="name">Krzysztof Kozioł</span>
-            <div className="contact">
-              <div>
-                <i className="material-icons small">local_phone</i>
-                <span>730173031</span>
-              </div>
-              <div>
-                <i className="material-icons small">mail_outline</i>
-                <span>biuro@sunstreetinvestment.pl</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <RealEstateBroker imgAuthor={imgAuthor} data={props.data} />
     </DetailsnDiv>
   );
 }
