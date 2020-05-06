@@ -16,29 +16,28 @@ const DescriptionDiv = styled.div`
       color: rgba(${colors.primary4});
     }
 
-    width: 90%;
     margin: 0 auto;
-    height: 15rem;
+    height: 20rem;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    position: absolute;
+    position: fixed;
+    width: 90%;
     left: 5%;
-    top: 30%;
+    top: 20%;
     ${boxShadows('big')};
     z-index: 1000;
 
     @media ${mediaQueries('tab-phone')} {
       width: 80%;
-      height: 20rem;
-      top: 10%;
-      left: 10%;
+    left: 10%;
+    top: 20%;
     }
 
     @media ${mediaQueries('tab-port')} {
       width: 70%;
       height: 25rem;
-      top: 2%;
+      top: 15%;
       left: 15%;
     }
   }
