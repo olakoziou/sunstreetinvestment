@@ -48,27 +48,43 @@ const HistoryDiv = styled.div`
         }
       }
 
-      & li {
-        display: flex;
-        align-items: center;
-
-        i {
-          color: rgba(${colors.extra});
-        }
-      }
-
       & .card-title {
         display: flex;
         min-height: 5rem;
         align-items: center;
         justify-content: center;
-
+        color: rgba(${colors.secondary2});
         @media ${mediaQueries('phone')} {
           min-height: 10rem;
         }
 
         @media ${mediaQueries('tab-land')} {
           min-height: 5rem;
+        }
+      }
+
+      & ul {
+        & span {
+          color: rgba(${colors.secondary3});
+        }
+        & li {
+          display: flex;
+          align-items: center;
+          color: rgba(${colors.secondary3});
+
+          i {
+            color: rgba(${colors.extra});
+          }
+        }
+      }
+
+      & .btn {
+        background-color: rgba(${colors.primary2});
+        margin-bottom: 1rem;
+        transition: all 0.2s;
+
+        &:hover {
+          background-color: rgba(${colors.primary3});
         }
       }
     }
@@ -103,7 +119,13 @@ function HistoryCard(props) {
 
   const handleOpen = (e) => {
     const cardOpened = document.querySelector('.card-opened');
+    const card = document.querySelectorAll('.card .card-content');
+    const btn = document.querySelectorAll('.btn');
     cardOpened.style.display = 'block';
+
+    card.forEach((el) => (el.style.filter = 'blur(2px)'));
+    btn.forEach((el) => (el.style.filter = 'blur(2px)'));
+
     setState({
       title: name,
       buyPrice,
@@ -114,6 +136,8 @@ function HistoryCard(props) {
       commissions,
       mthCosts,
       description,
+      investment,
+      roi,
     });
   };
 

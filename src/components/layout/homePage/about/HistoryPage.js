@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import HistoryCard from './HistoryCard';
-import { mediaQueries } from '../../../../mixins';
+import { mediaQueries, boxShadows } from '../../../../mixins';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { useState } from 'react';
 import { colors } from '../../../../colors';
+import Spinner from '../../../adminPanel/spinner/Spinner';
 
 const HistorySection = styled.section`
   margin: 5rem 0;
@@ -30,50 +31,128 @@ const HistorySection = styled.section`
       flex-direction: row;
       flex-wrap: wrap;
     }
+
+    & .spinner {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
   & .card-opened {
-    width: 90%;
+    width: 95%;
     /* height: calc(80vh - 11rem); */
     margin: 0 auto;
     position: fixed;
-    left: 5%;
+    left: 2.5%;
     right: 5%;
     top: 15%;
     bottom: 5%;
-    background-color: #ddd;
+    background-color: rgba(${colors.secondary6});
     display: none;
     text-align: center;
+    ${boxShadows('xsmall')};
+
+    @media ${mediaQueries('phone')} {
+      width: 80%;
+      ${boxShadows('small')};
+    }
+    @media ${mediaQueries('tab-port')} {
+      width: 70%;
+    }
+
+    @media ${mediaQueries('tab-land')} {
+      width: 60%;
+      top: 20%;
+      bottom: 10%;
+    }
 
     & i.close {
       position: absolute;
       top: 1%;
       right: 1%;
       cursor: pointer;
+      color: rgba(${colors.extra});
     }
 
-    & .card-title {
+    & .card-content {
+      padding: 0.5rem 2rem;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 5rem;
-      font-size: 1.2rem;
+      flex-direction: column;
+      height: 100%;
+      color: rgba(${colors.secondary3});
 
-      @media ${mediaQueries('phone')} {
-        min-height: 10rem;
+      @media ${mediaQueries('tab-port')} {
+        padding: 0.5rem 4rem;
       }
 
-      @media ${mediaQueries('tab-land')} {
+      & .card-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         min-height: 5rem;
+        font-size: 1.6rem;
+        color: rgba(${colors.secondary2});
+        @media ${mediaQueries('phone')} {
+          min-height: 10rem;
+        }
+
+        @media ${mediaQueries('tab-land')} {
+          min-height: 5rem;
+        }
       }
-    }
 
-    & li {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      & .top {
+        & .history-card__costs {
+          & ul {
+            & > span {
+              color: rgba(${colors.secondary2});
+              font-size: 1.2rem;
+              display: block;
+              padding: 0.5rem;
+            }
+            & li {
+              display: flex;
+              align-items: center;
+              justify-content: center;
 
-      & i.item {
-        color: rgba(${colors.extra});
+              & i.item {
+                color: rgba(${colors.extra});
+              }
+            }
+          }
+        }
+
+        & .history-card__info {
+          & span {
+            color: rgba(${colors.secondary2});
+            font-size: 1.2rem;
+            display: block;
+            padding: 0.5rem;
+          }
+        }
+      }
+
+      & .bottom {
+        & .history-card__summary {
+          & ul {
+            & > span {
+              color: rgba(${colors.secondary2});
+              padding: 0.5rem;
+              font-size: 1.2rem;
+              display: block;
+            }
+            & li {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              & i.item {
+                color: rgba(${colors.extra});
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -99,12 +178,16 @@ function HistoryPage() {
   const handleClose = (e) => {
     const cardOpened = e.target.parentElement;
     cardOpened.style.display = 'none';
+    const card = document.querySelectorAll('.card .card-content');
+    const btn = document.querySelectorAll('.btn');
+    card.forEach((el) => (el.style.filter = 'blur(0)'));
+    btn.forEach((el) => (el.style.filter = 'blur(0)'));
   };
   return (
     <HistorySection className="history-page">
       <h2>Archiwum</h2>
       <div className="history">
-        {oldCases &&
+        {oldCases ? (
           oldCasesFiltered.map((oldCase, i) => (
             <HistoryCard
               key={i}
@@ -122,7 +205,12 @@ function HistoryPage() {
               info={oldCase.info}
               setState={setState}
             />
-          ))}
+          ))
+        ) : (
+          <div className="spinner">
+            <Spinner />
+          </div>
+        )}
         <div className="card-opened">
           <div className="card-content">
             <span className="card-title">{state.title}</span>
