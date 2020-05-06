@@ -66,6 +66,7 @@ const FooterStyle = styled.footer`
     & i {
       margin: 0.2rem;
       font-size: 1.2rem;
+      color: rgba(${colors.extra});
     }
   }
 `;
