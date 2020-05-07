@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { colors } from '../../../colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogOut } from '../../../store/actions/authActions';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import { NavLink } from 'react-router-dom';
-import { useFirestoreConnect, useFirebaseConnect } from 'react-redux-firebase';
+import { useFirestoreConnect } from 'react-redux-firebase';
 import { mediaQueries } from '../../../mixins';
 
 const SideNavbarDiv = styled.div`
