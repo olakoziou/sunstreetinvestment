@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
 import AdminPanel from './AdminPanel';
 import Navbar from './navigation/Navbar';
 import LogInPanel from './logging/LogInPanel';
@@ -11,13 +11,16 @@ import Users from './users/Users';
 import styled from 'styled-components';
 import { colors } from '../../colors';
 import Container from './Container';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Archives from './added/Archives';
 import EditProperty from './edit/EditProperty';
 import EditUser from './account/EditUser';
 import ForgotPassword from './logging/ForgotPassword';
 import { useFirebaseConnect } from 'react-redux-firebase';
 import { mediaQueries } from '../../mixins';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { LogOut } from '../../store/actions/authActions';
 
 const AdminAppDiv = styled.div`
   min-height: 100vh;
@@ -31,7 +34,7 @@ const AdminAppDiv = styled.div`
   border-radius: 2px;
 
   @media ${mediaQueries('tab-port')} {
-    padding: 10rem 5rem;
+    padding: 5rem;
   }
 
   & .wrapper {
@@ -66,14 +69,88 @@ const AdminAppDiv = styled.div`
       }
     }
   }
+
+  & .logout {
+    margin: 2rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    display: none;
+
+    & .postpone {
+      border: 1px solid #fff;
+      cursor: pointer;
+      display: block;
+      padding: 0.5rem;
+      margin: 0 1rem;
+    }
+  }
 `;
 
 function AdminApp() {
   useFirebaseConnect();
   const userConfirmed = useSelector((state) => state.firebase.profile.status);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.firebase.auth.uid);
+  const history = useHistory();
+  const [state, setState] = useState({
+    counter: 0,
+    remainingTime: 5,
+  });
+
+  let interval;
+  let interval2;
+  const logOut = document.querySelector('.logout');
+
+  const handleMouseMove = (e) => {
+    setState((state) => ({ ...state, counter: 0, remainingTime: 5 }));
+    clearInterval(interval);
+  };
+
+  // const handlePostpone = (e) => {
+  //   setState({ counter: 0, remainingTime: 60 });
+  //   logOut.style.display = 'none';
+  // };
+
+  useEffect(() => {
+    interval =
+      user &&
+      setInterval(() => {
+        setState((state) => ({ ...state, counter: state.counter + 1 }));
+      }, 1000);
+
+    if (state.counter === 5) {
+      logOut.style.display = 'flex';
+      interval2 = setInterval(() => {
+        setState((state) => ({
+          ...state,
+          remainingTime: state.remainingTime - 1,
+        }));
+        clearInterval(interval);
+      }, 1000);
+    } else if (state.remainingTime < 1) {
+      setState((state) => ({
+        counter: 0,
+        remainingTime: 0,
+      }));
+      clearInterval(interval2);
+      logOut.style.display = 'none';
+      history.push('/admin-panel/log-in');
+      dispatch(LogOut());
+    }
+    return () => {
+      clearInterval(interval);
+    };
+  }, [state.remainingTime, state.counter, user]);
 
   return (
     <AdminAppDiv className="admin-panel">
+      <div className="logout red">
+        <span>Zostaniesz wylogowany za {state.remainingTime} sekund.</span>
+        <span className="postpone">ODŁÓŻ</span>
+      </div>
       <div className="wrapper">
         <BrowserRouter>
           <Route
@@ -99,7 +176,7 @@ function AdminApp() {
               component={ForgotPassword}
             />
             <Container>
-              <div className="dashboard">
+              <div className="dashboard" onMouseMove={handleMouseMove}>
                 <Route
                   exact
                   path="/admin-panel"
