@@ -29,34 +29,6 @@ function AdminPanel({ userConfirmed }) {
           <h3>Panel użytkownika</h3>
         </div>
       )}
-      {/* <BrowserRouter>
-        <Switch>
-          <Route exact path="/admin-panel/account" component={UserAccount} />
-          <Route
-            exact
-            path="/admin-panel/added-properties"
-            component={AddedProperties}
-          />
-          <Route
-            exact
-            path="/admin-panel/add-new-property"
-            component={AddNewProperty}
-          />
-          <Route
-            exact
-            path="/admin-panel/deleted-properties"
-            component={DeletedProperties}
-          />
-          <Route
-            exact
-            path="/admin-panel/edit-property"
-            component={EditProperty}
-          />
-          <Route exact path="/admin-panel/archives" component={Archives} />
-          <Route exact path="/admin-panel/edit-user" component={EditUser} />
-          <Route exact path="/admin-panel/users" component={Users} />
-        </Switch>
-      </BrowserRouter> */}
     </DashboardDiv>
   );
 }
