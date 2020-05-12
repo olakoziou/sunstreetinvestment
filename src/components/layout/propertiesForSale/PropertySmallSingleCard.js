@@ -27,7 +27,7 @@ const Card = styled.div`
       }
 
       @media ${mediaQueries('tab-land')} {
-        min-height: 25rem;
+        min-height: 23rem;
       }
     }
   }
@@ -103,7 +103,7 @@ function PropertySmallSingleCard(props) {
     .replace(/[^a-zA-Z ]/g, '');
 
   return (
-    <div className="row property-small-card">
+    <div className="row property-small-card" style={{ margin: '1rem auto' }}>
       <div className="col s12">
         <Link
           to={{
