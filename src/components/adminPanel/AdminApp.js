@@ -7,6 +7,7 @@ import UserAccount from './account/UserAccount';
 import AddedProperties from './added/AddedProperties';
 import AddNewProperty from './addNew/AddNewProperty';
 import DeletedProperties from './deleted/DeletedProperties';
+import Guide from './guide/Guide';
 import Users from './users/Users';
 import styled from 'styled-components';
 import { colors } from '../../colors';
@@ -25,11 +26,11 @@ import { LogOut } from '../../store/actions/authActions';
 const AdminAppDiv = styled.div`
   min-height: 100vh;
   padding: 1rem;
-  background: rgb(32, 64, 81);
+  background: rgba(${colors.primary});
   background: linear-gradient(
     113deg,
-    rgba(32, 64, 81, 1) 0%,
-    rgba(77, 145, 180, 1) 100%
+    rgba(${colors.primary}) 0%,
+    rgba(${colors.primary5}) 100%
   );
   border-radius: 2px;
 
@@ -79,13 +80,13 @@ const AdminAppDiv = styled.div`
     color: #fff;
     display: none;
 
-    & .postpone {
+    /* & .postpone {
       border: 1px solid #fff;
       cursor: pointer;
       display: block;
       padding: 0.5rem;
       margin: 0 1rem;
-    }
+    } */
   }
 `;
 
@@ -95,62 +96,63 @@ function AdminApp() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.firebase.auth.uid);
   const history = useHistory();
-  const [state, setState] = useState({
-    counter: 0,
-    remainingTime: 5,
-  });
+  // const [state, setState] = useState({
+  //   counter: 0,
+  //   remainingTime: 120,
+  // });
 
-  let interval;
-  let interval2;
-  const logOut = document.querySelector('.logout');
+  // let interval;
+  // let interval2;
+  // const logOut = document.querySelector('.logout');
 
-  const handleMouseMove = (e) => {
-    setState((state) => ({ ...state, counter: 0, remainingTime: 5 }));
-    clearInterval(interval);
-  };
-
-  // const handlePostpone = (e) => {
-  //   setState({ counter: 0, remainingTime: 60 });
-  //   logOut.style.display = 'none';
+  // const handleMouseMove = (e) => {
+  //   setState((state) => ({ ...state, counter: 0 }));
+  //   clearInterval(interval);
   // };
 
-  useEffect(() => {
-    interval =
-      user &&
-      setInterval(() => {
-        setState((state) => ({ ...state, counter: state.counter + 1 }));
-      }, 1000);
+  // useEffect(() => {
+  //   interval =
+  //     user &&
+  //     setInterval(() => {
+  //       setState((state) => ({ ...state, counter: state.counter + 1 }));
+  //     }, 1000);
 
-    if (state.counter === 5) {
-      logOut.style.display = 'flex';
-      interval2 = setInterval(() => {
-        setState((state) => ({
-          ...state,
-          remainingTime: state.remainingTime - 1,
-        }));
-        clearInterval(interval);
-      }, 1000);
-    } else if (state.remainingTime < 1) {
-      setState((state) => ({
-        counter: 0,
-        remainingTime: 0,
-      }));
-      clearInterval(interval2);
-      logOut.style.display = 'none';
-      history.push('/admin-panel/log-in');
+  //   if (state.counter === 600) {
+  //     logOut.style.display = 'flex';
+  //     interval2 = setInterval(() => {
+  //       setState((state) => ({
+  //         counter: 0,
+  //         remainingTime: state.remainingTime - 1,
+  //       }));
+  //     }, 1000);
+  //     // clearInterval(interval);
+  //   } else if (state.remainingTime < 1) {
+  //     setState((state) => ({
+  //       counter: 0,
+  //       remainingTime: 0,
+  //     }));
+  //     clearInterval(interval2);
+  //     logOut.style.display = 'none';
+  //     history.push('/admin-panel/log-in');
+  //     dispatch(LogOut());
+  //   } else {
+  //     return () => {
+  //       clearInterval(interval);
+  //     };
+  //   }
+  // }, [state.remainingTime, state.counter, user]);
+
+  useEffect(() => {
+    window.on = () => {
       dispatch(LogOut());
-    }
-    return () => {
-      clearInterval(interval);
     };
-  }, [state.remainingTime, state.counter, user]);
+  }, []);
 
   return (
     <AdminAppDiv className="admin-panel">
-      <div className="logout red">
+      {/* <div className="logout red">
         <span>Zostaniesz wylogowany za {state.remainingTime} sekund.</span>
-        <span className="postpone">ODŁÓŻ</span>
-      </div>
+      </div> */}
       <div className="wrapper">
         <BrowserRouter>
           <Route
@@ -176,7 +178,7 @@ function AdminApp() {
               component={ForgotPassword}
             />
             <Container>
-              <div className="dashboard" onMouseMove={handleMouseMove}>
+              <div className="dashboard">
                 <Route
                   exact
                   path="/admin-panel"
@@ -201,6 +203,7 @@ function AdminApp() {
                         path="/admin-panel/add-new-property"
                         component={AddNewProperty}
                       />
+
                       <Route
                         exact
                         path="/admin-panel/deleted-properties"
@@ -226,6 +229,11 @@ function AdminApp() {
                         exact
                         path="/admin-panel/users"
                         component={Users}
+                      />
+                      <Route
+                        exact
+                        path="/admin-panel/guide"
+                        component={Guide}
                       />
                     </>
                   )}
