@@ -5,11 +5,13 @@ import {
   addOnWeb,
   deleteProperty,
   setBackProperty,
+  hardDelete,
 } from '../../../store/actions/propertiesActions';
 import {
   addOnWebOldCase,
   deleteOldCase,
   setBackOldCase,
+  hardDeleteOldCase,
 } from '../../../store/actions/oldCasesActions';
 import moment from 'moment';
 import 'moment/locale/pl';
@@ -117,6 +119,18 @@ function SingleProperty(props) {
 
   const handleEdit = (e) => {
     history.push({ pathname: '/admin-panel/edit-property', state: data });
+  };
+
+  const handleDeleteHard = (e) => {
+    const parentDiv =
+      e.target.parentElement.parentElement.parentElement.parentElement
+        .parentElement;
+    console.log(data);
+    if (parentDiv.classList.value.indexOf('new') !== -1) {
+      dispatch(hardDelete(data));
+    } else if (parentDiv.classList.value.indexOf('old') !== -1) {
+      dispatch(hardDeleteOldCase(data));
+    }
   };
 
   return (
@@ -228,6 +242,9 @@ function SingleProperty(props) {
           <>
             <div className="btn blue" onClick={handleSetBack}>
               Przywróć
+            </div>
+            <div className="btn red" onClick={handleDeleteHard}>
+              Usuń
             </div>
           </>
         )}
