@@ -126,8 +126,6 @@ function Description(props) {
   const { description, imgUrlArr, propertyPlanUrl, extra } = props.data;
   const { displayImgs } = props;
 
-  console.log(props.data);
-
   const handleImgClick = (e) => {
     const imgUrl = e.target.style.backgroundImage;
     const imageBig = document.querySelector('.image-big');
