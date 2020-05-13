@@ -92,3 +92,20 @@ export const editProperty = (property) => {
       });
   };
 };
+
+export const hardDelete = (property) => {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection('properties')
+      .doc(property.id)
+      .delete()
+      .then(() => {
+        dispatch({ type: 'HARDDELETE_SUCCESS' });
+      })
+      .catch((err) => {
+        dispatch({ type: 'HARDDELETE_ERROR', err });
+      });
+  };
+};

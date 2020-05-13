@@ -125,6 +125,19 @@ const oldCasesReducer = (state = initialState, action) => {
         ...state,
         error: action.err,
       };
+    case 'HARDDELETE_OLDCASE_SUCCESS':
+      console.log('HARDDELETE_OLDCASE_SUCCESS');
+      return {
+        ...state,
+        error: null,
+      };
+    case 'HARDDELETE_OLDCASE_ERROR':
+      console.log('HARDDELETE_OLDCASE_ERROR');
+      console.log(action.err);
+      return {
+        ...state,
+        error: action.err,
+      };
     default:
       return state;
   }

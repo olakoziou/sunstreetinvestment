@@ -176,6 +176,19 @@ const propertiesReducer = (state = initialState, action) => {
         ...state,
         error: action.err,
       };
+    case 'HARDDELETE_SUCCESS':
+      console.log('HARDDELETE_SUCCESS');
+      return {
+        ...state,
+        error: null,
+      };
+    case 'HARDDELETE_ERROR':
+      console.log('HARDDELETE_ERROR');
+      console.log(action.err);
+      return {
+        ...state,
+        error: action.err,
+      };
     default:
       return state;
   }

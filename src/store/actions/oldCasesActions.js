@@ -93,3 +93,20 @@ export const editkOldCase = (property) => {
       });
   };
 };
+
+export const hardDeleteOldCase = (property) => {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection('oldCases')
+      .doc(property.id)
+      .delete()
+      .then(() => {
+        dispatch({ type: 'HARDDELETE_OLDCASE_SUCCESS' });
+      })
+      .catch((err) => {
+        dispatch({ type: 'HARDDELETE_OLDCASE_ERROR', err });
+      });
+  };
+};
