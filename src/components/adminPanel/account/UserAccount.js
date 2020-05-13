@@ -81,6 +81,7 @@ function UserAccount(props) {
           {user && user.firstName} {user && user.lastName}
         </span>
         <span>{user && user.email}</span>
+        {user && user.phone && <span>{user.phone}</span>}
         <span>{user && user.description}</span>
       </div>
       {user && (
