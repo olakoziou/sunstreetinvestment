@@ -22,12 +22,12 @@ const Card = styled.div`
         height: 100%;
       }
 
-      @media ${mediaQueries('tab-port')} {
-        min-height: 20rem;
+      @media ${mediaQueries('tab-land')} {
+        min-height: 22rem;
       }
 
-      @media ${mediaQueries('tab-land')} {
-        min-height: 23rem;
+      @media ${mediaQueries('popup')} {
+        min-height: 25rem;
       }
     }
   }
@@ -143,7 +143,7 @@ function PropertySmallSingleCard(props) {
                 <span className="card-title">{title}</span>
               </div>
               <div className="card-content">
-                <p>{description.slice(0, 100)}...</p>
+                {description && <p>{description.slice(0, 100)}...</p>}
               </div>
               <div className="card-details">
                 {!stan ? (
