@@ -40,7 +40,7 @@ const SlideContainer = styled.div`
 `;
 
 const properties = {
-  duration: 50000,
+  duration: 5000,
   transitionDuration: 500,
   infinite: true,
   arrows: true,
@@ -58,12 +58,14 @@ function Slider() {
   const propertiesArr = useSelector(
     (state) => state.firestore.ordered.properties
   );
+  const propertiesFiltered =
+    propertiesArr && propertiesArr.filter((el) => el.status === 'added');
 
   return (
     <SlideContainer className="slide-container">
       {propertiesArr ? (
         <Slide {...properties}>
-          {propertiesArr.slice(0, 4).map((property, i) => (
+          {propertiesFiltered.slice(0, 4).map((property, i) => (
             <div
               className="each-slide"
               key={i}
