@@ -143,7 +143,7 @@ function AdminApp() {
   // }, [state.remainingTime, state.counter, user]);
 
   useEffect(() => {
-    window.on = () => {
+    window.onbeforeunload = () => {
       dispatch(LogOut());
     };
   }, []);
