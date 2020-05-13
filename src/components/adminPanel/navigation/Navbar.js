@@ -133,11 +133,12 @@ function Navbar() {
           <NavLink to="/admin-panel/account">Konto</NavLink>
         </li>
         <li>
-          <a href="/">Strona główna</a>
-        </li>
-        <li>
           <NavLink to="/admin-panel/guide">Instrukcja</NavLink>
         </li>
+        <li>
+          <a href="/">Strona główna</a>
+        </li>
+
         <li>
           <NavLink to="/admin-panel/log-in" onClick={handleClick}>
             Wyloguj
