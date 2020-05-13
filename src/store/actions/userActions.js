@@ -75,6 +75,7 @@ export const editUser = (userEdit, emailForAuthEdit) => {
         firstName: userEdit.firstName,
         lastName: userEdit.lastName,
         userImg: userEdit.userImg ? userEdit.userImg : null,
+        phone: userEdit.phone ? userEdit.phone : null,
       })
       .then(() => {
         dispatch({ type: 'USEREDITED_SUCCES' });
