@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { mediaQueries } from '../../../../mixins';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { colors } from '../../../../colors';
+import Spinner from '../../../adminPanel/spinner/Spinner';
 
 const TeamDiv = styled.div`
   margin: 5rem 0;
@@ -24,13 +25,22 @@ const TeamDiv = styled.div`
     flex-wrap: wrap;
   }
 
+  & .team-top {
+    max-width: 90%;
+    margin: 0 auto;
+    & > div {
+      @media ${mediaQueries('tab-port')} {
+        height: 25rem;
+      }
+    }
+  }
+
   & .team-bottom {
     max-width: 90%;
     margin: 0 auto;
     & > div {
       @media ${mediaQueries('tab-port')} {
         height: 25rem;
-        /* min-width: 30rem; */
       }
     }
   }
@@ -38,7 +48,6 @@ const TeamDiv = styled.div`
 
 function Team() {
   useFirestoreConnect('users');
-  const team = useSelector((state) => state.team.team);
   const teamArr = useSelector((state) => state.firestore.ordered.users);
   const confirmedUsers =
     teamArr && teamArr.filter((user) => user.status === 'Confirmed');
@@ -48,10 +57,8 @@ function Team() {
   teamArr &&
     confirmedUsers.forEach((user) => {
       if (
-        (user.fullName.indexOf('Krzysztof') !== -1 &&
-          user.fullName.indexOf('Kozioł') !== -1) ||
-        (user.fullName.indexOf('Wojciech') !== -1 &&
-          user.fullName.indexOf('Urbańczyk') !== -1)
+        user.fullName.indexOf('Krzysztof Kozioł') !== -1 ||
+        user.fullName.indexOf('Wojciech Urbańczyk') !== -1
       ) {
         team1.push(user);
       }
@@ -62,45 +69,49 @@ function Team() {
   teamArr &&
     confirmedUsers.forEach((user) => {
       if (
-        user.fullName.indexOf('Krzysztof') === -1 &&
-        user.fullName.indexOf('Kozioł') === -1 &&
-        user.fullName.indexOf('Wojciech') === -1 &&
-        user.fullName.indexOf('Urbańczyk') === -1
+        user.fullName.indexOf('Krzysztof Kozioł') === -1 ||
+        user.fullName.indexOf('Wojciech Urbańczyk') === -1
       ) {
         team2.push(user);
       }
     });
 
-  // const team1 = team.slice(0, 2);
-  // const team2 = team.slice(2);
   return (
     <section id="team">
       <TeamDiv className="team ">
         <h3>
           Nasz <span>Zespół</span>{' '}
         </h3>
-        <div className="team-top ">
-          {team1.map((member, i) => (
-            <SingleTeamMember
-              key={i}
-              name={member.firstName}
-              lastName={member.lastName}
-              description={member.description}
-              img={member.userImg}
-            />
-          ))}
-        </div>
-        <div className="team-bottom">
-          {team2.map((member, i) => (
-            <SingleTeamMember
-              key={i}
-              name={member.firstName}
-              lastName={member.lastName}
-              description={member.description}
-              img={member.userImg}
-            />
-          ))}
-        </div>
+        {teamArr ? (
+          <>
+            <div className="team-top ">
+              {team1.map((member, i) => (
+                <SingleTeamMember
+                  key={i}
+                  name={member.firstName}
+                  lastName={member.lastName}
+                  description={member.description}
+                  img={member.userImg}
+                />
+              ))}
+            </div>
+            <div className="team-bottom">
+              {team2.map((member, i) => (
+                <SingleTeamMember
+                  key={i}
+                  name={member.firstName}
+                  lastName={member.lastName}
+                  description={member.description}
+                  img={member.userImg}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="spinner">
+            <Spinner />
+          </div>
+        )}
       </TeamDiv>
     </section>
   );
