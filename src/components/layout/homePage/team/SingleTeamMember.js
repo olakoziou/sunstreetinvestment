@@ -15,7 +15,7 @@ const DivMember = styled.div`
     height: 25rem;
   }
 
-  @media ${mediaQueries('tab-port')} {
+  @media ${mediaQueries('tab-land')} {
     width: 25rem;
   }
 
