@@ -157,6 +157,7 @@ function AddNewProperty(props) {
 
   // Add other images
   useEffect(() => {
+    // console.log(imgState && imgState.images);
     if (state.propertyName && imgState.images) {
       imgState.images.map((image, i) => {
         storageRef
@@ -166,13 +167,42 @@ function AddNewProperty(props) {
             url.ref.getDownloadURL().then((url) => {
               setState((state) => ({
                 ...state,
-                imgUrlArr: state.imgUrlArr ? [...state.imgUrlArr, url] : [url],
+                imgUrlArr: state.imgUrlArr
+                  ? [...new Set(state.imgUrlArr), url]
+                  : [url],
               }));
             });
           });
       });
     }
   }, [imgState.images]);
+
+  useEffect(() => {
+    const stateUrlArr = state.imgUrlArr && state.imgUrlArr;
+    let sliced = [];
+    let endings = [];
+    let filtered = [];
+    if (state.imgUrlArr) {
+      for (let el of state.imgUrlArr) {
+        let x = el;
+        console.log(x);
+        console.log(x.slice(0, x.indexOf('.jpg')));
+        console.log(x.slice(x.indexOf('.jpg')));
+
+        sliced.push(x.slice(0, x.indexOf('.jpg')));
+        endings.push(x.slice(x.indexOf('.jpg')));
+        filtered = Array.from(new Set(sliced));
+      }
+    }
+
+    let newFiltered = filtered.map((el, i) => el + endings[i]);
+    setState((state) => ({
+      ...state,
+      newFiltered,
+    }));
+
+    // console.log(endings);
+  }, [state.imgUrlArr]);
 
   // Add property plan
   useEffect(() => {
