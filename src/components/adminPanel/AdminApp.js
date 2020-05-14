@@ -142,11 +142,11 @@ function AdminApp() {
   //   }
   // }, [state.remainingTime, state.counter, user]);
 
-  useEffect(() => {
-    window.onbeforeunload = () => {
-      dispatch(LogOut());
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.onbeforeunload = () => {
+  //     dispatch(LogOut());
+  //   };
+  // }, []);
 
   return (
     <AdminAppDiv className="admin-panel">
