@@ -181,12 +181,12 @@ function SingleProperty(props) {
                 {data.realEstateBroker && (
                   <span>Opiekun oferty: {data.realEstateBroker}</span>
                 )}
-                {data.addedDate && (
+                {/* {data.addedDate && (
                   <span>
                     Data dodania:{' '}
                     {moment(new Date(data.addedDate.toDate())).format('LLLL')}
                   </span>
-                )}
+                )} */}
               </div>
             </>
           ) : (
