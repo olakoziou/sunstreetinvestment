@@ -471,10 +471,10 @@ function NewProperty(props) {
               ></div>
             </div>
           ) : null}
-          {props.state.imgUrlArr ? (
+          {props.state.newFiltered ? (
             <div className="other-images">
               <span>Pozostałe zdjęcia</span>
-              {props.state.imgUrlArr.map((img, i) => (
+              {props.state.newFiltered.map((img, i) => (
                 <div
                   className="img"
                   key={i}
