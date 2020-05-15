@@ -93,23 +93,24 @@ const DescriptionDiv = styled.div`
   }
 
   & .gallery, .property-plan {
+    & h6 {
+      text-align: center;
+    }
+  }
+
+  & .gallery .images, .property-plan .images {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     min-height: 10rem;
-    margin: 3.5rem 0;
-
-    @media ${mediaQueries('phone')} {
-      height: 15rem;
-    }
-
- 
+    margin: 1rem 0 3.5rem;
 
     & .img {
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      width: 30%;
+      width: 100%;
+      height: 10rem;
       max-width: 20rem;
       margin: 0.5rem;
       ${boxShadows('small')};
@@ -123,7 +124,7 @@ const DescriptionDiv = styled.div`
 `;
 
 function Description(props) {
-  const { description, imgUrlArr, propertyPlanUrl, extra } = props.data;
+  const { description, propertyPlanUrl, extra, newFiltered } = props.data;
   const { displayImgs } = props;
 
   const handleImgClick = (e) => {
@@ -157,26 +158,36 @@ function Description(props) {
         {extra &&
           extra.map((extra, i) => (extra ? <div key={i}>{extra}</div> : null))}
       </div>
-      {displayImgs && imgUrlArr ? (
-        <div className="gallery">
-          {imgUrlArr.map((img, i) => (
-            <div
-              className="img"
-              key={i}
-              style={{ backgroundImage: `url(${img})` }}
-              onClick={handleImgClick}
-            ></div>
-          ))}
-        </div>
+      {displayImgs && newFiltered ? (
+        <>
+          <div className="gallery">
+            <h6>Pozostałe zdjęcia</h6>
+            <div className="images">
+              {newFiltered.map((img, i) => (
+                <div
+                  className="img"
+                  key={i}
+                  style={{ backgroundImage: `url(${img})` }}
+                  onClick={handleImgClick}
+                ></div>
+              ))}
+            </div>
+          </div>
+        </>
       ) : null}
       {displayImgs && propertyPlanUrl ? (
-        <div className="property-plan">
-          <div
-            className="img"
-            style={{ backgroundImage: `url(${propertyPlanUrl})` }}
-            onClick={handleImgClick}
-          ></div>
-        </div>
+        <>
+          <div className="property-plan">
+            <h6>Plan nieruchomości</h6>
+            <div className="images">
+              <div
+                className="img"
+                style={{ backgroundImage: `url(${propertyPlanUrl})` }}
+                onClick={handleImgClick}
+              ></div>
+            </div>
+          </div>
+        </>
       ) : null}
     </DescriptionDiv>
   );
