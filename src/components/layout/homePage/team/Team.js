@@ -69,7 +69,7 @@ function Team() {
   teamArr &&
     confirmedUsers.forEach((user) => {
       if (
-        user.fullName.indexOf('Krzysztof Kozioł') === -1 ||
+        user.fullName.indexOf('Krzysztof Kozioł') === -1 &&
         user.fullName.indexOf('Wojciech Urbańczyk') === -1
       ) {
         team2.push(user);
