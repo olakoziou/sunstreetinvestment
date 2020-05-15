@@ -3,13 +3,12 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 
 function RealEstateBroker(props) {
-  console.log(props.data);
   useFirestoreConnect('users');
   const users = useSelector((state) => state.firestore.ordered.users);
   const realEstateBroker =
     users &&
     users.filter((user) => user.fullName === props.data.realEstateBroker)[0];
-  console.log(users);
+
   return (
     <div className="author">
       <h5>Opiekun oferty</h5>
