@@ -109,7 +109,6 @@ function SingleProperty(props) {
     const parentDiv =
       e.target.parentElement.parentElement.parentElement.parentElement
         .parentElement;
-    console.log(parentDiv.classList.value);
     if (parentDiv.classList.value.indexOf('new') !== -1) {
       dispatch(setBackProperty(data));
     } else if (parentDiv.classList.value.indexOf('old') !== -1) {
@@ -125,7 +124,6 @@ function SingleProperty(props) {
     const parentDiv =
       e.target.parentElement.parentElement.parentElement.parentElement
         .parentElement;
-    console.log(data);
     if (parentDiv.classList.value.indexOf('new') !== -1) {
       dispatch(hardDelete(data));
     } else if (parentDiv.classList.value.indexOf('old') !== -1) {
@@ -156,6 +154,10 @@ function SingleProperty(props) {
                 {data.market && <li>Rynek: {data.market}</li>}
                 {data.type && <li>Typ: {data.type}</li>}
                 {data.price && <li>Cena: {data.price} zł</li>}
+                {data.metrage && <li>Metraż: {data.metrage} m2</li>}
+                {data.price && data.metrage && (
+                  <li>{(data.price / data.metrage).toFixed(2)} zł/m2</li>
+                )}
                 {data.floor && <li>Piętro: {data.floor}</li>}
                 {data.numbOfFloors && (
                   <li>Ilość pieter: {data.numbOfFloors}</li>
@@ -181,12 +183,12 @@ function SingleProperty(props) {
                 {data.realEstateBroker && (
                   <span>Opiekun oferty: {data.realEstateBroker}</span>
                 )}
-                {/* {data.addedDate && (
+                {data.addedDate && (
                   <span>
-                    Data dodania:{' '}
+                    Data dodania / edycji:{' '}
                     {moment(new Date(data.addedDate.toDate())).format('LLLL')}
                   </span>
-                )} */}
+                )}
               </div>
             </>
           ) : (
