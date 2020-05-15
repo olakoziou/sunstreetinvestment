@@ -4,7 +4,6 @@ import { boxShadows, mediaQueries } from '../../../../mixins';
 import { colors } from '../../../../colors';
 import Description from './Description';
 import Details from './Details';
-import { Link } from 'react-router-dom';
 
 const PropertyCardSection = styled.section`
   & .property-card {
@@ -80,7 +79,8 @@ const PropertyCardSection = styled.section`
 
 function SinglePropertyCard(props) {
   const { title, img, stan } = props.location.state;
-  console.log(props);
+
+  const stanFiltered = stan && stan !== 'Ponownie w sprzedaży';
 
   return (
     <PropertyCardSection className="property">
@@ -89,9 +89,9 @@ function SinglePropertyCard(props) {
           className="property-card__banner"
           style={{ backgroundImage: `url(${img})` }}
         >
-          {!stan && <span className="title">{title}</span>}
+          {!stanFiltered && <span className="title">{title}</span>}
 
-          {stan && (
+          {stanFiltered && (
             <div className="stan__active">
               <span className="stan">
                 {title} - {stan}
@@ -104,11 +104,6 @@ function SinglePropertyCard(props) {
           <Details data={props.location.state} />
         </div>
       </div>
-      <button>
-        <Link to={{ pathname: '/oferta-pdf', state: props.location.state }}>
-          Wygeneruj ofertę
-        </Link>
-      </button>
     </PropertyCardSection>
   );
 }
