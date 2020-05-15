@@ -88,6 +88,7 @@ function PropertySmallCards(props) {
                   technology={property.technology}
                   extra={property.extra}
                   realEstateBroker={property.realEstateBroker}
+                  newFiltered={property.newFiltered}
                 />
               ))
           ) : (
@@ -119,6 +120,7 @@ function PropertySmallCards(props) {
                 technology={property.technology}
                 extra={property.extra}
                 realEstateBroker={property.realEstateBroker}
+                newFiltered={property.newFiltered}
               />
             ))
           )
