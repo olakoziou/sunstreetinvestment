@@ -94,7 +94,10 @@ function PropertySmallSingleCard(props) {
     technology,
     extra,
     realEstateBroker,
+    newFiltered,
   } = props;
+
+  const stanFiltered = stan && stan !== 'Ponownie w sprzedaży';
 
   const urlTitle = title
     .split(' ')
@@ -133,6 +136,7 @@ function PropertySmallSingleCard(props) {
               technology,
               extra,
               realEstateBroker,
+              newFiltered,
             },
           }}
         >
@@ -146,7 +150,7 @@ function PropertySmallSingleCard(props) {
                 {description && <p>{description.slice(0, 100)}...</p>}
               </div>
               <div className="card-details">
-                {!stan ? (
+                {!stanFiltered ? (
                   <ul>
                     {market && <li>{market}</li>}
                     {price && <li>{price} zł</li>}
