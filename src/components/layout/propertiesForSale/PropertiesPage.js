@@ -51,7 +51,7 @@ const PropertiesSection = styled.section`
     }
 
     & .banner-img {
-      width: 50%;
+      width: 100%;
       height: 20rem;
       margin-bottom: 5rem;
       background-position: center;
