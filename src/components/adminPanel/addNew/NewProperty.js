@@ -2,7 +2,7 @@ import React from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useFirestoreConnect, useFirebase } from 'react-redux-firebase';
+import { useFirestoreConnect } from 'react-redux-firebase';
 import imageCompression from 'browser-image-compression';
 
 function NewProperty(props) {
@@ -40,10 +40,9 @@ function NewProperty(props) {
     const upload = Array.from(e.target.files);
 
     upload.map((file) => {
-      console.log(file.size);
       imageCompression(file, size)
         .then(function (compressedFile) {
-          console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
+          // console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
           files.push(compressedFile);
         })
         .then(() => {
@@ -436,12 +435,14 @@ function NewProperty(props) {
               <option value="Umowa przedwstępna">Umowa przedwstępna</option>
               <option value="Rezerwacja">Rezerwacja</option>
               <option value="Sprzedane">Sprzedane</option>
+              <option value="Ponownie w sprzedaży">Ponownie w sprzedaży</option>
             </select>
             <label>Wybierz</label>
           </div>
         </div>
       )}
       <div className="row checkbox realEstateBroker">
+        <span>*Opiekun oferty:</span>
         {names &&
           names.map((name, i) => (
             <p key={i}>
@@ -495,7 +496,12 @@ function NewProperty(props) {
                 style={{
                   backgroundImage: `url(${props.state.propertyPlanUrl})`,
                 }}
-              ></div>
+              >
+                {' '}
+                <i className="material-icons" onClick={handleRemoveImg}>
+                  close
+                </i>
+              </div>
             </div>
           ) : null}
         </div>
