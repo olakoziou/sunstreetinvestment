@@ -83,7 +83,7 @@ export const editProperty = (property) => {
     firestore
       .collection('properties')
       .doc(property.id)
-      .update({ ...property, status: 'edited' })
+      .update({ ...property, status: 'edited', addedDate: new Date() })
       .then(() => {
         dispatch({ type: 'EDIT_SUCCESS' });
       })
