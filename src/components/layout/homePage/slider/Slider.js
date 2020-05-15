@@ -65,7 +65,7 @@ function Slider() {
     <SlideContainer className="slide-container">
       {propertiesArr ? (
         <Slide {...properties}>
-          {propertiesFiltered.slice(0, 4).map((property, i) => (
+          {propertiesFiltered.map((property, i) => (
             <div
               className="each-slide"
               key={i}
