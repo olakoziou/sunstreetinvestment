@@ -39,13 +39,20 @@ function Guide() {
               DODAJ. Oferta zostanie dodana na stronę.
             </li>
             <li>
-              2. Jeżeli zauważysz błąd, EDYTUJ ofertę lub ją USUŃ. Po każdej
-              edycji wróć na stronę główną i ponownie wejdź w link do oferty.
+              2. Jeżeli zauważysz błąd, EDYTUJ ofertę lub ją USUŃ.{' '}
+              <strong>
+                Po każdej edycji wróć na stronę główną i ponownie wejdź w link
+                do oferty.
+              </strong>
             </li>{' '}
             <li>
               3. Jeśli nieruchomość została sprzedana, zarezerwowana lub została
               podpisana umowa przedwstępna, kliknij EDYTUJ i zaznacz odpowiednią
-              opcję (Stan)
+              opcję (Stan).
+            </li>
+            <li>
+              4. Jeśli nieruchomość została ponownie wprowadzona do sprzedaży,
+              EDYTUJ i wybierz odpowiednią opcję.
             </li>
           </ul>
         </li>
@@ -60,7 +67,8 @@ function Guide() {
           <ul>
             <li>
               1. Tu znajdują się nieruchomości usunięte z zakładek{' '}
-              <span>Dodane nieruchomości</span> oraz <span>Archiwum</span>.
+              <strong>Dodane nieruchomości</strong> oraz{' '}
+              <strong>Archiwum</strong>.
             </li>
             <li>2. Możesz je przywrócić lub usunąć na stałe.</li>
             <li>
