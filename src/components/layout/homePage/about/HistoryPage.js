@@ -159,7 +159,12 @@ const HistorySection = styled.section`
 `;
 
 function HistoryPage() {
-  useFirestoreConnect('oldCases');
+  useFirestoreConnect([
+    {
+      collection: 'oldCases',
+      orderBy: ['addedDate', 'desc'],
+    },
+  ]);
   const oldCases = useSelector((state) => state.firestore.ordered.oldCases);
   const oldCasesFiltered =
     oldCases && oldCases.filter((el) => el.status === 'added');
@@ -200,8 +205,8 @@ function HistoryPage() {
               otherCosts={oldCase.otherCosts}
               notary={oldCase.notary}
               renovation={oldCase.renovation}
-              commissions={oldCase.commissions}
-              mthCosts={oldCase.mthCosts}
+              commissions={oldCase.comissions}
+              mthCost={oldCase.mthCost}
               info={oldCase.info}
               setState={setState}
             />
@@ -250,12 +255,12 @@ function HistoryPage() {
                       <span>Prowizje: {state.commissions} zł</span>
                     </li>
                   )}
-                  {state.mthCosts && (
+                  {state.mthCost && (
                     <li>
                       <i className="item material-icons">
                         keyboard_arrow_right
                       </i>
-                      <span>Opłaty miesięczne: {state.mthCosts} zł</span>
+                      <span>Opłaty miesięczne: {state.mthCost} zł</span>
                     </li>
                   )}
                   {state.otherCosts && (
