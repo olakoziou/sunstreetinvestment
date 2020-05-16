@@ -21,7 +21,9 @@ function OldProperty(props) {
             defaultValue={data ? data.buyPrice : ''}
             required
           />
-          <label htmlFor="buyPrice">*Cena zakupu</label>
+          <label className="active" htmlFor="buyPrice">
+            *Cena zakupu
+          </label>
         </div>
       </div>
       <div className="row">
@@ -34,7 +36,9 @@ function OldProperty(props) {
             defaultValue={data ? data.sellPrice : ''}
             required
           />
-          <label htmlFor="sellPrice">*Cena sprzedaży</label>
+          <label className="active" htmlFor="sellPrice">
+            *Cena sprzedaży
+          </label>
         </div>
       </div>
       <div className="row">
@@ -46,7 +50,9 @@ function OldProperty(props) {
             onChange={props.handleChange}
             defaultValue={data ? data.renovation : ''}
           />
-          <label htmlFor="renovation">Remont</label>
+          <label className="active" htmlFor="renovation">
+            Remont
+          </label>
         </div>
       </div>
       <div className="row">
@@ -58,7 +64,9 @@ function OldProperty(props) {
             onChange={props.handleChange}
             defaultValue={data ? data.comissions : ''}
           />
-          <label htmlFor="comissions">Prowizje</label>
+          <label className="active" htmlFor="comissions">
+            Prowizje
+          </label>
         </div>
       </div>
       <div className="row">
@@ -70,7 +78,9 @@ function OldProperty(props) {
             onChange={props.handleChange}
             defaultValue={data ? data.notary : ''}
           />
-          <label htmlFor="notary">Notariusz</label>
+          <label className="active" htmlFor="notary">
+            Notariusz
+          </label>
         </div>
       </div>
       <div className="row">
@@ -82,7 +92,9 @@ function OldProperty(props) {
             onChange={props.handleChange}
             defaultValue={data ? data.mthCost : ''}
           />
-          <label htmlFor="mthCost">Koszty miesięczne</label>
+          <label className="active" htmlFor="mthCost">
+            Koszty miesięczne
+          </label>
         </div>
       </div>
       <div className="row">
@@ -94,7 +106,9 @@ function OldProperty(props) {
             onChange={props.handleChange}
             defaultValue={data ? data.otherCosts : ''}
           />
-          <label htmlFor="otherCosts">Dodatkowe koszty</label>
+          <label className="active" htmlFor="otherCosts">
+            Dodatkowe koszty
+          </label>
         </div>
       </div>
     </>
