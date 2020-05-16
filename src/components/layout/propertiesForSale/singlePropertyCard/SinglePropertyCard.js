@@ -64,14 +64,20 @@ const PropertyCardSection = styled.section`
       }
     }
 
-    & .property-card__content {
-      max-width: 90%;
-      margin: 2rem auto;
-      display: flex;
-      flex-direction: column;
+    & .wrapper {
+      max-width: 1920px;
+      padding: 0 2rem;
+      margin: 0 auto;
 
-      @media ${mediaQueries('tab-land')} {
-        flex-direction: row;
+      & .property-card__content {
+        max-width: 95%;
+        margin: 2rem auto;
+        display: flex;
+        flex-direction: column;
+
+        @media ${mediaQueries('tab-land')} {
+          flex-direction: row;
+        }
       }
     }
   }
@@ -99,9 +105,11 @@ function SinglePropertyCard(props) {
             </div>
           )}
         </div>
-        <div className="property-card__content">
-          <Description data={props.location.state} displayImgs={true} />
-          <Details data={props.location.state} />
+        <div className="wrapper">
+          <div className="property-card__content">
+            <Description data={props.location.state} displayImgs={true} />
+            <Details data={props.location.state} />
+          </div>
         </div>
       </div>
     </PropertyCardSection>
