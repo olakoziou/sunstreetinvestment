@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../../../colors';
 import { mediaQueries } from '../../../../mixins';
@@ -100,7 +100,7 @@ function HistoryCard(props) {
     notary,
     renovation,
     commissions,
-    mthCosts,
+    mthCost,
     description,
     setState,
   } = props;
@@ -113,7 +113,7 @@ function HistoryCard(props) {
 
   const investment =
     buyPrice &&
-    sum(buyPrice, otherCosts, notary, renovation, commissions, mthCosts);
+    sum(buyPrice, otherCosts, notary, renovation, commissions, mthCost);
 
   const roi = ((sellPrice - investment) / investment).toFixed(2) * 100;
 
@@ -134,7 +134,7 @@ function HistoryCard(props) {
       notary,
       renovation,
       commissions,
-      mthCosts,
+      mthCost,
       description,
       investment,
       roi,
