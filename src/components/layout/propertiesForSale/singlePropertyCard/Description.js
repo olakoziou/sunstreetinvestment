@@ -5,6 +5,7 @@ import { colors } from '../../../../colors';
 
 const DescriptionDiv = styled.div`
   position: relative;
+  padding: 0 2rem;
 
   & .image-big {
     display: none;
@@ -17,33 +18,34 @@ const DescriptionDiv = styled.div`
     }
 
     margin: 0 auto;
-    height: 20rem;
+    height: 25rem;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     position: fixed;
-    width: 90%;
-    left: 5%;
-    top: 20%;
     ${boxShadows('big')};
     z-index: 1000;
 
     @media ${mediaQueries('tab-phone')} {
-      width: 80%;
-    left: 10%;
-    top: 20%;
+      width: 90%;
+    left: 5%;
+    top: 30%;
     }
 
     @media ${mediaQueries('tab-port')} {
-      width: 70%;
-      height: 25rem;
+      width: 80%;
+      height: 40rem;
       top: 15%;
-      left: 15%;
+      left: 10%;
+    }
+
+    @media ${mediaQueries('tab-land')} {
+      width: 55%;
+
     }
   }
 
-  padding: 0 2rem;
-  position: relative;
+  
   @media ${mediaQueries('tab-land')} {
     width: 70%;
   }
@@ -143,6 +145,8 @@ function Description(props) {
     imageBig.style.backgroundImage = '';
     description.style.filter = 'blur(0)';
   };
+
+  console.log(newFiltered);
   return (
     <DescriptionDiv className="property-card__content-description">
       <div className="image-big">
@@ -158,7 +162,7 @@ function Description(props) {
         {extra &&
           extra.map((extra, i) => (extra ? <div key={i}>{extra}</div> : null))}
       </div>
-      {displayImgs && newFiltered ? (
+      {displayImgs && newFiltered && newFiltered.length > 0 ? (
         <>
           <div className="gallery">
             <h6>Pozostałe zdjęcia</h6>
