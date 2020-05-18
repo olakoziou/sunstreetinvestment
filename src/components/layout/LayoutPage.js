@@ -11,7 +11,6 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 function LayoutPage() {
   useFirestoreConnect();
   const state = useSelector((state) => state);
-  console.log(state);
   return (
     <>
       <BrowserRouter>
