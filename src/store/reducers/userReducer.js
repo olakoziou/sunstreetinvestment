@@ -82,6 +82,19 @@ const userReducer = (state = initialState, action) => {
         ...state,
         error: action.err,
       };
+    case 'ADD_NEW_USER_SUCCESS':
+      console.log('ADD_NEW_USER_SUCCESS');
+      return {
+        ...state,
+        error: null,
+      };
+    case 'ADD_NEW_USER_ERROR':
+      console.log('ADD_NEW_USER_ERROR');
+      console.log(action.err);
+      return {
+        ...state,
+        error: action.err,
+      };
     default:
       return state;
   }

@@ -102,3 +102,28 @@ export const resetUserPassword = (email) => {
       });
   };
 };
+
+export const addNewUser = (newUser) => {
+  return (dispatch, getState, { getFirestore }) => {
+    const user = getState().firebase.profile;
+    const firestore = getFirestore();
+
+    firestore
+      .collection('users')
+      .add({
+        firstName: newUser['add-new_first_name'],
+        lastName: newUser['add-new_last_name'],
+        description: newUser['add-new_textarea1'],
+        userImg: newUser.userImg ? newUser.userImg : null,
+        fullName: `${newUser['add-new_first_name']} ${newUser['add-new_last_name']}`,
+        status: 'Waiting for confirmation',
+        addedBy: `${user.firstName} ${user.lastName}`,
+      })
+      .then(() => {
+        dispatch({ type: 'ADD_NEW_USER_SUCCESS', newUser });
+      })
+      .catch((err) => {
+        dispatch({ type: 'ADD_NEW_USER_ERROR', err });
+      });
+  };
+};
