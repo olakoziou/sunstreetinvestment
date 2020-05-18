@@ -19,9 +19,7 @@ import EditUser from './account/EditUser';
 import ForgotPassword from './logging/ForgotPassword';
 import { useFirebaseConnect } from 'react-redux-firebase';
 import { mediaQueries } from '../../mixins';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { LogOut } from '../../store/actions/authActions';
+import AddNew from './users/AddNew';
 
 const AdminAppDiv = styled.div`
   min-height: 100vh;
@@ -79,80 +77,15 @@ const AdminAppDiv = styled.div`
     align-items: center;
     color: #fff;
     display: none;
-
-    /* & .postpone {
-      border: 1px solid #fff;
-      cursor: pointer;
-      display: block;
-      padding: 0.5rem;
-      margin: 0 1rem;
-    } */
   }
 `;
 
 function AdminApp() {
   useFirebaseConnect();
   const userConfirmed = useSelector((state) => state.firebase.profile.status);
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.firebase.auth.uid);
-  const history = useHistory();
-  // const [state, setState] = useState({
-  //   counter: 0,
-  //   remainingTime: 120,
-  // });
-
-  // let interval;
-  // let interval2;
-  // const logOut = document.querySelector('.logout');
-
-  // const handleMouseMove = (e) => {
-  //   setState((state) => ({ ...state, counter: 0 }));
-  //   clearInterval(interval);
-  // };
-
-  // useEffect(() => {
-  //   interval =
-  //     user &&
-  //     setInterval(() => {
-  //       setState((state) => ({ ...state, counter: state.counter + 1 }));
-  //     }, 1000);
-
-  //   if (state.counter === 600) {
-  //     logOut.style.display = 'flex';
-  //     interval2 = setInterval(() => {
-  //       setState((state) => ({
-  //         counter: 0,
-  //         remainingTime: state.remainingTime - 1,
-  //       }));
-  //     }, 1000);
-  //     // clearInterval(interval);
-  //   } else if (state.remainingTime < 1) {
-  //     setState((state) => ({
-  //       counter: 0,
-  //       remainingTime: 0,
-  //     }));
-  //     clearInterval(interval2);
-  //     logOut.style.display = 'none';
-  //     history.push('/admin-panel/log-in');
-  //     dispatch(LogOut());
-  //   } else {
-  //     return () => {
-  //       clearInterval(interval);
-  //     };
-  //   }
-  // }, [state.remainingTime, state.counter, user]);
-
-  // useEffect(() => {
-  //   window.onbeforeunload = () => {
-  //     dispatch(LogOut());
-  //   };
-  // }, []);
 
   return (
     <AdminAppDiv className="admin-panel">
-      {/* <div className="logout red">
-        <span>Zostaniesz wylogowany za {state.remainingTime} sekund.</span>
-      </div> */}
       <div className="wrapper">
         <BrowserRouter>
           <Route
@@ -229,6 +162,11 @@ function AdminApp() {
                         exact
                         path="/admin-panel/users"
                         component={Users}
+                      />
+                      <Route
+                        exact
+                        path="/admin-panel/add-new-user"
+                        component={AddNew}
                       />
                       <Route
                         exact
