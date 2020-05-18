@@ -74,19 +74,19 @@ function SingleUser(props) {
   const users = useSelector((state) => state.firestore.ordered.users);
 
   const handleConfimation = (e) => {
-    const userEmail = Array.from(
+    const fullName = Array.from(
       Array.from(e.target.parentElement.parentElement.children)[1].children
-    )[2].innerHTML;
-    const user = users.filter((user) => user.email === userEmail)[0];
+    )[0].innerHTML;
+    const user = users.filter((user) => user.fullName === fullName)[0];
 
     dispatch(confirmUser(user));
   };
 
   const handleDelete = (e) => {
-    const userEmail = Array.from(
+    const fullName = Array.from(
       Array.from(e.target.parentElement.parentElement.children)[1].children
-    )[2].innerHTML;
-    const user = users.filter((user) => user.email === userEmail)[0];
+    )[0].innerHTML;
+    const user = users.filter((user) => user.fullName === fullName)[0];
 
     dispatch(deleteUser(user));
   };
