@@ -85,7 +85,8 @@ function Guide() {
               zarejestrowali.
             </li>
             <li>
-              2. Możesz ich zatwierdzić i dodać na stronę lub usunąć ze strony.
+              2. Możesz ich zatwierdzić i dodać na stronę, usunąć ze strony lub
+              całkowicie skasować z bazy danych.
             </li>
           </ul>
         </li>
