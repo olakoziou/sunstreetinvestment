@@ -128,7 +128,11 @@ function Navbar() {
         <li>
           <NavLink to="/admin-panel/users">Użytkownicy</NavLink>
         </li>
-
+        <li>
+          <NavLink to="/admin-panel/add-new-user">
+            Dodaj nowego użytkownika
+          </NavLink>
+        </li>
         <li>
           <NavLink to="/admin-panel/account">Konto</NavLink>
         </li>
