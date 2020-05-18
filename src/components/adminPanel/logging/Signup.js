@@ -35,6 +35,11 @@ function Signup({
     }
   }, [imgState.userImg]);
 
+  const handleDeleteWhiteSpaces = (e) => {
+    const deletedSpaces = e.target.value.replace(/\s/g, '');
+    setState({ ...state, [e.target.id]: deletedSpaces });
+  };
+
   return (
     <SignupDiv className="signup">
       <span className="title">Załóż konto</span>
@@ -48,6 +53,7 @@ function Signup({
                 className="validate"
                 onChange={handleChange}
                 required
+                onBlur={handleDeleteWhiteSpaces}
               />
               <label htmlFor="signup-first_name">*Imię</label>
             </div>
@@ -60,6 +66,7 @@ function Signup({
                 className="validate"
                 onChange={handleChange}
                 required
+                onBlur={handleDeleteWhiteSpaces}
               />
               <label htmlFor="signup-last_name">*Nazwisko</label>
             </div>
