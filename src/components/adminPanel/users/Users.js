@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux';
 import SingleUser from './SingleUser';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import Spinner from '../spinner/Spinner';
+import { Link } from 'react-router-dom';
 
 function Users() {
-  useFirestoreConnect('users');
+  useFirestoreConnect({ collection: 'users', orderBy: 'lastName' });
   const users = useSelector((state) => state.firestore.ordered.users);
+
   return (
     <div className="users">
       <ul className="collection">
@@ -16,6 +18,9 @@ function Users() {
           <Spinner />
         )}
       </ul>
+      <Link to="/admin-panel/add-new-user">
+        <div className="btn">Dodaj nowego</div>
+      </Link>
     </div>
   );
 }
