@@ -95,6 +95,19 @@ const userReducer = (state = initialState, action) => {
         ...state,
         error: action.err,
       };
+    case 'ADUSERHARDDELETEUCCESS':
+      console.log('USERHARDDELETE_SUCCESS');
+      return {
+        ...state,
+        error: null,
+      };
+    case 'USERHARDDELETE_ERROR':
+      console.log('USERHARDDELETE_ERROR');
+      console.log(action.err);
+      return {
+        ...state,
+        error: action.err,
+      };
     default:
       return state;
   }

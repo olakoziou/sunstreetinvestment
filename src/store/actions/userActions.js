@@ -127,3 +127,20 @@ export const addNewUser = (newUser) => {
       });
   };
 };
+
+export const hardDeleteUser = (user) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+
+    firestore
+      .collection('users')
+      .doc(user.id)
+      .delete()
+      .then(() => {
+        dispatch({ type: 'USERHARDDELETE_SUCCES' });
+      })
+      .catch((err) => {
+        dispatch({ type: 'USERHARDDELETE_ERROR', err });
+      });
+  };
+};
