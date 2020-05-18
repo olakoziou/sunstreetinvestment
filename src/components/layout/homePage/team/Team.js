@@ -47,7 +47,7 @@ const TeamDiv = styled.div`
 `;
 
 function Team() {
-  useFirestoreConnect('users');
+  useFirestoreConnect({ collection: 'users', orderBy: 'lastName' });
   const teamArr = useSelector((state) => state.firestore.ordered.users);
   const confirmedUsers =
     teamArr && teamArr.filter((user) => user.status === 'Confirmed');
