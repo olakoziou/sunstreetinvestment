@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../../colors';
 import { useDispatch, useSelector } from 'react-redux';
-import { confirmUser, deleteUser } from '../../../store/actions/userActions';
+import {
+  confirmUser,
+  deleteUser,
+  hardDeleteUser,
+} from '../../../store/actions/userActions';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { mediaQueries } from '../../../mixins';
 
@@ -51,18 +55,10 @@ const SingleUserDiv = styled.div`
 
   & .single-user-btns {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
     & button {
-      margin: 1rem;
-
-      @media ${mediaQueries('tab-port')} {
-        margin: 0 0.5rem;
-      }
-    }
-
-    @media ${mediaQueries('tab-port')} {
-      flex-direction: row;
+      margin: 0.5rem;
     }
   }
 `;
@@ -89,6 +85,10 @@ function SingleUser(props) {
     const user = users.filter((user) => user.fullName === fullName)[0];
 
     dispatch(deleteUser(user));
+  };
+
+  const handleHardDelete = (e) => {
+    dispatch(hardDeleteUser(data));
   };
   return (
     <li className="collection-item avatar" style={{ paddingLeft: 0 }}>
@@ -125,7 +125,10 @@ function SingleUser(props) {
             onClick={handleDelete}
             disabled={data.status === 'Deleted' ? true : false}
           >
-            Usuń
+            Usuń ze strony
+          </button>
+          <button className="btn black" onClick={handleHardDelete}>
+            Skaksuj
           </button>
         </div>
       </SingleUserDiv>
