@@ -14,7 +14,7 @@ const GuideDiv = styled.div`
 function Guide() {
   return (
     <GuideDiv className="guide">
-      <h2>Instrukcja</h2>
+      <h5>Instrukcja</h5>
       <ul>
         <li className="item__main">
           <span>Dodaj nową nieruchomość</span>:
@@ -90,13 +90,27 @@ function Guide() {
           </ul>
         </li>
         <li className="item__main">
+          <span>Dodaj nowego użytkownika</span>
+          <ul>
+            <li>
+              1. Dodaj nowego członka zespołu bez zakładania konta - dla osób,
+              które nie będą dodawać nowych ofert na stronę.
+            </li>
+            <li>
+              2. WAŻNE - nie ma możliwości edytowania danych takiego
+              użytkownika. Jeśli zaistnieje konieczność wprowadzenia zmian,
+              należy usunąć ze strony poprzedniego użytkownika i dodać nowego.
+            </li>
+          </ul>
+        </li>
+        <li className="item__main">
           <span>Konto</span>
           <ul>
             <li>1. W tej zakładce możesz edytować swoje dane.</li>
             <li>2. Każda edycja wymaga potwierdzenia hasłem</li>
             <li>
-              3. Jeśli nie pamiętasz hasła, wejdź na stronę logowania i zresetuj
-              hasło
+              3. Jeśli nie pamiętasz hasła, wyloguj się, wejdź na stronę
+              logowania i zresetuj hasło
             </li>
           </ul>
         </li>
