@@ -43,7 +43,7 @@ const properties = {
   duration: 5000,
   transitionDuration: 500,
   infinite: true,
-  arrows: true,
+  arrows: false,
   pauseOnHover: true,
   indicators: true,
 };
