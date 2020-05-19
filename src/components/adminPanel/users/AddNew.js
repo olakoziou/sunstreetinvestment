@@ -8,7 +8,14 @@ import { useEffect } from 'react';
 import { addNewUser } from '../../../store/actions/userActions';
 import { useHistory } from 'react-router';
 
-const AddNewUserDiv = styled.div``;
+const AddNewUserDiv = styled.div`
+  & .error {
+    & a {
+      color: inherit;
+      font-weight: bold;
+    }
+  }
+`;
 
 function AddNew() {
   const [state, setState] = useState({});
@@ -20,7 +27,7 @@ function AddNew() {
 
   const optionsSmallImg = {
     maxSizeMB: 1,
-    maxWidthOrHeight: 300,
+    maxWidthOrHeight: 450,
   };
 
   const handleChange = (e) => {
@@ -31,8 +38,17 @@ function AddNew() {
     e.persist();
     const files = [];
     const upload = Array.from(e.target.files);
+    const webp = [];
 
-    upload.forEach((file) => {
+    upload.forEach((el) => {
+      if (el.type === 'image/webp') {
+        webp.push(el);
+      } else {
+        setState((state) => ({ ...state, imageFormatError: true }));
+      }
+    });
+
+    webp.forEach((file) => {
       imageCompression(file, size)
         .then(function (compressedFile) {
           console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
@@ -51,6 +67,16 @@ function AddNew() {
         });
     });
   };
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setState((state) => ({ ...state, imageFormatError: false }));
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [state]);
 
   // Add main image
   useEffect(() => {
@@ -166,6 +192,22 @@ function AddNew() {
               />
             </div>
           </div>
+          {state.imageFormatError ? (
+            <div className="red-text center row error">
+              {' '}
+              <p>
+                Użyj zdjęcia w formacie .webp. Przejdź na{' '}
+                <a
+                  href="https://image.online-convert.com/convert-to-webp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  stronę
+                </a>{' '}
+                .
+              </p>
+            </div>
+          ) : null}
           <div className="row">
             <span>*Wymagane</span>
           </div>

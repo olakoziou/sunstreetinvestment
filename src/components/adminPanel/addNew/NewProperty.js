@@ -4,9 +4,11 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import imageCompression from 'browser-image-compression';
+import { useState } from 'react';
 
 function NewProperty(props) {
   const { data } = props;
+  const [state, setState] = useState({ imageFormatError: false });
   useFirestoreConnect('users');
   useEffect(() => {
     M.AutoInit();
@@ -38,8 +40,17 @@ function NewProperty(props) {
     e.persist();
     const files = [];
     const upload = Array.from(e.target.files);
+    const webp = [];
 
-    upload.map((file) => {
+    upload.forEach((el) => {
+      if (el.type === 'image/webp') {
+        webp.push(el);
+      } else {
+        setState((state) => ({ ...state, imageFormatError: true }));
+      }
+    });
+
+    webp.map((file) => {
       imageCompression(file, size)
         .then(function (compressedFile) {
           // console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
@@ -55,6 +66,16 @@ function NewProperty(props) {
         });
     });
   };
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setState((state) => ({ ...state, imageFormatError: false }));
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [state]);
 
   const realEastateBroker = useSelector(
     (state) => state.firestore.ordered.users
@@ -224,6 +245,22 @@ function NewProperty(props) {
           </div>
         </div>
       </div>
+      {state.imageFormatError ? (
+        <div className="red-text center row error">
+          {' '}
+          <p>
+            Użyj zdjęcia w formacie .webp. Przejdź na{' '}
+            <a
+              href="https://image.online-convert.com/convert-to-webp"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              stronę
+            </a>{' '}
+            .
+          </p>
+        </div>
+      ) : null}
       <div className="row">
         <div className="input-field col s12">
           <input

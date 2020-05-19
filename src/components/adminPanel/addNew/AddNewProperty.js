@@ -33,6 +33,24 @@ const FormBoxDiv = styled.div`
         width: 45%;
       }
     }
+
+    & .error {
+      width: 100%;
+      margin: 2rem;
+
+      & p {
+        width: 50%;
+        margin: 0 auto;
+        border: 1px solid;
+        padding: 1rem;
+
+        & a {
+          color: inherit;
+          font-weight: bold;
+        }
+      }
+    }
+
     & .checkbox {
       display: flex;
       align-items: center;

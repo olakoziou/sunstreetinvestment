@@ -46,6 +46,13 @@ const LogInPanelSection = styled.section`
         max-width: 30rem;
       }
 
+      & .error {
+        & a {
+          color: inherit;
+          font-weight: bold;
+        }
+      }
+
       /* label focus color */
       & .input-field input:focus + label,
       .input-field textarea:focus + label {
@@ -140,15 +147,24 @@ function LogInPanel() {
 
   const optionsSmallImg = {
     maxSizeMB: 1,
-    maxWidthOrHeight: 300,
+    maxWidthOrHeight: 450,
   };
 
   const handleImgChange = (size) => (e) => {
     e.persist();
     const files = [];
     const upload = Array.from(e.target.files);
+    const webp = [];
 
-    upload.forEach((file) => {
+    upload.forEach((el) => {
+      if (el.type === 'image/webp') {
+        webp.push(el);
+      } else {
+        setState((state) => ({ ...state, imageFormatError: true }));
+      }
+    });
+
+    webp.forEach((file) => {
       imageCompression(file, size)
         .then(function (compressedFile) {
           console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB

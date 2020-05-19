@@ -10,6 +10,12 @@ import { useFirebase } from 'react-redux-firebase';
 import imageCompression from 'browser-image-compression';
 
 const EditUserDiv = styled.div`
+  & .error {
+    & a {
+      color: inherit;
+      font-weight: bold;
+    }
+  }
   & .img {
     background-position: center;
     background-size: cover;
@@ -47,14 +53,23 @@ function EditUser(props) {
 
   const optionsSmallImg = {
     maxSizeMB: 1,
-    maxWidthOrHeight: 300,
+    maxWidthOrHeight: 450,
   };
   const handleImgChange = (size) => (e) => {
     e.persist();
     const files = [];
     const upload = Array.from(e.target.files);
+    const webp = [];
 
-    upload.map((file) => {
+    upload.forEach((el) => {
+      if (el.type === 'image/webp') {
+        webp.push(el);
+      } else {
+        setState((state) => ({ ...state, imageFormatError: true }));
+      }
+    });
+
+    webp.map((file) => {
       console.log(file.size);
       imageCompression(file, size)
         .then(function (compressedFile) {
@@ -223,6 +238,21 @@ function EditUser(props) {
               />
             </div>
           </div>
+          {state.imageFormatError ? (
+            <div className="red-text center row error">
+              {' '}
+              <p>
+                Użyj zdjęcia w formacie .webp. Przejdź na{' '}
+                <a
+                  href="https://image.online-convert.com/convert-to-webp"
+                  target="_blank"
+                >
+                  stronę
+                </a>{' '}
+                .
+              </p>
+            </div>
+          ) : null}
           {state.userImg ? (
             <div
               className="img"

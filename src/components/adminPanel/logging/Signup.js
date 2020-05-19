@@ -35,6 +35,16 @@ function Signup({
     }
   }, [imgState.userImg]);
 
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setState((state) => ({ ...state, imageFormatError: false }));
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [state]);
+
   const handleDeleteWhiteSpaces = (e) => {
     const deletedSpaces = e.target.value.replace(/\s/g, '');
     setState({ ...state, [e.target.id]: deletedSpaces });
@@ -150,6 +160,22 @@ function Signup({
               />
             </div>
           </div>
+          {state.imageFormatError ? (
+            <div className="white-text center row error">
+              {' '}
+              <p>
+                Użyj zdjęcia w formacie .webp. Przejdź na{' '}
+                <a
+                  href="https://image.online-convert.com/convert-to-webp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  stronę
+                </a>{' '}
+                .
+              </p>
+            </div>
+          ) : null}
           <div className="row">
             <span>*Wymagane</span>
           </div>
