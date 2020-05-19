@@ -28,6 +28,12 @@ function Guide() {
               3. Zatwierdzenie oferty nie jest równoznaczne z dodaniem oferty na
               stronę.
             </li>
+            <li>
+              4. <strong>Ważne:</strong> Podczas dodawania zdjęć, czasem pojawia
+              się błąd z linkiem, w skutek czego na samym dole pojawi się pusty
+              prostokąt. Usunięcie go, powinno automatycznie wygenerować
+              odpowiedni link. Jeśli nie, dodaj zdjęcie jeszcze raz.
+            </li>
           </ul>
         </li>
         <li className="item__main">
@@ -108,17 +114,38 @@ function Guide() {
           <span>Konto</span>
           <ul>
             <li>1. W tej zakładce możesz edytować swoje dane.</li>
-            <li>2. Każda edycja wymaga potwierdzenia hasłem</li>
+            <li>2. Każda edycja wymaga potwierdzenia hasłem.</li>
             <li>
               3. Jeśli nie pamiętasz hasła, wyloguj się, wejdź na stronę
-              logowania i zresetuj hasło
+              logowania i zresetuj hasło.
             </li>
           </ul>
         </li>
         <li className="item__main">
           <span>Strona główna</span>
           <ul>
-            <li>1. Przejście na stronę główną bez wylogowania</li>
+            <li>1. Przejście na stronę główną bez wylogowania.</li>
+          </ul>
+        </li>
+        <li className="item__main">
+          <span>Zdjęcia</span>
+          <ul>
+            <li>
+              1. W celu zoptymalizowania strony, wszystkie zdjęcia muszą zostać
+              dodane w formacie .webp. Link do{' '}
+              <a
+                target="_blank"
+                href="https://image.online-convert.com/convert-to-webp"
+                rel="noopener noreferrer"
+              >
+                strony
+              </a>
+              .
+            </li>
+            <li>
+              2. Zdjęcia powinny być robione w poziomie. Zdjęcia pionowe będą
+              się źle wyśiwetlać.
+            </li>
           </ul>
         </li>
       </ul>
