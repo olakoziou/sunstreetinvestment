@@ -81,12 +81,10 @@ function AddNew() {
   // Add main image
   useEffect(() => {
     console.log(state);
-    if (state['add-new_first_name'] && state['add-new_last_name']) {
+    if (state['add-new_first_name'] && state['add-new_email']) {
       imgState.userImg.map((image) => {
         storageRef
-          .child(
-            `team/${state['add-new_first_name']}${state['add-new_last_name']}`
-          )
+          .child(`team/${state['add-new_first_name']}${state['add-new_email']}`)
           .put(image)
           .then((url) => {
             url.ref.getDownloadURL().then((url) => {
@@ -102,6 +100,8 @@ function AddNew() {
     dispatch(addNewUser(state));
     history.push('/admin-panel/users');
   };
+
+  console.log(state);
 
   const handleDeleteWhiteSpaces = (e) => {
     const deletedSpaces = e.target.value.replace(/\s/g, '');
@@ -141,6 +141,17 @@ function AddNew() {
           <div className="row">
             <div className="input-field col s12">
               <input
+                id="add-new_email"
+                type="email"
+                className="validate"
+                onChange={handleChange}
+              />
+              <label htmlFor="add-new_email">Email</label>
+            </div>
+          </div>
+          <div className="row">
+            <div className="input-field col s12">
+              <input
                 id="add-new_phone"
                 type="number"
                 className="validate"
@@ -161,8 +172,8 @@ function AddNew() {
                 className="materialize-textarea"
                 onChange={handleChange}
                 required
-                // minLength={150}
-                // maxLength={200}
+                minLength={150}
+                maxLength={200}
               ></textarea>
               <label htmlFor="add-new_textarea1">*Opis</label>
               <span
