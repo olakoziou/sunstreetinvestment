@@ -7,7 +7,7 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import Spinner from '../../../adminPanel/spinner/Spinner';
 
 const SpanDiv = styled.div`
-  @media ${mediaQueries} {
+  @media ${mediaQueries('tab-port')} {
     text-align: left;
     right: 0;
     width: max-content;
@@ -40,7 +40,7 @@ const SlideContainer = styled.div`
 `;
 
 const properties = {
-  duration: 5000,
+  duration: 50000,
   transitionDuration: 500,
   infinite: true,
   arrows: false,
@@ -65,7 +65,7 @@ function Slider() {
     <SlideContainer className="slide-container">
       {propertiesArr ? (
         <Slide {...properties}>
-          {propertiesFiltered.map((property, i) => (
+          {propertiesFiltered.slice(0, 6).map((property, i) => (
             <div
               className="each-slide"
               key={i}
