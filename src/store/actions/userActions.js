@@ -114,6 +114,8 @@ export const addNewUser = (newUser) => {
         firstName: newUser['add-new_first_name'],
         lastName: newUser['add-new_last_name'],
         description: newUser['add-new_textarea1'],
+        email: newUser['add-new_email'] ? newUser['add-new_email'] : null,
+        phone: newUser['add-new_phone'] ? newUser['add-new_phone'] : null,
         userImg: newUser.userImg ? newUser.userImg : null,
         fullName: `${newUser['add-new_first_name']} ${newUser['add-new_last_name']}`,
         status: 'Waiting for confirmation',
