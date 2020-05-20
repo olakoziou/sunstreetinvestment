@@ -114,6 +114,8 @@ function EditUser(props) {
     setState({ ...state, userImg: null });
   };
 
+  console.log(state);
+
   const handleEdit = (e) => {};
   return (
     <EditUserDiv className="edit-user">
@@ -189,7 +191,7 @@ function EditUser(props) {
                 onChange={handleChange}
                 minLength={9}
                 maxLength={9}
-                defaultValue={state && state.number}
+                defaultValue={state && state.phone}
               />
               <label className="active" htmlFor="phone">
                 Numer służbowy
