@@ -118,9 +118,16 @@ const DescriptionDiv = styled.div`
       ${boxShadows('small')};
       position: relative;
       cursor: pointer;
+      transition: all .2s;
       /* @media ${mediaQueries('tab-port')} {
         width: 20%;
       } */
+
+      &:hover {
+      ${boxShadows('medium')};
+      transform: scale(1.01)
+
+      }
     }
   }
 `;
