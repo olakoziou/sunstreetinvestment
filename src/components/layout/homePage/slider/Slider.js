@@ -72,6 +72,7 @@ function Slider() {
               style={{ position: 'relative', overflow: 'hidden' }}
             >
               <div
+                className="lazyload"
                 style={{
                   backgroundImage: `url(${property.mainImgUrl})`,
                   height: 600,

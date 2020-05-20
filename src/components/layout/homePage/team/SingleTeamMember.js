@@ -95,7 +95,10 @@ function SingleTeamMember(props) {
     <DivMember className="single-team-member">
       <div className="single-team-member__image">
         {img ? (
-          <div className="img" style={{ backgroundImage: `url(${img})` }}></div>
+          <div
+            className="img lazyload"
+            style={{ backgroundImage: `url(${img})` }}
+          ></div>
         ) : (
           <div className="initials">
             <span>
