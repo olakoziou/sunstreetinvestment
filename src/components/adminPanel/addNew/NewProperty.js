@@ -211,7 +211,6 @@ function NewProperty(props) {
             <input
               type="file"
               onChange={handleImgChange(optionsSmallImg)}
-              multiple
               id="images"
               disabled={!props.state.propertyName ? true : false}
             />
