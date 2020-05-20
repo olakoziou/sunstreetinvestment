@@ -298,10 +298,18 @@ function AddNewProperty(props) {
               onChange={handleChange}
               defaultValue={state.propertyName ? state.propertyName : ''}
               required
+              maxLength={70}
             />
             <label className="active" htmlFor="propertyName">
               *Nazwa
             </label>
+            <span
+              className="helper-text"
+              data-error="wrong"
+              data-success="right"
+            >
+              max. 70 znaków
+            </span>
           </div>
         </div>
         <div className="row">
