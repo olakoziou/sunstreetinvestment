@@ -1,6 +1,15 @@
 import React from 'react';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+
+const AuthorDiv = styled.div`
+  & .contact {
+    & i {
+      margin: 0 0.5rem;
+    }
+  }
+`;
 
 function RealEstateBroker(props) {
   useFirestoreConnect('users');
@@ -10,7 +19,7 @@ function RealEstateBroker(props) {
     users.filter((user) => user.fullName === props.data.realEstateBroker)[0];
 
   return (
-    <div className="author">
+    <AuthorDiv className="author">
       <h5>Opiekun oferty</h5>
       <div className="author-details">
         {realEstateBroker && realEstateBroker.userImg ? (
@@ -42,14 +51,16 @@ function RealEstateBroker(props) {
                 <span>{realEstateBroker && realEstateBroker.phone}</span>
               </div>
             )}
-            <div>
-              <i className="material-icons small">mail_outline</i>
-              <span>{realEstateBroker && realEstateBroker.email}</span>
-            </div>
+            {realEstateBroker && realEstateBroker.email && (
+              <div>
+                <i className="material-icons small">mail_outline</i>
+                <span>{realEstateBroker && realEstateBroker.email}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>
-    </div>
+    </AuthorDiv>
   );
 }
 
