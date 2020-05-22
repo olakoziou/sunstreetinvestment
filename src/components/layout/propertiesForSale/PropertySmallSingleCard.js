@@ -95,6 +95,7 @@ function PropertySmallSingleCard(props) {
     extra,
     realEstateBroker,
     newFiltered,
+    banner,
   } = props;
 
   const stanFiltered = stan && stan !== 'Ponownie w sprzedaży';
@@ -137,6 +138,7 @@ function PropertySmallSingleCard(props) {
               extra,
               realEstateBroker,
               newFiltered,
+              banner,
             },
           }}
         >

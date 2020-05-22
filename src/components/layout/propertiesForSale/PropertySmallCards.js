@@ -89,6 +89,7 @@ function PropertySmallCards(props) {
                   extra={property.extra}
                   realEstateBroker={property.realEstateBroker}
                   newFiltered={property.newFiltered}
+                  banner={property.banner}
                 />
               ))
           ) : (
@@ -121,6 +122,7 @@ function PropertySmallCards(props) {
                 extra={property.extra}
                 realEstateBroker={property.realEstateBroker}
                 newFiltered={property.newFiltered}
+                banner={property.banner}
               />
             ))
           )

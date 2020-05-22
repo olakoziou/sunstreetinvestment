@@ -4,6 +4,7 @@ import { boxShadows, mediaQueries } from '../../../../mixins';
 import { colors } from '../../../../colors';
 import Description from './Description';
 import Details from './Details';
+import { useEffect } from 'react';
 
 const PropertyCardSection = styled.section`
   & .property-card {
@@ -12,6 +13,60 @@ const PropertyCardSection = styled.section`
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
+      width: 100%;
+      height: 40rem;
+      position: relative;
+
+      & .title,
+      .stan {
+        @media ${mediaQueries('phone')} {
+          text-align: left;
+          right: 0;
+          width: max-content;
+        }
+
+        border-top: 1px solid rgba(255, 255, 255, 0.75);
+        border-left: 1px solid rgba(255, 255, 255, 0.75);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.75);
+        width: 100%;
+        padding: 1rem 2rem;
+        font-size: 2rem;
+        text-align: center;
+        position: absolute;
+        z-index: 1000;
+
+        ${boxShadows('xsmall')}
+      }
+
+      & .title {
+        bottom: 15%;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+
+      & .stan {
+        position: absolute;
+        bottom: 40%;
+        left: 0;
+        right: 0;
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        background-color: rgba(${colors.extra});
+        border-right: 1px solid rgba(255, 255, 255, 0.75);
+      }
+
+      & .stan__active {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(${colors.primary}, 0.25);
+      }
+    }
+
+    & .property-card__banner-half {
+      background-position: center;
       width: 100%;
       height: 40rem;
       position: relative;
@@ -84,27 +139,54 @@ const PropertyCardSection = styled.section`
 `;
 
 function SinglePropertyCard(props) {
-  const { title, img, stan } = props.location.state;
-
+  const { title, img, stan, banner } = props.location.state;
   const stanFiltered = stan && stan !== 'Ponownie w sprzedaży';
+  console.log(banner);
+
+  // useEffect(() => {
+  //   if (banner === 'Nie') {
+  //     document.querySelector('.property-card__banner').style.display = 'none';
+  //   } else {
+  //     document.querySelector('.property-card__banner-half').style.display =
+  //       'none';
+  //   }
+  // }, []);
 
   return (
     <PropertyCardSection className="property">
       <div className="property-card">
-        <div
-          className="property-card__banner"
-          style={{ backgroundImage: `url(${img})` }}
-        >
-          {!stanFiltered && <span className="title">{title}</span>}
+        {banner === 'Nie' ? (
+          <div
+            className="property-card__banner-half"
+            style={{ backgroundImage: `url(${img})` }}
+          >
+            {!stanFiltered && <span className="title">{title}</span>}
 
-          {stanFiltered && (
-            <div className="stan__active">
-              <span className="stan">
-                {title} - {stan}
-              </span>
-            </div>
-          )}
-        </div>
+            {stanFiltered && (
+              <div className="stan__active">
+                <span className="stan">
+                  {title} - {stan}
+                </span>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div
+            className="property-card__banner"
+            style={{ backgroundImage: `url(${img})` }}
+          >
+            {!stanFiltered && <span className="title">{title}</span>}
+
+            {stanFiltered && (
+              <div className="stan__active">
+                <span className="stan">
+                  {title} - {stan}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="wrapper">
           <div className="property-card__content">
             <Description data={props.location.state} displayImgs={true} />

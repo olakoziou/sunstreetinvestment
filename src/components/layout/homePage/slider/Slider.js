@@ -59,7 +59,12 @@ function Slider() {
     (state) => state.firestore.ordered.properties
   );
   const propertiesFiltered =
-    propertiesArr && propertiesArr.filter((el) => el.status === 'added');
+    propertiesArr &&
+    propertiesArr
+      .filter((el) => el.status === 'added')
+      .filter((el) => el.banner !== 'Nie');
+
+  console.log(propertiesFiltered);
 
   return (
     <SlideContainer className="slide-container">

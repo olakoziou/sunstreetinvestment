@@ -457,6 +457,26 @@ function NewProperty(props) {
           <label>Dodatkowe informacje</label>
         </div>
       </div>
+      <div className="row">
+        <div className="input-field col s12">
+          <select
+            onChange={props.handleSelected}
+            id="banner"
+            defaultValue={data && data.banner ? data.banner : 'Default'}
+          >
+            <option value="Default" disabled>
+              Dodać na stronę główną
+            </option>
+            <option value="Tak">Tak</option>
+            <option value="Nie">Nie</option>
+          </select>
+          <label>Wybierz</label>
+          <span className="helper-text" data-error="wrong" data-success="right">
+            Nie wybranie opcji, automatycznie doda ofertę do Slidera na stronie
+            głównej. Jeżeli zdjęcie jest słabej jakości, wybierz NIE.
+          </span>
+        </div>
+      </div>
       {data && (
         <div className="row">
           <div className="input-field col s12">
