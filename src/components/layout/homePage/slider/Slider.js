@@ -7,7 +7,7 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import Spinner from '../../../adminPanel/spinner/Spinner';
 
 const SpanDiv = styled.div`
-  @media ${mediaQueries('tab-port')} {
+  @media ${mediaQueries('tab-land')} {
     text-align: left;
     right: 0;
     width: max-content;

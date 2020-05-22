@@ -72,7 +72,7 @@ const PropertyCardSection = styled.section`
 
       & .title,
       .stan {
-        @media ${mediaQueries('phone')} {
+        @media ${mediaQueries('tab-land')} {
           text-align: left;
           right: 0;
           width: max-content;
