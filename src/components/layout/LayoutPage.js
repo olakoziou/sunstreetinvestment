@@ -5,12 +5,10 @@ import SinglePropertyCard from './propertiesForSale/singlePropertyCard/SinglePro
 import PropertiesPage from './propertiesForSale/PropertiesPage';
 import HistoryPage from './homePage/about/HistoryPage';
 import PDFpage from './propertiesForSale/singlePropertyCard/PDFpage';
-import { useSelector } from 'react-redux';
 import { useFirestoreConnect } from 'react-redux-firebase';
 
 function LayoutPage() {
   useFirestoreConnect();
-  const state = useSelector((state) => state);
   return (
     <>
       <BrowserRouter>
