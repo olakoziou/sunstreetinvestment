@@ -145,7 +145,11 @@ function PropertySmallSingleCard(props) {
           <Card>
             <div className="card">
               <div className="card-image">
-                <img data-src={img} className="lazyload" />
+                <img
+                  data-src={img}
+                  className="lazyload"
+                  alt="Zdjęcie nieruchomości"
+                />
                 <span className="card-title">{title}</span>
               </div>
               <div className="card-content">
