@@ -64,8 +64,6 @@ function Slider() {
       .filter((el) => el.status === 'added')
       .filter((el) => el.banner !== 'Nie');
 
-  console.log(propertiesFiltered);
-
   return (
     <SlideContainer className="slide-container">
       {propertiesArr ? (

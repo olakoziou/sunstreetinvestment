@@ -167,7 +167,7 @@ function LogInPanel() {
     webp.forEach((file) => {
       imageCompression(file, size)
         .then(function (compressedFile) {
-          console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
+
           files.push(compressedFile);
         })
         .then(() => {

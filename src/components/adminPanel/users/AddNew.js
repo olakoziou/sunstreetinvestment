@@ -51,7 +51,6 @@ function AddNew() {
     webp.forEach((file) => {
       imageCompression(file, size)
         .then(function (compressedFile) {
-          console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
           files.push(compressedFile);
         })
         .then(() => {
@@ -80,7 +79,6 @@ function AddNew() {
 
   // Add main image
   useEffect(() => {
-    console.log(state);
     if (state['add-new_first_name'] && state['add-new_email']) {
       imgState.userImg.map((image) => {
         storageRef
@@ -100,8 +98,6 @@ function AddNew() {
     dispatch(addNewUser(state));
     history.push('/admin-panel/users');
   };
-
-  console.log(state);
 
   const handleDeleteWhiteSpaces = (e) => {
     const deletedSpaces = e.target.value.replace(/\s/g, '');

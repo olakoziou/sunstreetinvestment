@@ -144,7 +144,6 @@ function Details(props) {
     year,
     technology,
   } = props.data;
-  console.log(props.data);
 
   return (
     <DetailsnDiv className="property-card__content-details">

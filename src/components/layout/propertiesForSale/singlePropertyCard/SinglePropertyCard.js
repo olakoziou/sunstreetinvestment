@@ -4,7 +4,6 @@ import { boxShadows, mediaQueries } from '../../../../mixins';
 import { colors } from '../../../../colors';
 import Description from './Description';
 import Details from './Details';
-import { useEffect } from 'react';
 
 const PropertyCardSection = styled.section`
   & .property-card {
@@ -141,16 +140,6 @@ const PropertyCardSection = styled.section`
 function SinglePropertyCard(props) {
   const { title, img, stan, banner } = props.location.state;
   const stanFiltered = stan && stan !== 'Ponownie w sprzedaży';
-  console.log(banner);
-
-  // useEffect(() => {
-  //   if (banner === 'Nie') {
-  //     document.querySelector('.property-card__banner').style.display = 'none';
-  //   } else {
-  //     document.querySelector('.property-card__banner-half').style.display =
-  //       'none';
-  //   }
-  // }, []);
 
   return (
     <PropertyCardSection className="property">

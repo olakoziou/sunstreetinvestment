@@ -70,10 +70,9 @@ function EditUser(props) {
     });
 
     webp.map((file) => {
-      console.log(file.size);
       imageCompression(file, size)
         .then(function (compressedFile) {
-          console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
+          // console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
           files.push(compressedFile);
         })
         .then(() => {
@@ -113,8 +112,6 @@ function EditUser(props) {
 
     setState({ ...state, userImg: null });
   };
-
-  console.log(state);
 
   const handleEdit = (e) => {};
   return (

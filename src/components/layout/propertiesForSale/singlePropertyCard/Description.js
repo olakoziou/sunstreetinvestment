@@ -133,7 +133,7 @@ const DescriptionDiv = styled.div`
 `;
 
 function Description(props) {
-  const { description, propertyPlanUrl, extra, newFiltered } = props.data;
+  const { description, propertyPlanUrl, extra, imgUrlArr } = props.data;
   const { displayImgs } = props;
 
   const handleImgClick = (e) => {
@@ -153,7 +153,6 @@ function Description(props) {
     description.style.filter = 'blur(0)';
   };
 
-  console.log(newFiltered);
   return (
     <DescriptionDiv className="property-card__content-description">
       <div className="image-big">
@@ -169,12 +168,12 @@ function Description(props) {
         {extra &&
           extra.map((extra, i) => (extra ? <div key={i}>{extra}</div> : null))}
       </div>
-      {displayImgs && newFiltered && newFiltered.length > 0 ? (
+      {displayImgs && imgUrlArr && imgUrlArr.length > 0 ? (
         <>
           <div className="gallery">
             <h6>Pozostałe zdjęcia</h6>
             <div className="images">
-              {newFiltered.map((img, i) => (
+              {imgUrlArr.map((img, i) => (
                 <div
                   className="img"
                   key={i}

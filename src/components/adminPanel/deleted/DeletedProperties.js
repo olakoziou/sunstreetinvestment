@@ -5,7 +5,6 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import Spinner from '../spinner/Spinner';
 
 function DeletedProperties(props) {
-  // console.log(props);
   useFirestoreConnect([
     {
       collection: 'properties',

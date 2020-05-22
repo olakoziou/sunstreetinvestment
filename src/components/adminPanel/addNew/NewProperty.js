@@ -53,7 +53,7 @@ function NewProperty(props) {
     webp.map((file) => {
       imageCompression(file, size)
         .then(function (compressedFile) {
-          // console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
+
           files.push(compressedFile);
         })
         .then(() => {
@@ -528,10 +528,10 @@ function NewProperty(props) {
               ></div>
             </div>
           ) : null}
-          {props.state.newFiltered ? (
+          {props.state.imgUrlArr ? (
             <div className="other-images">
               <span>Pozostałe zdjęcia</span>
-              {props.state.newFiltered.map((img, i) => (
+              {props.state.imgUrlArr.map((img, i) => (
                 <div
                   className="img"
                   key={i}

@@ -22,7 +22,6 @@ const PdfPage = styled.div`
 
 function PDFpage(props) {
   const data = props.location.state;
-  console.log(data);
   const imgUrl = data && data.img;
   const ref = React.createRef();
   const doc = new jsPDF();
