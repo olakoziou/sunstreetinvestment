@@ -79,10 +79,12 @@ function AddNew() {
 
   // Add main image
   useEffect(() => {
-    if (state['add-new_first_name'] && state['add-new_email']) {
-      imgState.userImg.map((image) => {
+    if (state['add-new_first_name'] && state['add-new_last_name']) {
+      imgState.userImg.forEach((image) => {
         storageRef
-          .child(`team/${state['add-new_first_name']}${state['add-new_email']}`)
+          .child(
+            `team/${state['add-new_first_name']}${state['add-new_last_name']}`
+          )
           .put(image)
           .then((url) => {
             url.ref.getDownloadURL().then((url) => {
@@ -168,8 +170,8 @@ function AddNew() {
                 className="materialize-textarea"
                 onChange={handleChange}
                 required
-                minLength={150}
-                maxLength={200}
+                // minLength={150}
+                // maxLength={200}
               ></textarea>
               <label htmlFor="add-new_textarea1">*Opis</label>
               <span
