@@ -20,7 +20,7 @@ function Signup({
       state['signup-last_name'] &&
       imgState.userImg
     ) {
-      imgState.userImg.map((image) => {
+      imgState.userImg.forEach((image) => {
         storageRef
           .child(
             `team/${state['signup-first_name']}${state['signup-last_name']}`
