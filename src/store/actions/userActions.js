@@ -89,7 +89,6 @@ export const editUser = (userEdit, emailForAuthEdit) => {
 export const resetUserPassword = (email) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
-    const user = firebase.auth().currentUser;
 
     firebase
       .auth()
