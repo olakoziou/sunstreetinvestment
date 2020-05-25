@@ -77,7 +77,6 @@ const SideNavbarDiv = styled.div`
 
 function Navbar() {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.firebase.auth);
   const history = useHistory();
   useFirestoreConnect('users');
   const users = useSelector((state) => state.firestore.ordered.users);
