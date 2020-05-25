@@ -71,10 +71,6 @@ const FooterStyle = styled.footer`
   }
 `;
 
-const FlexDiv = styled.div`
-  display: flex;
-`;
-
 function Footer() {
   return (
     <FooterStyle>
@@ -100,10 +96,19 @@ function Footer() {
           </div>
           <div className="company-info">
             <h5>Dane spółki</h5>
-            <span>SunStreet Investment Sp. z o.o.</span>
-            <span>Masarska 13/b4, 31-534 Kraków</span>
-            <span>NIP: 6751705313</span>
-            <span>REGON: 383486649</span>
+            <span>
+              SunStreet Investment Sp. z o.o. <br />{' '}
+            </span>
+
+            <span>
+              Masarska 13/b4, 31-534 Kraków <br />{' '}
+            </span>
+            <span>
+              NIP: 6751705313 <br />{' '}
+            </span>
+            <span>
+              REGON: 383486649 <br />{' '}
+            </span>
           </div>
           <div className="address">
             <h5>Siedziba firmy</h5>
