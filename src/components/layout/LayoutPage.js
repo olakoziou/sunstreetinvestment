@@ -4,7 +4,6 @@ import HomePage from './homePage/HomePage';
 import SinglePropertyCard from './propertiesForSale/singlePropertyCard/SinglePropertyCard';
 import PropertiesPage from './propertiesForSale/PropertiesPage';
 import HistoryPage from './homePage/about/HistoryPage';
-import PDFpage from './propertiesForSale/singlePropertyCard/PDFpage';
 import { useFirestoreConnect } from 'react-redux-firebase';
 
 function LayoutPage() {
@@ -21,7 +20,6 @@ function LayoutPage() {
           />
           <Route exact path="/nieruchomosci" component={PropertiesPage} />
           <Route exact path="/archiwum" component={HistoryPage} />
-          <Route exact path="/oferta-pdf" component={PDFpage} />
         </Switch>
       </BrowserRouter>
     </>
