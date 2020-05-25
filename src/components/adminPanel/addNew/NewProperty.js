@@ -50,14 +50,13 @@ function NewProperty(props) {
       }
     });
 
-    webp.map((file) => {
+    webp.forEach((file) => {
       imageCompression(file, size)
         .then(function (compressedFile) {
-
           files.push(compressedFile);
         })
         .then(() => {
-          files.map((file) => {
+          files.forEach((file) => {
             props.setImgState({ ...props.imgState, [e.target.id]: [file] });
           });
         })
@@ -84,7 +83,7 @@ function NewProperty(props) {
   realEastateBroker &&
     realEastateBroker
       .filter((el) => el.status === 'Confirmed')
-      .map((el) => names.push([el.fullName]));
+      .forEach((el) => names.push([el.fullName]));
 
   return (
     <>
@@ -500,7 +499,7 @@ function NewProperty(props) {
       <div className="row checkbox realEstateBroker">
         <span>*Opiekun oferty:</span>
         {names &&
-          names.map((name, i) => (
+          names.forEach((name, i) => (
             <p key={i}>
               <label>
                 <input
