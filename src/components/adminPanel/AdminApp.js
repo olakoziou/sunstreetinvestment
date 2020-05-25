@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AdminPanel from './AdminPanel';
 import Navbar from './navigation/Navbar';
 import LogInPanel from './logging/LogInPanel';
@@ -12,7 +12,7 @@ import Users from './users/Users';
 import styled from 'styled-components';
 import { colors } from '../../colors';
 import Container from './Container';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Archives from './added/Archives';
 import EditProperty from './edit/EditProperty';
 import EditUser from './account/EditUser';
