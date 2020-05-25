@@ -2,7 +2,6 @@ export const addOldProperty = (property) => {
   return (dispatch, getState, { getFirestore }) => {
     const user = getState().firebase.profile;
     const firestore = getFirestore();
-    const id = getState().firebase.auth.uid;
 
     firestore
       .collection('oldCases')
