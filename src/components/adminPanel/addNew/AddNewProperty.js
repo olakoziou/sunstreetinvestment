@@ -4,10 +4,9 @@ import { mediaQueries } from '../../../mixins';
 import { useState } from 'react';
 import NewProperty from './NewProperty';
 import OldProperty from './OldProperty';
-import M from 'materialize-css/dist/js/materialize.min.js';
 import { useEffect } from 'react';
-import { useFirebase, useFirebaseConnect } from 'react-redux-firebase';
-import { useSelector, useDispatch } from 'react-redux';
+import { useFirebase } from 'react-redux-firebase';
+import { useDispatch } from 'react-redux';
 import {
   addNewProperty,
   editProperty,
@@ -153,14 +152,14 @@ function AddNewProperty(props) {
   };
 
   const handleSelectedMultiple = (e) => {
-    const values = [...e.target.selectedOptions].map((opt) => opt.value);
+    const values = [...e.target.selectedOptions].forEach((opt) => opt.value);
     setState({ ...state, [e.target.id]: values });
   };
 
   // Add main image
   useEffect(() => {
     if (state.propertyName && imgState.mainImg) {
-      imgState.mainImg.map((image, i) => {
+      imgState.mainImg.forEach((image, i) => {
         storageRef
           .child(`images/${state.propertyName}/mainimage`)
           .put(image)
@@ -176,7 +175,7 @@ function AddNewProperty(props) {
   // Add other images
   useEffect(() => {
     if (state.propertyName && imgState.images) {
-      imgState.images.map((image, i) => {
+      imgState.images.forEach((image, i) => {
         storageRef
           .child(`images/${state.propertyName}/${image.name}`)
           .put(image)
@@ -197,7 +196,7 @@ function AddNewProperty(props) {
   // Add property plan
   useEffect(() => {
     if (state.propertyName && imgState.plan) {
-      imgState.plan.map((image, i) => {
+      imgState.plan.forEach((image, i) => {
         storageRef
           .child(`images/${state.propertyName}/plan`)
           .put(image)
