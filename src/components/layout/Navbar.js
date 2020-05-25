@@ -64,9 +64,8 @@ function Navbar() {
   }, [state.isTop]);
 
   useEffect(() => {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, {});
-  });
+    M.AutoInit();
+  }, []);
 
   const height = state.isTop ? '55px' : '50px';
   const lineHeight = state.isTop ? '55px' : '50px';
