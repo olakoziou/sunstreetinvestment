@@ -69,14 +69,14 @@ function EditUser(props) {
       }
     });
 
-    webp.map((file) => {
+    webp.forEach((file) => {
       imageCompression(file, size)
         .then(function (compressedFile) {
           // console.log(`compressedFile size ${compressedFile.size} MB`); // smaller than maxSizeMB
           files.push(compressedFile);
         })
         .then(() => {
-          files.map((file) => {
+          files.forEach((file) => {
             setImgState({
               ...imgState,
               [e.target.id]: [file],
@@ -92,7 +92,7 @@ function EditUser(props) {
   // Add main image
   useEffect(() => {
     if (state.firstName && state.lastName && imgState.userImg) {
-      imgState.userImg.map((image) => {
+      imgState.userImg.forEach((image) => {
         storageRef
           .child(`team/${state.firstName}${state.lastName}-${uuidv4()}`)
           .put(image)
@@ -106,10 +106,6 @@ function EditUser(props) {
   }, [imgState.userImg]);
 
   const handleRemoveImg = (e) => {
-    const currentImgUrl = e.target.parentElement.parentElement.style.backgroundImage
-      .slice(4, -1)
-      .replace(/"/g, '');
-
     setState({ ...state, userImg: null });
   };
 
