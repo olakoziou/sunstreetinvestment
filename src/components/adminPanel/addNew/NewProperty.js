@@ -499,7 +499,7 @@ function NewProperty(props) {
       <div className="row checkbox realEstateBroker">
         <span>*Opiekun oferty:</span>
         {names &&
-          names.forEach((name, i) => (
+          names.map((name, i) => (
             <p key={i}>
               <label>
                 <input
