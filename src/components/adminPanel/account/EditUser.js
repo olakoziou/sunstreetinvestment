@@ -241,6 +241,7 @@ function EditUser(props) {
                 <a
                   href="https://image.online-convert.com/convert-to-webp"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   stronę
                 </a>{' '}
