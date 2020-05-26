@@ -42,6 +42,7 @@ const FormBoxDiv = styled.div`
         margin: 0 auto;
         border: 1px solid;
         padding: 1rem;
+        font-display: swap;
 
         & a {
           color: inherit;
@@ -170,7 +171,8 @@ function AddNewProperty(props) {
           });
       });
     }
-  }, [imgState.mainImg]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imgState.mainImg, state.propertyName]);
 
   // Add other images
   useEffect(() => {
@@ -191,7 +193,8 @@ function AddNewProperty(props) {
           });
       });
     }
-  }, [imgState.images]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imgState.images, state.propertyName]);
 
   // Add property plan
   useEffect(() => {
@@ -207,7 +210,8 @@ function AddNewProperty(props) {
           });
       });
     }
-  }, [imgState.plan]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imgState.plan, state.propertyName]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
