@@ -4,6 +4,8 @@ import { boxShadows, mediaQueries } from '../../../../mixins';
 import { colors } from '../../../../colors';
 import Description from './Description';
 import Details from './Details';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router';
 
 const PropertyCardSection = styled.section`
   & .property-card {
@@ -138,8 +140,14 @@ const PropertyCardSection = styled.section`
 `;
 
 function SinglePropertyCard(props) {
-  const { title, img, stan, banner } = props.location.state;
+  useEffect(() => {
+    !props.location.state && history.push('/nieruchomosci');
+  }, []);
+  const { title, img, stan, banner } = props.location.state || {};
   const stanFiltered = stan && stan !== 'Ponownie w sprzedaży';
+  const history = useHistory();
+
+  console.log(props.location.state);
 
   return (
     <PropertyCardSection className="property">

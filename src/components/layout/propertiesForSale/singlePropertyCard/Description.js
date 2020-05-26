@@ -133,7 +133,7 @@ const DescriptionDiv = styled.div`
 `;
 
 function Description(props) {
-  const { description, propertyPlanUrl, extra, imgUrlArr } = props.data;
+  const { description, propertyPlanUrl, extra, imgUrlArr } = props.data || {};
   const { displayImgs } = props;
 
   const handleImgClick = (e) => {

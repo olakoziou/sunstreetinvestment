@@ -143,7 +143,7 @@ function Details(props) {
     garage,
     year,
     technology,
-  } = props.data;
+  } = props.data || {};
 
   return (
     <DetailsnDiv className="property-card__content-details">
