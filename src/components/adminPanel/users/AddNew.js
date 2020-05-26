@@ -93,6 +93,7 @@ function AddNew() {
           });
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imgState.userImg]);
 
   const handleSubmit = (e) => {
