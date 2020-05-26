@@ -9,6 +9,9 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import 'materialize-css/dist/css/materialize.min.css';
 
+import NotFound from './components/NotFound';
+import { Redirect } from 'react-router-dom';
+
 function App() {
   return (
     <div className="App">
@@ -33,6 +36,15 @@ function App() {
             path="/nieruchomosc/:name/:id"
             component={SinglePropertyCard}
           />
+          <Route
+            path="*"
+            render={(props) =>
+              props.location.pathname.indexOf('/admin-panel') === -1 ? (
+                <NotFound />
+              ) : null
+            }
+          />
+          <Redirect to="/404" />
         </Switch>
         <Route
           path="/"
