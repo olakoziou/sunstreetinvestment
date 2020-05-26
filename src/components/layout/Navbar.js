@@ -61,6 +61,7 @@ function Navbar() {
         setState((state) => ({ ...state, isTop }));
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.isTop]);
 
   useEffect(() => {
@@ -89,7 +90,7 @@ function Navbar() {
               style={{ height, transition: 'all 0.2s' }}
             />
           </a>
-          <a href="#" data-target="mobile-demo" className="sidenav-trigger">
+          <a href="/#" data-target="mobile-demo" className="sidenav-trigger">
             <i className="material-icons">menu</i>
           </a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
