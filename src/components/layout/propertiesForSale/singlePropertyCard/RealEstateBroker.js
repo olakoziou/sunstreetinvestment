@@ -14,8 +14,10 @@ const AuthorDiv = styled.div`
 function RealEstateBroker(props) {
   useFirestoreConnect('users');
   const users = useSelector((state) => state.firestore.ordered.users);
+
   const realEstateBroker =
     users &&
+    props.data &&
     users.filter((user) => user.fullName === props.data.realEstateBroker)[0];
 
   return (
