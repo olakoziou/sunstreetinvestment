@@ -110,6 +110,7 @@ function SingleUser(props) {
           </span>
           <span>{data && data.description}</span>
           <span>{data && data.email}</span>
+          <span>{data && data.phone}</span>
           <span>Status: {data && data.status}</span>
         </div>
         <div className="single-user-btns">
