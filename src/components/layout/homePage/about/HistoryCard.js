@@ -66,11 +66,24 @@ const HistoryDiv = styled.div`
       & ul {
         & span {
           color: rgba(${colors.secondary3});
+          font-size: 1.8rem;
+
+          @media ${mediaQueries('phone')} {
+            font-size: 1.6rem;
+          }
         }
         & li {
           display: flex;
           align-items: center;
           color: rgba(${colors.secondary3});
+
+          & span {
+            font-size: 1.4rem;
+
+            @media ${mediaQueries('phone')} {
+            font-size: 1.2rem;
+          }
+          }
 
           i {
             color: rgba(${colors.extra});

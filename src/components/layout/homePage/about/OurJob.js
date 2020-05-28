@@ -24,7 +24,7 @@ const JobDiv = styled.div`
     padding: 0 0.5rem;
 
     & > div {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       background: rgb(189, 189, 189);
       background: radial-gradient(
         circle,

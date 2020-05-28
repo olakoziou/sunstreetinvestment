@@ -51,6 +51,7 @@ const HistorySection = styled.section`
     background-color: rgba(${colors.secondary6});
     display: none;
     text-align: center;
+    overflow-y: scroll;
     ${boxShadows('xsmall')};
 
     @media ${mediaQueries('phone')} {
@@ -91,10 +92,11 @@ const HistorySection = styled.section`
         align-items: center;
         justify-content: center;
         min-height: 5rem;
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         color: rgba(${colors.secondary2});
         @media ${mediaQueries('phone')} {
           min-height: 10rem;
+          font-size: 1.6rem;
         }
 
         @media ${mediaQueries('tab-land')} {
@@ -107,14 +109,23 @@ const HistorySection = styled.section`
           & ul {
             & > span {
               color: rgba(${colors.secondary2});
-              font-size: 1.2rem;
+              font-size: 1.6rem;
               display: block;
               padding: 0.5rem;
+
+              @media ${mediaQueries('phone')} {
+                font-size: 1.4rem;
+              }
             }
             & li {
               display: flex;
               align-items: center;
               justify-content: center;
+              font-size: 1.3rem;
+
+              @media ${mediaQueries('phone')} {
+                font-size: 1.2rem;
+              }
 
               & i.item {
                 color: rgba(${colors.extra});
@@ -126,9 +137,20 @@ const HistorySection = styled.section`
         & .history-card__info {
           & span {
             color: rgba(${colors.secondary2});
-            font-size: 1.2rem;
+            font-size: 1.6rem;
             display: block;
             padding: 0.5rem;
+
+            @media ${mediaQueries('phone')} {
+              font-size: 1.4rem;
+            }
+          }
+          & p {
+            font-size: 1.3rem;
+
+            @media ${mediaQueries('phone')} {
+              font-size: 1.2rem;
+            }
           }
         }
       }
@@ -139,13 +161,22 @@ const HistorySection = styled.section`
             & > span {
               color: rgba(${colors.secondary2});
               padding: 0.5rem;
-              font-size: 1.2rem;
+              font-size: 1.6rem;
               display: block;
+
+              @media ${mediaQueries('phone')} {
+                font-size: 1.4rem;
+              }
             }
             & li {
               display: flex;
               align-items: center;
               justify-content: center;
+              font-size: 1.3rem;
+
+              @media ${mediaQueries('phone')} {
+                font-size: 1.2rem;
+              }
 
               & i.item {
                 color: rgba(${colors.extra});

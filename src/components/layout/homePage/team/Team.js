@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import SingleTeamMember from './SingleTeamMember';
 import styled from 'styled-components';
-import { mediaQueries } from '../../../../mixins';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { colors } from '../../../../colors';
 import Spinner from '../../../adminPanel/spinner/Spinner';
@@ -25,24 +24,10 @@ const TeamDiv = styled.div`
     flex-wrap: wrap;
   }
 
-  & .team-top {
+  & .team-top,
+  .team-bottom {
     max-width: 90%;
     margin: 0 auto;
-    & > div {
-      @media ${mediaQueries('tab-port')} {
-        height: 25rem;
-      }
-    }
-  }
-
-  & .team-bottom {
-    max-width: 90%;
-    margin: 0 auto;
-    & > div {
-      @media ${mediaQueries('tab-port')} {
-        height: 25rem;
-      }
-    }
   }
 `;
 

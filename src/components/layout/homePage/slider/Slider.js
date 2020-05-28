@@ -7,6 +7,9 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import Spinner from '../../../adminPanel/spinner/Spinner';
 
 const SpanDiv = styled.div`
+  @media ${mediaQueries('tab-port')} {
+    bottom: 15%;
+  }
   @media ${mediaQueries('tab-land')} {
     text-align: left;
     right: 0;
@@ -22,7 +25,7 @@ const SpanDiv = styled.div`
   text-align: center;
   position: absolute;
   /* right: 0; */
-  bottom: 15%;
+  bottom: 45%;
   ${boxShadows('xsmall')}
 `;
 
@@ -40,7 +43,7 @@ const SlideContainer = styled.div`
 `;
 
 const properties = {
-  duration: 50000,
+  duration: 5000,
   transitionDuration: 500,
   infinite: true,
   arrows: false,

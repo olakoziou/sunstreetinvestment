@@ -5,14 +5,14 @@ import { boxShadows, mediaQueries } from '../../../../mixins';
 
 const DivMember = styled.div`
   min-width: 15rem;
-  width: 20rem;
+  width: 23rem;
   margin: 5rem 2rem;
   background-color: rgba(${colors.secondary5});
   ${boxShadows('small')};
   position: relative;
 
   @media ${mediaQueries('phone')} {
-    height: 25rem;
+    height: 28rem;
   }
 
   @media ${mediaQueries('tab-land')} {
@@ -74,7 +74,7 @@ const DivMember = styled.div`
 
     & h5 {
       margin: 1rem;
-      font-size: 1.6rem;
+      font-size: 2rem;
 
       & span {
         color: rgba(${colors.extra}, 1);
@@ -83,8 +83,9 @@ const DivMember = styled.div`
     }
 
     & p {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       padding: 1rem;
+      line-height: 1.6;
     }
   }
 `;

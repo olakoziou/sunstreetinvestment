@@ -27,7 +27,7 @@ const JobDiv = styled.div`
     margin-bottom: 1rem;
     & > p {
       padding: 1rem;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
 
       & a {
         display: inline-block;
@@ -58,11 +58,7 @@ function OurHistory() {
           Firma powstała w 2015 roku. Początkowo zajmowaliśmy się podnajmem i
           najmem krótkoterminowym, a po kilku miesiącach całkowicie
           poświęciliśmy się pozyskiwaniu nieruchomości inwestycyjnych oraz
-          sprzedaży. W 2019 roku powstała bliźniacza spółka{' '}
-          <a href="greenvest.pl" target="_blank">
-            Greenvest
-          </a>
-          .
+          sprzedaży.
         </p>
         <div className="btn">
           <Link to="/archiwum">Portfolio</Link>
