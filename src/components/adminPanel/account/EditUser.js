@@ -36,7 +36,7 @@ const EditUserDiv = styled.div`
 function EditUser(props) {
   const [state, setState] = useState(props.location.state);
   const [imgState, setImgState] = useState({});
-  const emailForAuthEdit = props.location.state.email;
+  const emailForAuthEdit = props.location.state && props.location.state.email;
   const dispatch = useDispatch();
   const history = useHistory();
   const firebase = useFirebase();
