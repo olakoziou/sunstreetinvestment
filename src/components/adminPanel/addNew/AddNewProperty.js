@@ -153,7 +153,7 @@ function AddNewProperty(props) {
   };
 
   const handleSelectedMultiple = (e) => {
-    const values = [...e.target.selectedOptions].forEach((opt) => opt.value);
+    const values = [...e.target.selectedOptions].map((opt) => opt.value);
     setState({ ...state, [e.target.id]: values });
   };
 
