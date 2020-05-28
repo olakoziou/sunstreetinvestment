@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 import AdminPanel from './AdminPanel';
 import Navbar from './navigation/Navbar';
 import LogInPanel from './logging/LogInPanel';
@@ -87,7 +87,7 @@ function AdminApp() {
   return (
     <AdminAppDiv className="admin-panel">
       <div className="wrapper">
-        <BrowserRouter>
+        <HashRouter>
           <Route
             path="/"
             render={(props) => {
@@ -179,7 +179,7 @@ function AdminApp() {
               </div>
             </Container>
           </Switch>
-        </BrowserRouter>
+        </HashRouter>
       </div>
     </AdminAppDiv>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 import LayoutPage from './components/layout/LayoutPage';
 import AdminApp from './components/adminPanel/AdminApp';
 import SinglePropertyCard from './components/layout/propertiesForSale/singlePropertyCard/SinglePropertyCard';
@@ -15,7 +15,7 @@ import { Redirect } from 'react-router-dom';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Route
           path="/"
           render={(props) =>
@@ -28,12 +28,12 @@ function App() {
         <Switch>
           <Route exact path="/" component={LayoutPage} />
 
-          <Route path="/nieruchomosci" exact component={PropertiesPage} />
+          <Route path="/nieruchomosci/" exact component={PropertiesPage} />
           <Route path="/archiwum" component={HistoryPage} />
           <Route path="/archiwum/:name" component={HistoryPage} />
           <Route
             exact
-            path="/nieruchomosc/:name/:id"
+            path="/nieruchomosc/:name/"
             component={SinglePropertyCard}
           />
           <Route
@@ -56,7 +56,7 @@ function App() {
         />
 
         <Route path="/admin-panel" component={AdminApp} />
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
