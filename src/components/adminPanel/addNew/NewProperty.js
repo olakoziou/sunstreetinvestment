@@ -472,7 +472,9 @@ function NewProperty(props) {
           <label>Wybierz</label>
           <span className="helper-text" data-error="wrong" data-success="right">
             Nie wybranie opcji, automatycznie doda ofertę do Slidera na stronie
-            głównej. Jeżeli zdjęcie jest słabej jakości, wybierz NIE.
+            głównej. Jeżeli zdjęcie jest słabej jakości (poniżej 1200x300 px),{' '}
+            <strong>wybierz NIE</strong>. Po dodaniu oferty na stronę, upewnij
+            się, że jakość jest odpowiednia.
           </span>
         </div>
       </div>
