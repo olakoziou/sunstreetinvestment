@@ -147,8 +147,6 @@ function SinglePropertyCard(props) {
   const stanFiltered = stan && stan !== 'Ponownie w sprzedaży';
   const history = useHistory();
 
-  console.log(props.location.state);
-
   return (
     <PropertyCardSection className="property">
       <div className="property-card">
