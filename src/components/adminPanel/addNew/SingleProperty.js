@@ -245,7 +245,7 @@ function SingleProperty(props) {
             <div className="btn blue" onClick={handleSetBack}>
               Przywróć
             </div>
-            <div className="btn red" onClick={handleDeleteHard}>
+            <div className="btn black" onClick={handleDeleteHard}>
               Usuń
             </div>
           </>
