@@ -18,7 +18,8 @@ const Div = styled.div`
     margin: 0 auto;
 
     @media ${mediaQueries('tab-port')} {
-      max-width: 50%;
+      width: 50%;
+      max-width: 45rem;
     }
 
     & > div {

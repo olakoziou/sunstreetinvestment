@@ -35,14 +35,14 @@ const Card = styled.div`
     display: block;
     background-color: rgba(0, 0, 0, 0.5);
     border-right: 2px solid rgba(${colors.extra}, 0.85);
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     padding: 0.6rem 1.2rem;
     bottom: 5%;
     ${boxShadows('small')};
   }
 
   & .card .card-content {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: rgba(${colors.secondary2}, 1);
     border-bottom: 1px solid rgba(${colors.secondary4}, 1);
   }
@@ -58,7 +58,7 @@ const Card = styled.div`
       margin: 0.5rem;
       ${boxShadows('xsmall')};
       color: rgba(${colors.primary3}, 1);
-      font-size: 1.1rem;
+      font-size: 1.3rem;
     }
 
     & li.stan {
@@ -96,7 +96,9 @@ function PropertySmallSingleCard(props) {
     realEstateBroker,
     newFiltered,
     banner,
-  } = props;
+  } = props || {};
+
+  console.log(props);
 
   const stanFiltered = stan && stan !== 'Ponownie w sprzedaży';
 
@@ -111,7 +113,7 @@ function PropertySmallSingleCard(props) {
       <div className="col s12">
         <Link
           to={{
-            pathname: '/nieruchomosc/' + urlTitle + '/' + id,
+            pathname: '/nieruchomosc/' + urlTitle,
             state: {
               title,
               description,

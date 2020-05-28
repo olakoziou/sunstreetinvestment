@@ -36,7 +36,6 @@ export const editUser = (userEdit, emailForAuthEdit) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const firebase = getFirebase();
-    const user = firebase.auth().currentUser;
 
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -52,19 +51,19 @@ export const editUser = (userEdit, emailForAuthEdit) => {
           .catch(function (err) {
             dispatch({ type: 'USERREAUTH_ERROR', err });
           });
+
+        // Prompt the user to re-provide their sign-in credentials
+
+        user
+          .updateEmail(userEdit.email)
+          .then(() => {
+            dispatch({ type: 'CHANGEEMAIL_SUCCESS' });
+          })
+          .catch((err) => {
+            dispatch({ type: 'CHANGEEMAIL_ERROR', err });
+          });
       }
     });
-
-    // Prompt the user to re-provide their sign-in credentials
-
-    user
-      .updateEmail(userEdit.email)
-      .then(() => {
-        dispatch({ type: 'CHANGEEMAIL_SUCCESS' });
-      })
-      .catch((err) => {
-        dispatch({ type: 'CHANGEEMAIL_ERROR', err });
-      });
 
     firestore
       .collection('users')

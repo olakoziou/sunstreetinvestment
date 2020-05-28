@@ -47,6 +47,7 @@ const DetailsnDiv = styled.div`
       }
 
       & li {
+        font-size: 1.2rem;
         display: flex;
         justify-content: space-between;
         padding: 0.25rem;
@@ -115,6 +116,7 @@ const DetailsnDiv = styled.div`
 
         & .contact {
           & > div {
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -144,6 +146,7 @@ function Details(props) {
     year,
     technology,
   } = props.data || {};
+  console.log(props);
 
   return (
     <DetailsnDiv className="property-card__content-details">
@@ -234,16 +237,16 @@ function Details(props) {
               <span>{stan}</span>
             </li>
           ) : null}
-          {balcony ? (
+          {balcony && balcony.length > 0 ? (
             <li>
               <span>Balkon: </span>
-              <span>{balcony}</span>
+              <span>{balcony.map((el) => `${el}, `)}</span>
             </li>
           ) : null}
-          {garage ? (
+          {garage && garage.length > 0 ? (
             <li>
               <span>Garaż: </span>
-              <span>{garage}</span>
+              <span>{garage.map((el) => `${el}, `)}</span>
             </li>
           ) : null}
           {technology ? (

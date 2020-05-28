@@ -59,12 +59,8 @@ const DescriptionDiv = styled.div`
 
     & p {
       text-align: center;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       line-height: 1.8;
-
-      @media ${mediaQueries('tab-land')} {
-        font-size: 1.2rem;
-      }
     }
   }
 
@@ -95,7 +91,7 @@ const DescriptionDiv = styled.div`
   }
 
   & .gallery, .property-plan {
-    & h6 {
+    & h5 {
       text-align: center;
     }
   }
@@ -171,7 +167,7 @@ function Description(props) {
       {displayImgs && imgUrlArr && imgUrlArr.length > 0 ? (
         <>
           <div className="gallery">
-            <h6>Pozostałe zdjęcia</h6>
+            <h5>Pozostałe zdjęcia</h5>
             <div className="images">
               {imgUrlArr.map((img, i) => (
                 <div
@@ -188,7 +184,7 @@ function Description(props) {
       {displayImgs && propertyPlanUrl ? (
         <>
           <div className="property-plan">
-            <h6>Plan nieruchomości</h6>
+            <h5>Plan nieruchomości</h5>
             <div className="images">
               <div
                 className="img"
