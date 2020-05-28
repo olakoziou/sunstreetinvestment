@@ -16,7 +16,7 @@ const NavBar = styled.nav`
     max-width: 80%;
     margin: 0 auto;
     & ul li a {
-      font-size: 1.2rem;
+      font-size: 1.6rem;
     }
 
     & ul li a.active {
@@ -25,7 +25,7 @@ const NavBar = styled.nav`
     }
 
     & a.sidenav-trigger i {
-      line-height: 4rem;
+      /* line-height: 5rem; */
     }
   }
 `;
@@ -68,8 +68,8 @@ function Navbar() {
     M.AutoInit();
   }, []);
 
-  const height = state.isTop ? '55px' : '50px';
-  const lineHeight = state.isTop ? '55px' : '50px';
+  const height = state.isTop ? '60px' : '55px';
+  const lineHeight = state.isTop ? '60px' : '55px';
   return (
     <>
       <NavBar

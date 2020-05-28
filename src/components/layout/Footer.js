@@ -30,7 +30,7 @@ const FooterStyle = styled.footer`
       display: flex;
       flex-direction: column;
       width: 100%;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
 
       @media ${mediaQueries('tab-port')} {
         flex-direction: row;
@@ -43,30 +43,43 @@ const FooterStyle = styled.footer`
 
     & .footer_copyright {
       & span {
-        font-size: 0.6rem;
+        font-size: 0.9rem;
         display: block;
         margin: 0.5rem auto;
       }
     }
   }
 
-  & h5 {
-    font-size: 1.4rem;
-  }
-
-  & span {
-    font-size: 1rem;
-  }
-
-  & .contact > div {
-    display: flex;
-    align-items: center;
+  & .footer__details {
     justify-content: center;
 
-    & i {
-      margin: 0.2rem;
+    & > div {
+      margin-bottom: 1.2rem;
+      padding: 0 1rem;
+
+      @media ${mediaQueries('tab-port')} {
+        width: 25%;
+      }
+    }
+    & h5 {
+      font-size: 1.6rem;
+      margin-bottom: 0.6rem;
+    }
+
+    & span {
       font-size: 1.2rem;
-      color: rgba(${colors.extra});
+    }
+
+    & .contact > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & i {
+        margin: 0.2rem;
+        font-size: 1.2rem;
+        color: rgba(${colors.extra});
+      }
     }
   }
 `;
@@ -101,18 +114,24 @@ function Footer() {
             </span>
 
             <span>
-              Masarska 13/b4, 31-534 Kraków <br />{' '}
+              Masarska 13/B4, 31-534 Kraków <br />{' '}
             </span>
             <span>
-              NIP: 6751705313 <br />{' '}
+              NIP: 678-316-33-06 <br />{' '}
             </span>
             <span>
-              REGON: 383486649 <br />{' '}
+              REGON: 363877510 <br />{' '}
             </span>
           </div>
           <div className="address">
             <h5>Siedziba firmy</h5>
-            <span>ul. Generała Józefa Sowińskiego, 2/5 31-524 Kraków</span>
+            <span>
+              ul. Generała Józefa Sowińskiego, 2/5 31-524 Kraków <br />{' '}
+            </span>
+            <span>
+              Kapitał Zakładowy 18 000,00 zł Sąd Rejonowy w Krakowie, XI Wydział
+              Gospodarczy KRS 0000643359
+            </span>
           </div>
         </div>
         <div className="footer_copyright">
